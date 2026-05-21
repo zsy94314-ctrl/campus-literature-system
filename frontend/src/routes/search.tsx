@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { literatureApi, type SearchParams } from "@/api/literature";
 import { categoryApi, type Category } from "@/api/category";
-import { searchHistoryApi } from "@/api/searchHistory";
+
 import type { Literature } from "@/mock/literatures";
 import { Search } from "lucide-react";
 
@@ -42,7 +42,6 @@ function SearchPage() {
       sortBy,
     });
     setList(res.list);
-    if (keyword) searchHistoryApi.add(keyword);
     setLoading(false);
   };
 

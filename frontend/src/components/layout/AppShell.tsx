@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { authStore } from "@/lib/auth-store";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Search, Star, History, FileText, ClipboardList, User, LogOut } from "lucide-react";
+import { BookOpen, Search, Star, FileText, ClipboardList, User, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const userNav = [
@@ -9,7 +9,7 @@ const userNav = [
   { to: "/search", label: "文献检索", icon: Search },
   { to: "/advanced-search", label: "高级检索", icon: Search },
   { to: "/favorites", label: "我的收藏", icon: Star },
-  { to: "/search-history", label: "检索历史", icon: History },
+
   { to: "/review-generate", label: "综述生成", icon: FileText },
   { to: "/review-history", label: "综述记录", icon: ClipboardList },
   { to: "/profile", label: "个人中心", icon: User },

@@ -46,6 +46,24 @@ public class SearchHistoryServiceImpl implements SearchHistoryService {
         searchHistoryMapper.insert(history);
     }
 
+    @Override
+    public void deleteById(Long id) {
+        Long userId = UserContext.getCurrentUserId();
+        SearchHistory history = searchHistoryMapper.selectById(id);
+        if (history == null || !history.getUserId().equals(userId)) {
+            throw new com.campus.literature.exception.BusinessException(com.campus.literature.common.ErrorCode.FORBIDDEN);
+        }
+        searchHistoryMapper.deleteById(id);
+    }
+
+    @Override
+    public void clear() {
+        Long userId = UserContext.getCurrentUserId();
+        LambdaQueryWrapper<SearchHistory> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(SearchHistory::getUserId, userId);
+        searchHistoryMapper.delete(wrapper);
+    }
+
     private SearchHistoryVO convertToVO(SearchHistory history) {
         SearchHistoryVO vo = new SearchHistoryVO();
         vo.setId(history.getId());

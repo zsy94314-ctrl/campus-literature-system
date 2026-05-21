@@ -12,4 +12,8 @@ public interface SearchHistoryService {
     List<SearchHistoryVO> getMySearchHistory();
 
     void saveSearchHistory(String keyword, String searchType, Integer resultCount);
+
+    void deleteById(Long id);
+
+    void clear();
 }
