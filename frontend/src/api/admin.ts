@@ -31,8 +31,8 @@ export const adminApi = {
     return {
       userCount: raw.userCount || 0,
       literatureCount: raw.literatureCount || 0,
-      searchCount: raw.searchCount || 0,
       reviewCount: raw.reviewCount || 0,
+      categoryCount: raw.categoryCount || 0,
       // Provide a default recentTrend so the statistics page chart doesn't break
       recentTrend: [
         { date: "周一", value: 320 },

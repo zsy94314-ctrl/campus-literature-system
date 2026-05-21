@@ -13,7 +13,7 @@ export const Route = createFileRoute("/admin/statistics")({
 
 function AdminStatisticsPage() {
   const [data, setData] = useState<{
-    userCount: number; literatureCount: number; searchCount: number; reviewCount: number;
+    userCount: number; literatureCount: number; reviewCount: number; categoryCount: number;
     recentTrend: { date: string; value: number }[];
   } | null>(null);
 
@@ -23,7 +23,7 @@ function AdminStatisticsPage() {
   const stats = [
     { label: "用户总数", value: data.userCount },
     { label: "文献总数", value: data.literatureCount },
-    { label: "检索次数", value: data.searchCount },
+    { label: "分类数量", value: data.categoryCount },
     { label: "综述生成", value: data.reviewCount },
   ];
 

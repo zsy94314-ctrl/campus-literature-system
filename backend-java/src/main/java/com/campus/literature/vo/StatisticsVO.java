@@ -10,6 +10,6 @@ public class StatisticsVO {
 
     private Long userCount;
     private Long literatureCount;
-    private Long searchCount;
     private Long reviewCount;
+    private Long categoryCount;
 }

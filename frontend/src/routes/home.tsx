@@ -54,7 +54,7 @@ function HomePage() {
           <Input
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            placeholder="输入关键词、作者或主题..."
+            placeholder="输入关键词或研究主题..."
             className="h-12 bg-background text-foreground"
           />
           <Button type="submit" size="lg" variant="secondary">

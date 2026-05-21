@@ -28,7 +28,7 @@ public class AdminServiceImpl implements AdminService {
 
     private final UserMapper userMapper;
     private final com.campus.literature.mapper.LiteratureMapper literatureMapper;
-    private final SearchHistoryMapper searchHistoryMapper;
+    private final com.campus.literature.mapper.CategoryMapper categoryMapper;
     private final ReviewRecordMapper reviewRecordMapper;
     private final AdminLogMapper adminLogMapper;
 
@@ -62,8 +62,8 @@ public class AdminServiceImpl implements AdminService {
         StatisticsVO vo = new StatisticsVO();
         vo.setUserCount((long) userMapper.selectCount(null));
         vo.setLiteratureCount((long) literatureMapper.selectCount(null));
-        vo.setSearchCount((long) searchHistoryMapper.selectCount(null));
         vo.setReviewCount((long) reviewRecordMapper.selectCount(null));
+        vo.setCategoryCount((long) categoryMapper.selectCount(null));
         return vo;
     }
 

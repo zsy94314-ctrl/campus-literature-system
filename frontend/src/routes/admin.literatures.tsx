@@ -29,13 +29,21 @@ const emptyForm = {
 function AdminLiteraturesPage() {
   const [list, setList] = useState<Literature[]>([]);
   const [keyword, setKeyword] = useState("");
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"create" | "edit">("create");
   const [editingLiterature, setEditingLiterature] = useState<Literature | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [categories, setCategories] = useState<Category[]>([]);
+  const pageSize = 10;
 
-  const load = (k = "") => literatureApi.search({ keyword: k }).then((r) => setList(r.list));
+  const load = (k = "", p = 1) =>
+    literatureApi.search({ keyword: k, page: p, pageSize }).then((r) => {
+      setList(r.list);
+      setTotal(r.total);
+      setPage(p);
+    });
 
   useEffect(() => {
     load();
@@ -102,7 +110,7 @@ function AdminLiteraturesPage() {
       setMode("create");
       setEditingLiterature(null);
       setForm(emptyForm);
-      await load(keyword);
+      await load(keyword, page);
     } catch (err: any) {
       console.error("save literature error:", err);
       toast.error(err?.message || "操作失败，请稍后重试");
@@ -113,7 +121,7 @@ function AdminLiteraturesPage() {
     try {
       await literatureApi.remove(id);
       toast.success("删除文献成功");
-      load(keyword);
+      load(keyword, page);
     } catch (err: any) {
       toast.error(err?.message || "操作失败，请稍后重试");
     }
@@ -190,7 +198,7 @@ function AdminLiteraturesPage() {
         <CardContent className="pt-6">
           <div className="mb-4 flex gap-2">
             <Input placeholder="搜索标题或关键词..." value={keyword} onChange={(e) => setKeyword(e.target.value)} />
-            <Button onClick={() => load(keyword)}>查询</Button>
+            <Button onClick={() => load(keyword, 1)}>查询</Button>
           </div>
           <Table>
             <TableHeader>
@@ -216,6 +224,31 @@ function AdminLiteraturesPage() {
               ))}
             </TableBody>
           </Table>
+
+          <div className="mt-4 flex items-center justify-between border-t pt-4 text-sm text-muted-foreground">
+            <span>共 {total} 条</span>
+            <div className="flex items-center gap-4">
+              <span>第 {page} / {Math.max(1, Math.ceil(total / pageSize))} 页</span>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={page <= 1}
+                  onClick={() => load(keyword, page - 1)}
+                >
+                  上一页
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled={page >= Math.ceil(total / pageSize)}
+                  onClick={() => load(keyword, page + 1)}
+                >
+                  下一页
+                </Button>
+              </div>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </AdminShell>
