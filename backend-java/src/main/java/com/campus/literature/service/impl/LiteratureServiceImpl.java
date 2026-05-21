@@ -164,6 +164,7 @@ public class LiteratureServiceImpl implements LiteratureService {
         vo.setPublishYear(literature.getPublishYear());
         vo.setCitationCount(literature.getCitationCount());
         vo.setDoi(literature.getDoi());
+        vo.setAbstractText(literature.getAbstractText());
         vo.setCategoryId(literature.getCategoryId());
         return vo;
     }

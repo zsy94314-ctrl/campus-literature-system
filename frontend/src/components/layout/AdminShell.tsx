@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 const items = [
   { to: "/admin", label: "管理首页", icon: LayoutDashboard },
   { to: "/admin/literatures", label: "文献管理", icon: FileText },
-  { to: "/admin/users", label: "用户管理", icon: Users },
   { to: "/admin/categories", label: "分类管理", icon: Tags },
+  { to: "/admin/users", label: "用户管理", icon: Users },
   { to: "/admin/statistics", label: "数据统计", icon: BarChart3 },
 ];
 
