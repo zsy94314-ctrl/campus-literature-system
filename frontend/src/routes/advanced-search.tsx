@@ -116,9 +116,11 @@ function AdvancedSearchPage() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">全部</SelectItem>
-                  {cats.map((c) => (
-                    <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                  ))}
+                  {cats
+                    .filter((c) => c.parentId && c.parentId !== "0")
+                    .map((c) => (
+                      <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
             </div>

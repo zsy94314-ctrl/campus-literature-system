@@ -173,9 +173,11 @@ function AdminLiteraturesPage() {
                     <SelectValue placeholder="选择分类" />
                   </SelectTrigger>
                   <SelectContent>
-                    {categories.map((c) => (
-                      <SelectItem key={String(c.id)} value={String(c.id)}>{c.name}</SelectItem>
-                    ))}
+                    {categories
+                      .filter((c) => c.parentId && c.parentId !== "0")
+                      .map((c) => (
+                        <SelectItem key={String(c.id)} value={String(c.id)}>{c.name}</SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
               </div>

@@ -7,567 +7,153 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2026-05-21T21:01:28.131+08:00  INFO 16236 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Starting CampusLiteratureApplication v1.0.0 using Java 25.0.2 with PID 16236 (F:\campus-literature-system\backend-java\target\literature-1.0.0.jar started by zsy in F:\campus-literature-system\backend-java)
-2026-05-21T21:01:28.132+08:00  INFO 16236 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-05-21T21:39:00.883+08:00  INFO 25332 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Starting CampusLiteratureApplication v1.0.0 using Java 25.0.2 with PID 25332 (F:\campus-literature-system\backend-java\target\literature-1.0.0.jar started by zsy in F:\campus-literature-system\backend-java)
+2026-05-21T21:39:00.885+08:00  INFO 25332 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : No active profile set, falling back to 1 default profile: "default"
 WARNING: A restricted method in java.lang.System has been called
 WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (jar:nested:/F:/campus-literature-system/backend-java/target/literature-1.0.0.jar/!BOOT-INF/lib/tomcat-embed-core-10.1.16.jar!/)
 WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
 WARNING: Restricted methods will be blocked in a future release unless native access is enabled
 
-2026-05-21T21:01:28.912+08:00  INFO 16236 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-05-21T21:01:28.916+08:00  INFO 16236 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-05-21T21:01:28.917+08:00  INFO 16236 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
-2026-05-21T21:01:28.938+08:00  INFO 16236 --- [campus-literature-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-05-21T21:01:28.939+08:00  INFO 16236 --- [campus-literature-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 756 ms
+2026-05-21T21:39:01.678+08:00  INFO 25332 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-21T21:39:01.683+08:00  INFO 25332 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-21T21:39:01.683+08:00  INFO 25332 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-21T21:39:01.704+08:00  INFO 25332 --- [campus-literature-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-21T21:39:01.705+08:00  INFO 25332 --- [campus-literature-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 769 ms
 Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
-Initialization Sequence datacenterId:23 workerId:15
+Initialization Sequence datacenterId:23 workerId:14
  _ _   |_  _ _|_. ___ _ |    _ 
 | | |\/|_)(_| | |_\  |_)||_|_\ 
      /               |         
                         3.5.5 
-2026-05-21T21:01:29.503+08:00  INFO 16236 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2026-05-21T21:01:29.508+08:00  INFO 16236 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Started CampusLiteratureApplication in 1.644 seconds (process running for 1.887)
+2026-05-21T21:39:02.301+08:00  INFO 25332 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-05-21T21:39:02.305+08:00  INFO 25332 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Started CampusLiteratureApplication in 1.695 seconds (process running for 1.96)
 Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13cc0b90] was not registered for synchronization because synchronization is not active
-2026-05-21T21:01:29.522+08:00  INFO 16236 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-05-21T21:01:29.695+08:00  INFO 16236 --- [campus-literature-system] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@16a6dc21
-2026-05-21T21:01:29.696+08:00  INFO 16236 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-JDBC Connection [HikariProxyConnection@1735770321 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@15214920] was not registered for synchronization because synchronization is not active
+2026-05-21T21:39:02.322+08:00  INFO 25332 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-21T21:39:02.501+08:00  INFO 25332 --- [campus-literature-system] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@66a82a13
+2026-05-21T21:39:02.502+08:00  INFO 25332 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+JDBC Connection [HikariProxyConnection@2116839170 wrapping com.mysql.cj.jdbc.ConnectionImpl@66a82a13] will not be managed by Spring
 ==>  Preparing: SELECT * FROM user WHERE username = ? LIMIT 1
 ==> Parameters: admin(String)
 <==    Columns: id, username, password_hash, real_name, email, role, status, create_time, update_time
 <==        Row: 1, admin, $2a$10$UoblLYsChhV1aMCj/6/PnOhlKgHfMCLcFzOhZ9bhzRKf9uExPqeaS, 系统管理员, admin@example.com, ADMIN, 1, 2026-05-21 17:15:04, 2026-05-21 17:15:04
 <==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13cc0b90]
-2026-05-21T21:02:04.492+08:00  INFO 16236 --- [campus-literature-system] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-05-21T21:02:04.492+08:00  INFO 16236 --- [campus-literature-system] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-05-21T21:02:04.493+08:00  INFO 16236 --- [campus-literature-system] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@15214920]
+2026-05-21T21:39:41.734+08:00  INFO 25332 --- [campus-literature-system] [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-21T21:39:41.735+08:00  INFO 25332 --- [campus-literature-system] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-05-21T21:39:41.735+08:00  INFO 25332 --- [campus-literature-system] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
 Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a7ec6b1] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@935327924 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50bd0ecd] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@291701952 wrapping com.mysql.cj.jdbc.ConnectionImpl@66a82a13] will not be managed by Spring
+==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category ORDER BY sort_order ASC
 ==> Parameters: 
-<==    Columns: total
-<==        Row: 100
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature ORDER BY id DESC LIMIT ?
-==> Parameters: 1(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 132, 数字图书馆在学术资源发现中的应用——模型构建, 赵六、刘洋、杨帆, <<BLOB>>, 信息管理，信息检索，数据治理, 信息系统工程, 2025, 10.1000/campus.2025.100, 5, 73, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3a7ec6b1]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e9d4b37] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@608847082 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 5(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 5, 信息管理, 0, 5, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e9d4b37]
-2026-05-21T21:02:20.309+08:00 ERROR 16236 --- [campus-literature-system] [nio-8080-exec-2] c.c.l.exception.GlobalExceptionHandler   : 绯荤粺寮傚父
-
-org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Invalid UTF-8 start byte 0xb2
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:184) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:159) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:134) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:218) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:171) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
-Caused by: com.fasterxml.jackson.databind.JsonMappingException: Invalid UTF-8 start byte 0xb2
- at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 2, column: 16] (through reference chain: com.campus.literature.dto.LiteratureCreateRequest["title"])
-	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:402) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:361) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.wrapAndThrow(BeanDeserializerBase.java:1853) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:394) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:185) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2105) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1481) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395) ~[spring-web-6.1.1.jar!/:6.1.1]
-	... 55 common frames omitted
-Caused by: com.fasterxml.jackson.core.JsonParseException: Invalid UTF-8 start byte 0xb2
- at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 2, column: 16]
-	at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:2477) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:750) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._reportInvalidInitial(UTF8StreamJsonParser.java:3712) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._reportInvalidChar(UTF8StreamJsonParser.java:3708) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishString2(UTF8StreamJsonParser.java:2634) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishAndReturnString(UTF8StreamJsonParser.java:2560) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.getText(UTF8StreamJsonParser.java:335) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.std.StringDeserializer.deserialize(StringDeserializer.java:42) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.std.StringDeserializer.deserialize(StringDeserializer.java:11) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:392) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	... 60 common frames omitted
-
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5bc57397] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@150825335 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: INSERT INTO literature ( title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, source, document_type, source_url, content ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
-==> Parameters: 测试新增字段文献(String), 测试作者(String), 这是一个测试摘要(String), 测试,字段(String), 测试期刊(String), 2024(Integer), 10.9999/test001(String), 1(Long), 5(Integer), 系统录入(String), 期刊论文(String), https://example.com/test(String), 这是一段用于测试的正文节选(String)
-<==    Updates: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5bc57397]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13cb1a2] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1616852204 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature WHERE ((title LIKE ? OR abstract_text LIKE ? OR keywords LIKE ? OR content LIKE ?))
-==> Parameters: %测试新增%(String), %测试新增%(String), %测试新增%(String), %测试新增%(String)
-<==    Columns: total
-<==        Row: 1
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE ((title LIKE ? OR abstract_text LIKE ? OR keywords LIKE ? OR content LIKE ?)) ORDER BY id DESC LIMIT ?
-==> Parameters: %测试新增%(String), %测试新增%(String), %测试新增%(String), %测试新增%(String), 1(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献, 测试作者, <<BLOB>>, 测试,字段, 测试期刊, 2024, 10.9999/test001, 1, 5, null, 系统录入, 期刊论文, https://example.com/test, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@13cb1a2]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6475d877] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@2106882113 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 1(Long)
 <==    Columns: id, name, parent_id, sort_order, create_time
 <==        Row: 1, 人工智能, 0, 0, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6475d877]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2deb1be3] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@250701660 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE id=?
-==> Parameters: 133(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献, 测试作者, <<BLOB>>, 测试,字段, 测试期刊, 2024, 10.9999/test001, 1, 5, null, 系统录入, 期刊论文, https://example.com/test, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2deb1be3]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10bbf003] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@368422607 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id=?
-==> Parameters: 1(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 1, 人工智能, 0, 0, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@10bbf003]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1c3760e2] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1265266692 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE id=?
-==> Parameters: 133(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献, 测试作者, <<BLOB>>, 测试,字段, 测试期刊, 2024, 10.9999/test001, 1, 5, null, 系统录入, 期刊论文, https://example.com/test, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1c3760e2]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e68643a] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1283348181 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: UPDATE literature SET title=?, authors=?, abstract_text=?, keywords=?, journal=?, publish_year=?, doi=?, category_id=?, citation_count=?, source=?, document_type=?, source_url=?, content=?, create_time=?, update_time=? WHERE id=?
-==> Parameters: 测试新增字段文献-已更新(String), 测试作者, 更新作者(String), 这是一个更新后的测试摘要(String), 测试,字段,更新(String), 测试期刊(String), 2025(Integer), 10.9999/test001-updated(String), 2(Long), 10(Integer), 系统录入(String), 会议论文(String), https://example.com/test-updated(String), 这是更新后的正文节选内容(String), 2026-05-21T21:02:37(LocalDateTime), 2026-05-21T21:02:37(LocalDateTime), 133(Long)
-<==    Updates: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5e68643a]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d97807c] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@860912062 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE id=?
-==> Parameters: 133(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献-已更新, 测试作者, 更新作者, <<BLOB>>, 测试,字段,更新, 测试期刊, 2025, 10.9999/test001-updated, 2, 10, null, 系统录入, 会议论文, https://example.com/test-updated, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d97807c]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@726d7385] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1937283540 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id=?
-==> Parameters: 2(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@726d7385]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@377dac5e] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1162032177 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature WHERE (document_type = ?)
-==> Parameters: 期刊论文(String)
-<==    Columns: total
-<==        Row: 0
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@377dac5e]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@411822c2] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1062999327 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature WHERE (document_type = ?)
-==> Parameters: 会议论文(String)
-<==    Columns: total
-<==        Row: 1
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE (document_type = ?) ORDER BY id DESC LIMIT ?
-==> Parameters: 会议论文(String), 3(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献-已更新, 测试作者, 更新作者, <<BLOB>>, 测试,字段,更新, 测试期刊, 2025, 10.9999/test001-updated, 2, 10, null, 系统录入, 会议论文, https://example.com/test-updated, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@411822c2]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@efd4d85] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1372997032 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 2(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@efd4d85]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@489f836b] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@534970817 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature WHERE (publish_year >= ? AND publish_year <= ?)
-==> Parameters: 2024(Integer), 2025(Integer)
-<==    Columns: total
-<==        Row: 29
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE (publish_year >= ? AND publish_year <= ?) ORDER BY id DESC LIMIT ?
-==> Parameters: 2024(Integer), 2025(Integer), 2(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献-已更新, 测试作者, 更新作者, <<BLOB>>, 测试,字段,更新, 测试期刊, 2025, 10.9999/test001-updated, 2, 10, null, 系统录入, 会议论文, https://example.com/test-updated, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==        Row: 132, 数字图书馆在学术资源发现中的应用——模型构建, 赵六、刘洋、杨帆, <<BLOB>>, 信息管理，信息检索，数据治理, 信息系统工程, 2025, 10.1000/campus.2025.100, 5, 73, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==      Total: 2
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@489f836b]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@446f07a9] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1132854252 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? , ? )
-==> Parameters: 2(Long), 5(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==        Row: 5, 信息管理, 0, 5, 2026-05-21 17:15:04
-<==      Total: 2
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@446f07a9]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4bc57aa8] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1691336078 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature WHERE ((title LIKE ? OR abstract_text LIKE ? OR keywords LIKE ? OR content LIKE ?))
-==> Parameters: %正文节选%(String), %正文节选%(String), %正文节选%(String), %正文节选%(String)
-<==    Columns: total
-<==        Row: 1
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE ((title LIKE ? OR abstract_text LIKE ? OR keywords LIKE ? OR content LIKE ?)) ORDER BY id DESC LIMIT ?
-==> Parameters: %正文节选%(String), %正文节选%(String), %正文节选%(String), %正文节选%(String), 2(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献-已更新, 测试作者, 更新作者, <<BLOB>>, 测试,字段,更新, 测试期刊, 2025, 10.9999/test001-updated, 2, 10, null, 系统录入, 会议论文, https://example.com/test-updated, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4bc57aa8]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@641068d4] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@2108332565 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 2(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@641068d4]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6aa245c] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1981417943 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature
-==> Parameters: 
-<==    Columns: total
-<==        Row: 101
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature ORDER BY publish_year ASC LIMIT ?
-==> Parameters: 2(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 34, 基于敏捷开发的校园学术资源管理方法, 郭强、王五、林雪, <<BLOB>>, 软件工程，低代码开发，软件测试, 计算机教育, 2019, 10.1000/campus.2019.002, 2, 23, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==        Row: 54, 基于需求分析的校园学术资源管理方法, 杨帆, <<BLOB>>, 软件工程，软件测试，低代码开发, 高校图书馆工作, 2019, 10.1000/campus.2019.022, 2, 141, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==      Total: 2
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6aa245c]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@a0f8228] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1109795540 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 2(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@a0f8228]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b2a3771] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@271456298 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature
-==> Parameters: 
-<==    Columns: total
-<==        Row: 101
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature ORDER BY publish_year ASC LIMIT ?
-==> Parameters: 2(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 34, 基于敏捷开发的校园学术资源管理方法, 郭强、王五、林雪, <<BLOB>>, 软件工程，低代码开发，软件测试, 计算机教育, 2019, 10.1000/campus.2019.002, 2, 23, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==        Row: 54, 基于需求分析的校园学术资源管理方法, 杨帆, <<BLOB>>, 软件工程，软件测试，低代码开发, 高校图书馆工作, 2019, 10.1000/campus.2019.022, 2, 141, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==      Total: 2
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@b2a3771]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@48023346] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@671980836 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 2(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@48023346]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@59142f54] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1767016825 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature
-==> Parameters: 
-<==    Columns: total
-<==        Row: 101
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature ORDER BY citation_count DESC LIMIT ?
-==> Parameters: 2(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 69, 需求分析辅助的学术写作支持系统研究, 郑磊、刘洋, <<BLOB>>, 软件工程，软件测试，敏捷开发, 计算机应用研究, 2026, 10.1000/campus.2026.037, 2, 180, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==        Row: 125, 分类算法在课程资源推荐中的应用, 孙涛, <<BLOB>>, 预测模型，关联规则，数据挖掘, 情报科学, 2023, 10.1000/campus.2023.093, 3, 179, null, 模拟数据, null, null, <<BLOB>>, 2026-05-21 19:56:50, 2026-05-21 19:56:50
-<==      Total: 2
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@59142f54]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bf13039] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1444244863 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? , ? )
-==> Parameters: 2(Long), 3(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
 <==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
 <==        Row: 3, 数据挖掘, 0, 3, 2026-05-21 17:15:04
-<==      Total: 2
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bf13039]
+<==        Row: 4, 教育技术, 0, 4, 2026-05-21 17:15:04
+<==        Row: 5, 信息管理, 0, 5, 2026-05-21 17:15:04
+<==      Total: 5
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@50bd0ecd]
 Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66b444a1] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@375656256 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature WHERE (doi LIKE ?)
-==> Parameters: %10.9999%(String)
-<==    Columns: total
-<==        Row: 1
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE (doi LIKE ?) ORDER BY id DESC LIMIT ?
-==> Parameters: %10.9999%(String), 2(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献-已更新, 测试作者, 更新作者, <<BLOB>>, 测试,字段,更新, 测试期刊, 2025, 10.9999/test001-updated, 2, 10, null, 系统录入, 会议论文, https://example.com/test-updated, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@66b444a1]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b0ccfda] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@757386740 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 2(Long)
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53472ba2] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1568722874 wrapping com.mysql.cj.jdbc.ConnectionImpl@66a82a13] will not be managed by Spring
+==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category ORDER BY sort_order ASC
+==> Parameters: 
 <==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@1b0ccfda]
+<==        Row: 1, 自然科学, 0, 1, 2026-05-21 21:39:49
+<==        Row: 26, 农学, 4, 1, 2026-05-21 21:39:49
+<==        Row: 7, 数学, 1, 1, 2026-05-21 21:39:49
+<==        Row: 20, 基础医学, 3, 1, 2026-05-21 21:39:49
+<==        Row: 30, 教育学, 5, 1, 2026-05-21 21:39:49
+<==        Row: 13, 计算机科学与人工智能, 2, 1, 2026-05-21 21:39:49
+<==        Row: 38, 文学, 6, 1, 2026-05-21 21:39:49
+<==        Row: 2, 工程与技术, 0, 2, 2026-05-21 21:39:49
+<==        Row: 8, 物理学, 1, 2, 2026-05-21 21:39:49
+<==        Row: 31, 管理学, 5, 2, 2026-05-21 21:39:49
+<==        Row: 14, 软件工程, 2, 2, 2026-05-21 21:39:49
+<==        Row: 21, 临床医学, 3, 2, 2026-05-21 21:39:49
+<==        Row: 27, 食品科学, 4, 2, 2026-05-21 21:39:49
+<==        Row: 39, 历史学, 6, 2, 2026-05-21 21:39:49
+<==        Row: 3, 医学与健康科学, 0, 3, 2026-05-21 21:39:49
+<==        Row: 32, 经济学, 5, 3, 2026-05-21 21:39:49
+<==        Row: 22, 公共健康, 3, 3, 2026-05-21 21:39:49
+<==        Row: 9, 化学, 1, 3, 2026-05-21 21:39:49
+<==        Row: 15, 数据科学与数据挖掘, 2, 3, 2026-05-21 21:39:49
+<==        Row: 28, 生态学, 4, 3, 2026-05-21 21:39:49
+<==        Row: 40, 哲学, 6, 3, 2026-05-21 21:39:49
+<==        Row: 33, 法学, 5, 4, 2026-05-21 21:39:49
+<==        Row: 23, 心理健康, 3, 4, 2026-05-21 21:39:49
+<==        Row: 29, 生物技术, 4, 4, 2026-05-21 21:39:49
+<==        Row: 4, 农业与生命科学, 0, 4, 2026-05-21 21:39:49
+<==        Row: 10, 地球科学, 1, 4, 2026-05-21 21:39:49
+<==        Row: 16, 信息与通信工程, 2, 4, 2026-05-21 21:39:49
+<==        Row: 41, 语言学, 6, 4, 2026-05-21 21:39:49
+<==        Row: 24, 健康管理, 3, 5, 2026-05-21 21:39:49
+<==        Row: 5, 社会科学, 0, 5, 2026-05-21 21:39:49
+<==        Row: 34, 社会学, 5, 5, 2026-05-21 21:39:49
+<==        Row: 11, 生物科学, 1, 5, 2026-05-21 21:39:49
+<==        Row: 17, 电子工程, 2, 5, 2026-05-21 21:39:49
+<==        Row: 42, 艺术学, 6, 5, 2026-05-21 21:39:49
+<==        Row: 12, 环境科学, 1, 6, 2026-05-21 21:39:49
+<==        Row: 6, 人文与艺术, 0, 6, 2026-05-21 21:39:49
+<==        Row: 25, 医学信息学, 3, 6, 2026-05-21 21:39:49
+<==        Row: 35, 心理学, 5, 6, 2026-05-21 21:39:49
+<==        Row: 18, 智能制造与自动化, 2, 6, 2026-05-21 21:39:49
+<==        Row: 43, 文化研究, 6, 6, 2026-05-21 21:39:49
+<==        Row: 36, 新闻传播学, 5, 7, 2026-05-21 21:39:49
+<==        Row: 19, 能源与环境工程, 2, 7, 2026-05-21 21:39:49
+<==        Row: 37, 图书情报与档案管理, 5, 8, 2026-05-21 21:39:49
+<==      Total: 43
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@53472ba2]
 Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17013e52] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1881507626 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT COUNT(*) AS total FROM literature WHERE (journal LIKE ?)
-==> Parameters: %测试期刊%(String)
-<==    Columns: total
-<==        Row: 1
-<==      Total: 1
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE (journal LIKE ?) ORDER BY id DESC LIMIT ?
-==> Parameters: %测试期刊%(String), 2(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献-已更新, 测试作者, 更新作者, <<BLOB>>, 测试,字段,更新, 测试期刊, 2025, 10.9999/test001-updated, 2, 10, null, 系统录入, 会议论文, https://example.com/test-updated, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@17013e52]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@24f74424] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@2025298759 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
-==> Parameters: 2(Long)
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@168ad55f] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@407710206 wrapping com.mysql.cj.jdbc.ConnectionImpl@66a82a13] will not be managed by Spring
+==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category ORDER BY sort_order ASC
+==> Parameters: 
 <==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 2, 软件工程, 0, 2, 2026-05-21 17:15:04
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@24f74424]
-2026-05-21T21:04:12.511+08:00 ERROR 16236 --- [campus-literature-system] [nio-8080-exec-7] c.c.l.exception.GlobalExceptionHandler   : 绯荤粺寮傚父
-
-org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Invalid UTF-8 start byte 0xb2
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:184) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:159) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:134) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:218) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:171) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.1.jar!/:6.1.1]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.1.jar!/:6.1.1]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.16.jar!/:na]
-	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
-Caused by: com.fasterxml.jackson.databind.JsonMappingException: Invalid UTF-8 start byte 0xb2
- at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 2, column: 16] (through reference chain: com.campus.literature.dto.ReviewGenerateRequest["topic"])
-	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:402) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:361) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.wrapAndThrow(BeanDeserializerBase.java:1853) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:394) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:185) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2105) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1481) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395) ~[spring-web-6.1.1.jar!/:6.1.1]
-	... 55 common frames omitted
-Caused by: com.fasterxml.jackson.core.JsonParseException: Invalid UTF-8 start byte 0xb2
- at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 2, column: 16]
-	at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:2477) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:750) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._reportInvalidInitial(UTF8StreamJsonParser.java:3712) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._reportInvalidChar(UTF8StreamJsonParser.java:3708) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishString2(UTF8StreamJsonParser.java:2634) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser._finishAndReturnString(UTF8StreamJsonParser.java:2560) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.getText(UTF8StreamJsonParser.java:335) ~[jackson-core-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.std.StringDeserializer.deserialize(StringDeserializer.java:42) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.std.StringDeserializer.deserialize(StringDeserializer.java:11) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:392) ~[jackson-databind-2.15.3.jar!/:2.15.3]
-	... 60 common frames omitted
-
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c3fc7cf] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@992881641 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE id IN ( ? )
-==> Parameters: 133(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 133, 测试新增字段文献-已更新, 测试作者, 更新作者, <<BLOB>>, 测试,字段,更新, 测试期刊, 2025, 10.9999/test001-updated, 2, 10, null, 系统录入, 会议论文, https://example.com/test-updated, <<BLOB>>, 2026-05-21 21:02:37, 2026-05-21 21:02:37
-<==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@c3fc7cf]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bbe9bcb] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@990865883 wrapping com.mysql.cj.jdbc.ConnectionImpl@16a6dc21] will not be managed by Spring
-==>  Preparing: INSERT INTO review_record ( user_id, topic, literature_ids, content, reference_text ) VALUES ( ?, ?, ?, ?, ? )
-==> Parameters: 1(Long), 测试综述生成(String), 133(String), # 测试综述生成
-
-## 一、研究背景
-
-随着科学技术的快速发展，测试综述生成逐渐成为学术界和产业界关注的热点。本文基于1篇相关文献，对该领域的研究现状进行综述。
-
-## 二、研究现状
-
-1. **测试新增字段文献-已更新**
-   - 作者：测试作者, 更新作者
-   - 正文节选：这是更新后的正文节选内容
-   - 摘要：这是一个更新后的测试摘要
-
-## 三、主要研究方向
-
-根据上述文献分析，该领域的主要研究方向包括：
-1. 理论研究：深入探讨相关概念、模型和算法。
-2. 应用实践：将研究成果应用于实际场景中。
-3. 系统开发：设计和实现相关的智能系统或平台。
-
-## 四、存在问题
-
-当前研究仍面临一些挑战：
-1. 数据质量和规模限制。
-2. 算法的泛化能力有待提升。
-3. 理论与实践的结合不够紧密。
-
-## 五、发展趋势
-
-展望未来，该领域的发展趋势包括：
-1. 多模态融合与跨领域应用。
-2. 大模型技术的深入应用。
-3. 个性化与智能化服务。
-
-## 六、参考文献来源
-
-- 测试新增字段文献-已更新（测试作者, 更新作者）
-(String), 133:测试新增字段文献-已更新(String)
-<==    Updates: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2bbe9bcb]
+<==        Row: 1, 自然科学, 0, 1, 2026-05-21 21:39:49
+<==        Row: 26, 农学, 4, 1, 2026-05-21 21:39:49
+<==        Row: 7, 数学, 1, 1, 2026-05-21 21:39:49
+<==        Row: 20, 基础医学, 3, 1, 2026-05-21 21:39:49
+<==        Row: 30, 教育学, 5, 1, 2026-05-21 21:39:49
+<==        Row: 13, 计算机科学与人工智能, 2, 1, 2026-05-21 21:39:49
+<==        Row: 38, 文学, 6, 1, 2026-05-21 21:39:49
+<==        Row: 2, 工程与技术, 0, 2, 2026-05-21 21:39:49
+<==        Row: 8, 物理学, 1, 2, 2026-05-21 21:39:49
+<==        Row: 31, 管理学, 5, 2, 2026-05-21 21:39:49
+<==        Row: 14, 软件工程, 2, 2, 2026-05-21 21:39:49
+<==        Row: 21, 临床医学, 3, 2, 2026-05-21 21:39:49
+<==        Row: 27, 食品科学, 4, 2, 2026-05-21 21:39:49
+<==        Row: 39, 历史学, 6, 2, 2026-05-21 21:39:49
+<==        Row: 3, 医学与健康科学, 0, 3, 2026-05-21 21:39:49
+<==        Row: 32, 经济学, 5, 3, 2026-05-21 21:39:49
+<==        Row: 22, 公共健康, 3, 3, 2026-05-21 21:39:49
+<==        Row: 9, 化学, 1, 3, 2026-05-21 21:39:49
+<==        Row: 15, 数据科学与数据挖掘, 2, 3, 2026-05-21 21:39:49
+<==        Row: 28, 生态学, 4, 3, 2026-05-21 21:39:49
+<==        Row: 40, 哲学, 6, 3, 2026-05-21 21:39:49
+<==        Row: 33, 法学, 5, 4, 2026-05-21 21:39:49
+<==        Row: 23, 心理健康, 3, 4, 2026-05-21 21:39:49
+<==        Row: 29, 生物技术, 4, 4, 2026-05-21 21:39:49
+<==        Row: 4, 农业与生命科学, 0, 4, 2026-05-21 21:39:49
+<==        Row: 10, 地球科学, 1, 4, 2026-05-21 21:39:49
+<==        Row: 16, 信息与通信工程, 2, 4, 2026-05-21 21:39:49
+<==        Row: 41, 语言学, 6, 4, 2026-05-21 21:39:49
+<==        Row: 24, 健康管理, 3, 5, 2026-05-21 21:39:49
+<==        Row: 5, 社会科学, 0, 5, 2026-05-21 21:39:49
+<==        Row: 34, 社会学, 5, 5, 2026-05-21 21:39:49
+<==        Row: 11, 生物科学, 1, 5, 2026-05-21 21:39:49
+<==        Row: 17, 电子工程, 2, 5, 2026-05-21 21:39:49
+<==        Row: 42, 艺术学, 6, 5, 2026-05-21 21:39:49
+<==        Row: 12, 环境科学, 1, 6, 2026-05-21 21:39:49
+<==        Row: 6, 人文与艺术, 0, 6, 2026-05-21 21:39:49
+<==        Row: 25, 医学信息学, 3, 6, 2026-05-21 21:39:49
+<==        Row: 35, 心理学, 5, 6, 2026-05-21 21:39:49
+<==        Row: 18, 智能制造与自动化, 2, 6, 2026-05-21 21:39:49
+<==        Row: 43, 文化研究, 6, 6, 2026-05-21 21:39:49
+<==        Row: 36, 新闻传播学, 5, 7, 2026-05-21 21:39:49
+<==        Row: 19, 能源与环境工程, 2, 7, 2026-05-21 21:39:49
+<==        Row: 37, 图书情报与档案管理, 5, 8, 2026-05-21 21:39:49
+<==      Total: 43
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@168ad55f]
