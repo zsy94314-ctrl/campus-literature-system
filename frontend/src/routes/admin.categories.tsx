@@ -54,7 +54,7 @@ function AdminCategoriesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead><TableHead>名称</TableHead><TableHead>文献数</TableHead><TableHead>操作</TableHead>
+                <TableHead>ID</TableHead><TableHead>名称</TableHead><TableHead>操作</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -66,7 +66,6 @@ function AdminCategoriesPage() {
                       <Input value={editing.name} onChange={(e) => setEditing({ ...editing, name: e.target.value })} className="h-8" />
                     ) : (c.name)}
                   </TableCell>
-                  <TableCell>{c.count}</TableCell>
                   <TableCell className="space-x-1">
                     {editing?.id === c.id ? (
                       <>

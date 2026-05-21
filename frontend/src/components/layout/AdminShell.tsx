@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { authStore } from "@/lib/auth-store";
 import { Button } from "@/components/ui/button";
 import { LayoutDashboard, FileText, Users, Tags, BarChart3, LogOut, ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const items = [
   { to: "/admin", label: "管理首页", icon: LayoutDashboard },
@@ -14,7 +15,19 @@ const items = [
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const user = authStore.getUser();
+  const [mounted, setMounted] = useState(false);
+  const [username, setUsername] = useState<string>("");
+
+  useEffect(() => {
+    setMounted(true);
+    const user = authStore.getUser();
+    setUsername(user?.username || "");
+  }, []);
+
+  const handleLogout = () => {
+    authStore.clear();
+    navigate({ to: "/login" });
+  };
 
   return (
     <div className="flex min-h-screen bg-muted/30">
@@ -58,15 +71,8 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         <header className="flex h-16 items-center justify-between border-b bg-card px-6">
           <h1 className="text-sm font-medium text-muted-foreground">校园学术文献智能检索平台 · 管理控制台</h1>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-foreground">{user?.username}</span>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                authStore.clear();
-                navigate({ to: "/login" });
-              }}
-            >
+            <span className="text-sm text-foreground">{mounted ? username : "管理员"}</span>
+            <Button variant="ghost" size="icon" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />
             </Button>
           </div>

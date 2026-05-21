@@ -9,6 +9,7 @@ export interface Literature {
   doi: string;
   citations: number;
   category: string;
+  categoryId?: string;
 }
 
 export const mockLiteratures: Literature[] = [

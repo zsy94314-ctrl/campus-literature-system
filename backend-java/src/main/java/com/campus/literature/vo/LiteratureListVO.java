@@ -15,4 +15,6 @@ public class LiteratureListVO {
     private String journal;
     private Integer publishYear;
     private Integer citationCount;
+    private Long categoryId;
+    private String categoryName;
 }

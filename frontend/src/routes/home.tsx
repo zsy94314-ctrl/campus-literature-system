@@ -3,7 +3,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { literatureApi } from "@/api/literature";
 import { categoryApi, type Category } from "@/api/category";
 import type { Literature } from "@/mock/literatures";
@@ -19,11 +19,23 @@ function HomePage() {
   const [keyword, setKeyword] = useState("");
   const [hot, setHot] = useState<Literature[]>([]);
   const [cats, setCats] = useState<Category[]>([]);
+  const [allLits, setAllLits] = useState<Literature[]>([]);
 
   useEffect(() => {
     literatureApi.search({ sortBy: "citations", pageSize: 4 }).then((r) => setHot(r.list.slice(0, 4)));
+    literatureApi.search({ page: 1, pageSize: 100 }).then((r) => setAllLits(r.list));
     categoryApi.list().then(setCats);
   }, []);
+
+  const catCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    allLits.forEach((l) => {
+      if (l.categoryId) {
+        counts[l.categoryId] = (counts[l.categoryId] || 0) + 1;
+      }
+    });
+    return counts;
+  }, [allLits]);
 
   return (
     <AppShell>
@@ -114,7 +126,7 @@ function HomePage() {
                 search={{ category: c.name } as never}
                 className="rounded-full border px-3 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
-                {c.name} · {c.count}
+                {c.name} · {catCounts[c.id] || 0}
               </Link>
             ))}
           </CardContent>

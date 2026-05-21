@@ -25,6 +25,20 @@ export interface PageResult<T> {
 }
 
 function adaptLiterature(raw: any): Literature {
+  if (!raw) {
+    return {
+      id: "",
+      title: "",
+      authors: [],
+      abstract: "",
+      keywords: [],
+      journal: "",
+      year: 0,
+      doi: "",
+      citations: 0,
+      category: "",
+    };
+  }
   return {
     id: String(raw.id),
     title: raw.title || "",
@@ -46,10 +60,11 @@ function adaptLiterature(raw: any): Literature {
     doi: raw.doi || "",
     citations: raw.citationCount || raw.citations || 0,
     category: raw.categoryName || raw.category || "",
+    categoryId: raw.categoryId != null ? String(raw.categoryId) : undefined,
   };
 }
 
-function buildLiteraturePayload(data: Partial<Literature> & { categoryId?: number; category?: string }): any {
+function buildLiteraturePayload(data: Partial<Literature> & { category?: string }): any {
   const payload: any = {
     title: data.title,
     authors: Array.isArray(data.authors) ? data.authors.join(",") : data.authors,
@@ -60,8 +75,8 @@ function buildLiteraturePayload(data: Partial<Literature> & { categoryId?: numbe
     doi: data.doi,
     citationCount: data.citations,
   };
-  if (data.categoryId !== undefined) {
-    payload.categoryId = data.categoryId;
+  if (data.categoryId !== undefined && data.categoryId !== "") {
+    payload.categoryId = Number(data.categoryId);
   }
   return payload;
 }
@@ -128,12 +143,12 @@ export const literatureApi = {
     return lits.filter(Boolean) as Literature[];
   },
   // POST /literatures (admin)
-  create: async (data: Omit<Literature, "id"> & { category?: string; categoryId?: number }): Promise<Literature> => {
+  create: async (data: Partial<Literature> & { category?: string }): Promise<Literature> => {
     const raw = await request<any>({ method: "POST", url: "/literatures", data: buildLiteraturePayload(data) });
     return adaptLiterature(raw);
   },
   // PUT /literatures/:id (admin)
-  update: async (id: string, data: Partial<Literature> & { category?: string; categoryId?: number }): Promise<Literature> => {
+  update: async (id: string, data: Partial<Literature> & { category?: string }): Promise<Literature> => {
     const raw = await request<any>({ method: "PUT", url: `/literatures/${id}`, data: buildLiteraturePayload(data) });
     return adaptLiterature(raw);
   },

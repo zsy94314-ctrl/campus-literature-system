@@ -19,7 +19,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -69,8 +72,22 @@ public class LiteratureServiceImpl implements LiteratureService {
 
         Page<Literature> resultPage = literatureMapper.selectPage(page, wrapper);
 
+        // 批量查询分类名称，避免 N+1
+        List<Long> categoryIds = resultPage.getRecords().stream()
+                .map(Literature::getCategoryId)
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
+        Map<Long, String> categoryMap = categoryIds.isEmpty() ? Collections.emptyMap() :
+                categoryMapper.selectBatchIds(categoryIds).stream()
+                        .collect(Collectors.toMap(Category::getId, Category::getName));
+
         List<LiteratureListVO> records = resultPage.getRecords().stream()
-                .map(this::convertToListVO)
+                .map(lit -> {
+                    LiteratureListVO vo = convertToListVO(lit);
+                    vo.setCategoryName(categoryMap.get(lit.getCategoryId()));
+                    return vo;
+                })
                 .collect(Collectors.toList());
 
         return new PageResult<>(resultPage.getTotal(), records);
@@ -146,6 +163,7 @@ public class LiteratureServiceImpl implements LiteratureService {
         vo.setJournal(literature.getJournal());
         vo.setPublishYear(literature.getPublishYear());
         vo.setCitationCount(literature.getCitationCount());
+        vo.setCategoryId(literature.getCategoryId());
         return vo;
     }
 
