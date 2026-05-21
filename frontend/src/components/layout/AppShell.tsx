@@ -1,0 +1,104 @@
+import { Link, useNavigate, useLocation } from "@tanstack/react-router";
+import { authStore } from "@/lib/auth-store";
+import { Button } from "@/components/ui/button";
+import { BookOpen, Search, Star, History, FileText, ClipboardList, User, LogOut } from "lucide-react";
+
+const userNav = [
+  { to: "/home", label: "首页", icon: BookOpen },
+  { to: "/search", label: "文献检索", icon: Search },
+  { to: "/advanced-search", label: "高级检索", icon: Search },
+  { to: "/favorites", label: "我的收藏", icon: Star },
+  { to: "/search-history", label: "检索历史", icon: History },
+  { to: "/review-generate", label: "综述生成", icon: FileText },
+  { to: "/review-history", label: "综述记录", icon: ClipboardList },
+  { to: "/profile", label: "个人中心", icon: User },
+];
+
+export function AppHeader() {
+  const navigate = useNavigate();
+  const user = authStore.getUser();
+  const isAdmin = user?.role === "admin";
+
+  const handleLogout = () => {
+    authStore.clear();
+    navigate({ to: "/login" });
+  };
+
+  return (
+    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+        <Link to="/home" className="flex items-center gap-2">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <BookOpen className="h-5 w-5" />
+          </div>
+          <div className="flex flex-col leading-tight">
+            <span className="text-sm font-semibold text-foreground">学术文献智能平台</span>
+            <span className="text-xs text-muted-foreground">Scholar AI</span>
+          </div>
+        </Link>
+
+        <div className="flex items-center gap-2">
+          {isAdmin && (
+            <Button asChild variant="outline" size="sm">
+              <Link to="/admin">管理后台</Link>
+            </Button>
+          )}
+          {user ? (
+            <>
+              <Button asChild variant="ghost" size="sm">
+                <Link to="/profile">{user.username}</Link>
+              </Button>
+              <Button variant="ghost" size="icon" onClick={handleLogout} title="退出">
+                <LogOut className="h-4 w-4" />
+              </Button>
+            </>
+          ) : (
+            <Button asChild size="sm">
+              <Link to="/login">登录</Link>
+            </Button>
+          )}
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export function AppSidebar() {
+  const location = useLocation();
+  return (
+    <aside className="hidden w-56 shrink-0 border-r bg-card/30 lg:block">
+      <nav className="sticky top-16 flex flex-col gap-1 p-4">
+        {userNav.map((item) => {
+          const Icon = item.icon;
+          const active = location.pathname === item.to;
+          return (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${
+                active
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+              }`}
+            >
+              <Icon className="h-4 w-4" />
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
+    </aside>
+  );
+}
+
+export function AppShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-screen bg-background">
+      <AppHeader />
+      <div className="mx-auto flex max-w-7xl">
+        <AppSidebar />
+        <main className="min-w-0 flex-1 p-6">{children}</main>
+      </div>
+    </div>
+  );
+}
