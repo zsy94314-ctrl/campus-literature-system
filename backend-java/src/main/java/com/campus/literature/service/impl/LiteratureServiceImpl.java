@@ -49,23 +49,49 @@ public class LiteratureServiceImpl implements LiteratureService {
                     .or()
                     .like(Literature::getAbstractText, request.getKeyword())
                     .or()
-                    .like(Literature::getKeywords, request.getKeyword()));
+                    .like(Literature::getKeywords, request.getKeyword())
+                    .or()
+                    .like(Literature::getContent, request.getKeyword()));
+        }
+        if (StringUtils.hasText(request.getTitle())) {
+            wrapper.like(Literature::getTitle, request.getTitle());
         }
         if (StringUtils.hasText(request.getAuthor())) {
             wrapper.like(Literature::getAuthors, request.getAuthor());
         }
+        if (StringUtils.hasText(request.getJournal())) {
+            wrapper.like(Literature::getJournal, request.getJournal());
+        }
+        if (StringUtils.hasText(request.getDoi())) {
+            wrapper.like(Literature::getDoi, request.getDoi());
+        }
         if (request.getCategoryId() != null) {
             wrapper.eq(Literature::getCategoryId, request.getCategoryId());
         }
-        if (request.getYear() != null) {
+        if (StringUtils.hasText(request.getDocumentType())) {
+            wrapper.eq(Literature::getDocumentType, request.getDocumentType());
+        }
+        if (request.getStartYear() != null || request.getEndYear() != null) {
+            if (request.getStartYear() != null) {
+                wrapper.ge(Literature::getPublishYear, request.getStartYear());
+            }
+            if (request.getEndYear() != null) {
+                wrapper.le(Literature::getPublishYear, request.getEndYear());
+            }
+        } else if (request.getYear() != null) {
             wrapper.eq(Literature::getPublishYear, request.getYear());
         }
 
         // 排序
-        if ("year".equals(request.getSortBy())) {
+        String sortBy = request.getSortBy();
+        if ("year_desc".equals(sortBy) || "year".equals(sortBy)) {
             wrapper.orderByDesc(Literature::getPublishYear);
-        } else if ("citation".equals(request.getSortBy())) {
+        } else if ("year_asc".equals(sortBy)) {
+            wrapper.orderByAsc(Literature::getPublishYear);
+        } else if ("citation_desc".equals(sortBy) || "citation".equals(sortBy) || "citations".equals(sortBy)) {
             wrapper.orderByDesc(Literature::getCitationCount);
+        } else if ("citation_asc".equals(sortBy)) {
+            wrapper.orderByAsc(Literature::getCitationCount);
         } else {
             wrapper.orderByDesc(Literature::getId);
         }
@@ -114,6 +140,9 @@ public class LiteratureServiceImpl implements LiteratureService {
         literature.setDoi(request.getDoi());
         literature.setCategoryId(request.getCategoryId());
         literature.setCitationCount(request.getCitationCount() != null ? request.getCitationCount() : 0);
+        literature.setDocumentType(request.getDocumentType());
+        literature.setSourceUrl(request.getSourceUrl());
+        literature.setContent(request.getContent());
         literature.setSource("系统录入");
         literatureMapper.insert(literature);
     }
@@ -133,6 +162,9 @@ public class LiteratureServiceImpl implements LiteratureService {
         literature.setDoi(request.getDoi());
         literature.setCategoryId(request.getCategoryId());
         literature.setCitationCount(request.getCitationCount());
+        literature.setDocumentType(request.getDocumentType());
+        literature.setSourceUrl(request.getSourceUrl());
+        literature.setContent(request.getContent());
         literatureMapper.updateById(literature);
     }
 
@@ -166,6 +198,7 @@ public class LiteratureServiceImpl implements LiteratureService {
         vo.setDoi(literature.getDoi());
         vo.setAbstractText(literature.getAbstractText());
         vo.setCategoryId(literature.getCategoryId());
+        vo.setDocumentType(literature.getDocumentType());
         return vo;
     }
 
@@ -181,6 +214,9 @@ public class LiteratureServiceImpl implements LiteratureService {
         vo.setDoi(literature.getDoi());
         vo.setCitationCount(literature.getCitationCount());
         vo.setCategoryId(literature.getCategoryId());
+        vo.setDocumentType(literature.getDocumentType());
+        vo.setSourceUrl(literature.getSourceUrl());
+        vo.setContent(literature.getContent());
         if (literature.getCategoryId() != null) {
             Category category = categoryMapper.selectById(literature.getCategoryId());
             if (category != null) {

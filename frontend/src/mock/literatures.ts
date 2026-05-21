@@ -10,6 +10,9 @@ export interface Literature {
   citations: number;
   category: string;
   categoryId?: string;
+  documentType?: string;
+  sourceUrl?: string;
+  content?: string;
 }
 
 export const mockLiteratures: Literature[] = [

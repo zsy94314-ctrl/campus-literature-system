@@ -136,6 +136,7 @@ function ReviewGeneratePage() {
                         <div className="truncate text-sm font-medium">{l.title}</div>
                         <div className="text-xs text-muted-foreground">
                           {l.authors.join(", ")} · {l.year}
+                          {l.documentType ? ` · ${l.documentType}` : ""}
                         </div>
                         <div className="mt-1 flex flex-wrap gap-1">
                           {l.keywords.map((k) => (
@@ -170,6 +171,7 @@ function ReviewGeneratePage() {
                         <div className="truncate font-medium">{l.title}</div>
                         <div className="text-xs text-muted-foreground">
                           {l.authors.join(", ")} · {l.year}
+                          {l.documentType ? ` · ${l.documentType}` : ""}
                         </div>
                       </div>
                       <Button variant="ghost" size="sm" onClick={() => toggle(l.id)}>

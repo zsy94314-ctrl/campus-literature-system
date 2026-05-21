@@ -12,6 +12,7 @@ import com.campus.literature.service.ReviewRecordService;
 import com.campus.literature.vo.ReviewRecordVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,9 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
             Literature lit = literatures.get(i);
             content.append(i + 1).append(". **").append(lit.getTitle()).append("**\n");
             content.append("   - 作者：").append(lit.getAuthors()).append("\n");
+            if (StringUtils.hasText(lit.getContent())) {
+                content.append("   - 正文节选：").append(lit.getContent()).append("\n");
+            }
             content.append("   - 摘要：").append(lit.getAbstractText()).append("\n\n");
         }
 

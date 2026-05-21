@@ -19,4 +19,7 @@ public class LiteratureDetailVO {
     private Integer citationCount;
     private Long categoryId;
     private String categoryName;
+    private String documentType;
+    private String sourceUrl;
+    private String content;
 }

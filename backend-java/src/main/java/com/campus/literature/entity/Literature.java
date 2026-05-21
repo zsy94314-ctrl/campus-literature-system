@@ -27,6 +27,9 @@ public class Literature {
     private Integer citationCount;
     private String fileUrl;
     private String source;
+    private String documentType;
+    private String sourceUrl;
+    private String content;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

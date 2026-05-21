@@ -19,4 +19,5 @@ public class LiteratureListVO {
     private String abstractText;
     private Long categoryId;
     private String categoryName;
+    private String documentType;
 }

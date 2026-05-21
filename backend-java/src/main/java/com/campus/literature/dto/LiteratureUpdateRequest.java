@@ -20,4 +20,7 @@ public class LiteratureUpdateRequest {
     private String doi;
     private Long categoryId;
     private Integer citationCount;
+    private String documentType;
+    private String sourceUrl;
+    private String content;
 }

@@ -6,7 +6,8 @@ export interface SearchParams {
   author?: string;
   category?: string;
   year?: number;
-  sortBy?: "relevance" | "year" | "citations";
+  documentType?: string;
+  sortBy?: "relevance" | "year" | "year_desc" | "year_asc" | "citations" | "citation_desc" | "citation_asc";
   page?: number;
   pageSize?: number;
 }
@@ -61,6 +62,9 @@ function adaptLiterature(raw: any): Literature {
     citations: raw.citationCount || raw.citations || 0,
     category: raw.categoryName || raw.category || "",
     categoryId: raw.categoryId != null ? String(raw.categoryId) : undefined,
+    documentType: raw.documentType || undefined,
+    sourceUrl: raw.sourceUrl || undefined,
+    content: raw.content || undefined,
   };
 }
 
@@ -74,6 +78,9 @@ function buildLiteraturePayload(data: Partial<Literature> & { category?: string 
     publishYear: data.year,
     doi: data.doi,
     citationCount: data.citations,
+    documentType: data.documentType,
+    sourceUrl: data.sourceUrl,
+    content: data.content,
   };
   if (data.categoryId !== undefined && data.categoryId !== "") {
     payload.categoryId = Number(data.categoryId);
@@ -94,6 +101,7 @@ export const literatureApi = {
         author: params.author,
         categoryId: params.category && !isNaN(Number(params.category)) ? Number(params.category) : undefined,
         year: params.year,
+        documentType: params.documentType || undefined,
         sortBy: params.sortBy,
         page,
         size,
@@ -106,7 +114,7 @@ export const literatureApi = {
       pageSize: size,
     };
   },
-  // GET /literatures/search (advanced search falls back to basic search)
+  // GET /literatures/search (advanced search)
   advancedSearch: async (params: AdvancedSearchParams): Promise<PageResult<Literature>> => {
     const page = params.page ?? 1;
     const size = params.pageSize ?? 10;
@@ -114,9 +122,16 @@ export const literatureApi = {
       method: "GET",
       url: "/literatures/search",
       params: {
-        keyword: params.keyword || params.title,
-        author: params.author,
-        year: params.yearFrom || params.yearTo || params.year,
+        keyword: params.keyword || undefined,
+        title: params.title || undefined,
+        author: params.author || undefined,
+        journal: params.journal || undefined,
+        doi: params.doi || undefined,
+        categoryId: params.category && !isNaN(Number(params.category)) ? Number(params.category) : undefined,
+        year: params.year || undefined,
+        documentType: params.documentType || undefined,
+        startYear: params.yearFrom || undefined,
+        endYear: params.yearTo || undefined,
         sortBy: params.sortBy,
         page,
         size,

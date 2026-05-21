@@ -44,11 +44,15 @@ CREATE TABLE literature (
     citation_count INT DEFAULT 0 COMMENT '引用次数',
     file_url VARCHAR(500) COMMENT '文献文件地址，可选',
     source VARCHAR(255) COMMENT '数据来源',
+    document_type VARCHAR(50) COMMENT '文献类型：期刊论文、会议论文、学位论文、研究报告',
+    source_url VARCHAR(255) COMMENT '来源链接',
+    content TEXT COMMENT '正文节选或文献内容说明',
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     INDEX idx_title (title),
     INDEX idx_year (publish_year),
-    INDEX idx_category (category_id)
+    INDEX idx_category (category_id),
+    INDEX idx_document_type (document_type)
 ) COMMENT='文献表';
 
 -- 4. 收藏表
@@ -118,8 +122,8 @@ INSERT INTO category (name, parent_id, sort_order) VALUES
 
 -- 初始化示例文献
 INSERT INTO literature
-(title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, source)
+(title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, source, document_type, source_url, content)
 VALUES
-('人工智能在高校教学中的应用研究', '张三, 李四', '本文分析了人工智能技术在高校教学中的应用场景，包括智能推荐、个性化学习和教学评价等方面。', '人工智能,高校教学,个性化学习', '教育信息化研究', 2023, '10.0000/example001', 1, 12, '系统录入'),
-('基于机器学习的学生学习行为分析', '王五', '本文利用机器学习方法对学生学习行为数据进行分析，探索学习行为与学习效果之间的关系。', '机器学习,学习行为,数据分析', '计算机教育', 2022, '10.0000/example002', 3, 8, '系统录入'),
-('面向学术文献的智能检索系统设计', '赵六, 陈七', '本文设计了一种面向学术文献的智能检索系统，通过关键词匹配和语义相似度计算提升检索效果。', '文献检索,语义检索,智能系统', '软件工程与应用', 2024, '10.0000/example003', 2, 15, '系统录入');
+('人工智能在高校教学中的应用研究', '张三, 李四', '本文分析了人工智能技术在高校教学中的应用场景，包括智能推荐、个性化学习和教学评价等方面。', '人工智能,高校教学,个性化学习', '教育信息化研究', 2023, '10.0000/example001', 1, 12, '系统录入', '期刊论文', 'https://example.com/paper001', '本文首先介绍了人工智能在高校教学中的发展背景，随后详细分析了智能推荐系统在课程资源匹配中的应用效果。'),
+('基于机器学习的学生学习行为分析', '王五', '本文利用机器学习方法对学生学习行为数据进行分析，探索学习行为与学习效果之间的关系。', '机器学习,学习行为,数据分析', '计算机教育', 2022, '10.0000/example002', 3, 8, '系统录入', '会议论文', 'https://example.com/paper002', '实验部分采用了随机森林与支持向量机两种算法进行对比，结果表明随机森林在行为分类任务上表现更优。'),
+('面向学术文献的智能检索系统设计', '赵六, 陈七', '本文设计了一种面向学术文献的智能检索系统，通过关键词匹配和语义相似度计算提升检索效果。', '文献检索,语义检索,智能系统', '软件工程与应用', 2024, '10.0000/example003', 2, 15, '系统录入', '期刊论文', 'https://example.com/paper003', '系统架构分为数据采集层、索引构建层和检索服务层三层，支持布尔检索和向量语义检索两种模式。');

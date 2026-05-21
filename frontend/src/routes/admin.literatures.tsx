@@ -24,7 +24,10 @@ export const Route = createFileRoute("/admin/literatures")({
 const emptyForm = {
   title: "", authors: "", abstract: "", keywords: "",
   journal: "", year: 2024, doi: "", citations: 0, categoryId: "",
+  documentType: "", sourceUrl: "", content: "",
 };
+
+const documentTypes = ["期刊论文", "会议论文", "学位论文", "研究报告"];
 
 function AdminLiteraturesPage() {
   const [list, setList] = useState<Literature[]>([]);
@@ -33,7 +36,7 @@ function AdminLiteraturesPage() {
   const [total, setTotal] = useState(0);
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"create" | "edit">("create");
-  const [editingLiterature, setEditingLiterature] = useState<Literature | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [categories, setCategories] = useState<Category[]>([]);
   const pageSize = 10;
@@ -54,35 +57,42 @@ function AdminLiteraturesPage() {
     setOpen(v);
     if (!v) {
       setMode("create");
-      setEditingLiterature(null);
+      setEditingId(null);
       setForm(emptyForm);
     }
   };
 
   const openCreate = () => {
     setMode("create");
-    setEditingLiterature(null);
+    setEditingId(null);
     setForm(emptyForm);
     setOpen(true);
   };
 
-  const openEdit = (l: Literature) => {
-    const cid = String(l.categoryId ?? "");
-    console.log("openEdit literature:", l.id, "categoryId:", l.categoryId, "form.categoryId:", cid, "categories:", categories.map((c) => ({ id: c.id, name: c.name })));
-    setMode("edit");
-    setEditingLiterature(l);
-    setForm({
-      title: l.title,
-      authors: l.authors.join(","),
-      abstract: l.abstract,
-      keywords: l.keywords.join(","),
-      journal: l.journal,
-      year: l.year,
-      doi: l.doi,
-      citations: l.citations,
-      categoryId: cid,
-    });
-    setOpen(true);
+  const openEdit = async (l: Literature) => {
+    try {
+      const detail = await literatureApi.getById(l.id);
+      const cid = String(detail.categoryId ?? "");
+      setMode("edit");
+      setEditingId(detail.id);
+      setForm({
+        title: detail.title,
+        authors: detail.authors.join(","),
+        abstract: detail.abstract,
+        keywords: detail.keywords.join(","),
+        journal: detail.journal,
+        year: detail.year,
+        doi: detail.doi,
+        citations: detail.citations,
+        categoryId: cid,
+        documentType: detail.documentType || "",
+        sourceUrl: detail.sourceUrl || "",
+        content: detail.content || "",
+      });
+      setOpen(true);
+    } catch (err: any) {
+      toast.error("获取文献详情失败");
+    }
   };
 
   const save = async () => {
@@ -96,11 +106,11 @@ function AdminLiteraturesPage() {
     };
     try {
       if (mode === "edit") {
-        if (!editingLiterature || !editingLiterature.id) {
+        if (!editingId) {
           toast.error("未选择要编辑的文献");
           return;
         }
-        await literatureApi.update(editingLiterature.id, payload);
+        await literatureApi.update(editingId, payload);
         toast.success("修改文献成功");
       } else {
         await literatureApi.create(payload);
@@ -108,7 +118,7 @@ function AdminLiteraturesPage() {
       }
       setOpen(false);
       setMode("create");
-      setEditingLiterature(null);
+      setEditingId(null);
       setForm(emptyForm);
       await load(keyword, page);
     } catch (err: any) {
@@ -177,13 +187,34 @@ function AdminLiteraturesPage() {
                 <Label>引用次数</Label>
                 <Input type="number" value={form.citations} onChange={(e) => setForm({ ...form, citations: Number(e.target.value) })} />
               </div>
+              <div className="space-y-1.5">
+                <Label>文献类型</Label>
+                <Select value={form.documentType} onValueChange={(v) => setForm({ ...form, documentType: v })}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="选择文献类型" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {documentTypes.map((t) => (
+                      <SelectItem key={t} value={t}>{t}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="col-span-2 space-y-1.5">
                 <Label>DOI</Label>
                 <Input value={form.doi} onChange={(e) => setForm({ ...form, doi: e.target.value })} />
               </div>
               <div className="col-span-2 space-y-1.5">
+                <Label>来源链接</Label>
+                <Input value={form.sourceUrl} onChange={(e) => setForm({ ...form, sourceUrl: e.target.value })} placeholder="https://..." />
+              </div>
+              <div className="col-span-2 space-y-1.5">
                 <Label>摘要</Label>
                 <Textarea rows={4} value={form.abstract} onChange={(e) => setForm({ ...form, abstract: e.target.value })} />
+              </div>
+              <div className="col-span-2 space-y-1.5">
+                <Label>正文节选</Label>
+                <Textarea rows={4} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} placeholder="输入正文节选或文献内容说明..." />
               </div>
             </div>
             <DialogFooter>
@@ -204,7 +235,7 @@ function AdminLiteraturesPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>标题</TableHead><TableHead>作者</TableHead><TableHead>期刊</TableHead>
-                <TableHead>分类</TableHead><TableHead>年份</TableHead><TableHead>引用</TableHead><TableHead>操作</TableHead>
+                <TableHead>分类</TableHead><TableHead>类型</TableHead><TableHead>年份</TableHead><TableHead>引用</TableHead><TableHead>操作</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -214,6 +245,7 @@ function AdminLiteraturesPage() {
                   <TableCell>{l.authors.join(", ")}</TableCell>
                   <TableCell>{l.journal}</TableCell>
                   <TableCell>{l.category}</TableCell>
+                  <TableCell>{l.documentType || "—"}</TableCell>
                   <TableCell>{l.year}</TableCell>
                   <TableCell>{l.citations}</TableCell>
                   <TableCell className="space-x-1">

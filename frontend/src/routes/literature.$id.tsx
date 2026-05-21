@@ -46,7 +46,10 @@ function LiteratureDetailPage() {
         <CardContent className="pt-6">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <Badge variant="secondary">{lit.category}</Badge>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="secondary">{lit.category}</Badge>
+                {lit.documentType && <Badge variant="outline">{lit.documentType}</Badge>}
+              </div>
               <h1 className="mt-2 text-2xl font-semibold leading-snug">{lit.title}</h1>
               <p className="mt-2 text-sm text-muted-foreground">
                 {lit.authors.join(", ")} · {lit.journal} · {lit.year}
@@ -61,7 +64,7 @@ function LiteratureDetailPage() {
           <div className="mt-6 grid grid-cols-3 gap-4 border-y py-4 text-center text-sm">
             <div>
               <div className="text-xs text-muted-foreground">DOI</div>
-              <div className="mt-1 font-medium">{lit.doi}</div>
+              <div className="mt-1 font-medium">{lit.doi || "—"}</div>
             </div>
             <div>
               <div className="text-xs text-muted-foreground">引用次数</div>
@@ -73,10 +76,32 @@ function LiteratureDetailPage() {
             </div>
           </div>
 
+          {lit.sourceUrl && (
+            <div className="mt-6">
+              <h2 className="text-base font-semibold">来源链接</h2>
+              <a
+                href={lit.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-2 inline-flex items-center gap-1 text-sm text-primary hover:underline"
+              >
+                {lit.sourceUrl}
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+          )}
+
           <div className="mt-6">
             <h2 className="text-base font-semibold">摘要</h2>
             <p className="mt-2 leading-relaxed text-muted-foreground">{lit.abstract}</p>
           </div>
+
+          {lit.content && (
+            <div className="mt-6 rounded-md bg-secondary/40 p-4">
+              <h2 className="text-base font-semibold">正文节选</h2>
+              <p className="mt-2 leading-relaxed text-muted-foreground">{lit.content}</p>
+            </div>
+          )}
 
           <div className="mt-6">
             <h2 className="text-base font-semibold">关键词</h2>

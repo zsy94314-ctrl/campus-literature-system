@@ -125,6 +125,7 @@ function SearchPage() {
               </Link>
               <div className="mt-1 text-xs text-muted-foreground">
                 {l.authors.join(", ")} · {l.journal} · {l.year} · 引用 {l.citations}
+                {l.documentType ? ` · ${l.documentType}` : ""}
               </div>
               <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{l.abstract}</p>
               <div className="mt-3 flex flex-wrap gap-1.5">
