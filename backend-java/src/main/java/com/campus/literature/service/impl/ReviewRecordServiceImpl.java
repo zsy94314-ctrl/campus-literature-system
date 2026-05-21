@@ -37,8 +37,9 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
             throw new BusinessException(ErrorCode.PARAM_ERROR);
         }
 
+        String displayTitle = formatTopic(request.getTopic());
         StringBuilder content = new StringBuilder();
-        content.append("# ").append(request.getTopic()).append("\n\n");
+        content.append("# ").append(displayTitle).append("\n\n");
 
         // 研究背景
         content.append("## 一、研究背景\n\n");
@@ -70,14 +71,14 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         content.append("3. 理论与实践的结合不够紧密。\n\n");
 
         // 未来发展趋势
-        content.append("## 五、未来发展趋势\n\n");
+        content.append("## 五、发展趋势\n\n");
         content.append("展望未来，该领域的发展趋势包括：\n");
         content.append("1. 多模态融合与跨领域应用。\n");
         content.append("2. 大模型技术的深入应用。\n");
         content.append("3. 个性化与智能化服务。\n\n");
 
         // 参考来源
-        content.append("## 六、参考来源\n\n");
+        content.append("## 六、参考文献来源\n\n");
         for (Literature lit : literatures) {
             content.append("- ").append(lit.getTitle()).append("（").append(lit.getAuthors()).append("）\n");
         }
@@ -150,6 +151,17 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
             throw new BusinessException(ErrorCode.FORBIDDEN);
         }
         reviewRecordMapper.deleteById(id);
+    }
+
+    private String formatTopic(String topic) {
+        if (topic == null || topic.trim().isEmpty()) {
+            return "研究综述";
+        }
+        String t = topic.trim();
+        if (t.contains("综述")) {
+            return t;
+        }
+        return t + "领域研究综述";
     }
 
     private ReviewRecordVO convertToVO(ReviewRecord record) {

@@ -4,7 +4,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { reviewApi } from "@/api/review";
+import { reviewApi, formatReviewTitle } from "@/api/review";
 import type { Review } from "@/mock/reviews";
 import { Trash2 } from "lucide-react";
 
@@ -28,8 +28,8 @@ function ReviewHistoryPage() {
             <CardContent className="pt-6">
               <div className="flex items-start justify-between gap-3">
                 <button className="flex-1 text-left" onClick={() => setOpen(open === r.id ? null : r.id)}>
-                  <div className="text-base font-medium">{r.topic}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{r.createdAt} · 参考 {r.references.length} 篇</div>
+                  <div className="text-base font-medium">《{formatReviewTitle(r.topic)}》</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{r.createdAt} · 参考 {r.references.length} 篇文献</div>
                 </button>
                 <Button variant="ghost" size="icon" onClick={async () => { await reviewApi.remove(r.id); load(); }}>
                   <Trash2 className="h-4 w-4" />

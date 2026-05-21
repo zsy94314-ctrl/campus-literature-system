@@ -6,6 +6,13 @@ export interface GenerateReviewParams {
   literatureIds: string[];
 }
 
+export function formatReviewTitle(topic: string): string {
+  const t = topic.trim();
+  if (!t) return "研究综述";
+  if (t.includes("综述")) return t;
+  return `${t}领域研究综述`;
+}
+
 function adaptReview(raw: any): Review {
   return {
     id: String(raw.id),
