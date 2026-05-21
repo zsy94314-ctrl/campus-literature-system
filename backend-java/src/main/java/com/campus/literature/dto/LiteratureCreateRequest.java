@@ -1,0 +1,23 @@
+package com.campus.literature.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+/**
+ * 新增文献请求
+ */
+@Data
+public class LiteratureCreateRequest {
+
+    @NotBlank(message = "文献标题不能为空")
+    private String title;
+
+    private String authors;
+    private String abstractText;
+    private String keywords;
+    private String journal;
+    private Integer publishYear;
+    private String doi;
+    private Long categoryId;
+    private Integer citationCount;
+}
