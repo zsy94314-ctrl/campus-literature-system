@@ -1,7 +1,8 @@
-// Centralized API request helper. Mock mode simulates the backend's unified
-// response envelope { code, message, data } and unwraps `data` for callers,
-// so swapping to real axios requests later won't change any call site.
+// Centralized API request helper for the Spring Boot backend.
+// baseURL: http://localhost:8080/api
+// Unwraps the unified response envelope { code, message, data } and returns `data`.
 import axios from "axios";
+import { toast } from "sonner";
 
 export const API_BASE_URL = "http://localhost:8080/api";
 
@@ -11,30 +12,13 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-/**
- * Simulate a backend call. Internally constructs the unified response envelope
- * { code: 200, message: "success", data } — the same shape the Spring Boot
- * backend will return — and resolves with the unwrapped `data` payload.
- */
-export function mockRequest<T>(data: T, delay = 300): Promise<T> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const envelope: ApiResponse<T> = {
-        code: 200,
-        message: "success",
-        data,
-      };
-      resolve(envelope.data);
-    }, delay);
-  });
-}
-
-// Axios instance for real backend communication (used once mock is replaced).
+// Axios instance for real backend communication.
 export const http = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: 15000,
 });
 
+// Request interceptor: automatically attach Bearer token.
 http.interceptors.request.use((cfg) => {
   const token = localStorage.getItem("lit_token");
   if (token) {
@@ -42,6 +26,31 @@ http.interceptors.request.use((cfg) => {
   }
   return cfg;
 });
+
+// Response interceptor: handle 401/403 globally.
+http.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status;
+      const resData = error.response?.data as ApiResponse<unknown> | undefined;
+
+      if (status === 401) {
+        localStorage.removeItem("lit_token");
+        localStorage.removeItem("lit_user");
+        toast.error("登录已失效，请重新登录");
+        window.location.href = "/login";
+        return Promise.reject(new Error("未登录或登录失效"));
+      }
+
+      if (status === 403) {
+        toast.error(resData?.message || "无权限访问");
+        return Promise.reject(new Error("无权限"));
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 // Real request helper: unwraps the backend { code, message, data } envelope.
 export async function request<T>(config: Parameters<typeof http.request>[0]): Promise<T> {

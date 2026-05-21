@@ -80,7 +80,7 @@ function SearchPage() {
                 <SelectContent>
                   <SelectItem value="all">全部</SelectItem>
                   {cats.map((c) => (
-                    <SelectItem key={c.id} value={c.name}>{c.name}</SelectItem>
+                    <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>

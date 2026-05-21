@@ -1,5 +1,6 @@
-import { mockRequest } from "./request";
-import { mockCurrentUser, type User } from "@/mock/users";
+import { request } from "./request";
+import { authStore } from "@/lib/auth-store";
+import type { User } from "@/mock/users";
 
 export interface LoginParams {
   username: string;
@@ -15,20 +16,39 @@ export interface LoginResult {
   user: User;
 }
 
+function adaptUser(raw: any): User {
+  return {
+    id: String(raw.id),
+    username: raw.username,
+    email: raw.email || "",
+    role: raw.role === "ADMIN" ? "admin" : "user",
+    status: raw.status === 1 ? "active" : "disabled",
+    createdAt: raw.createTime ? raw.createTime.slice(0, 10) : "",
+  };
+}
+
 export const authApi = {
   // POST /auth/login
-  login: (params: LoginParams) => {
-    const isAdmin = params.username === "admin";
-    const user: User = isAdmin
-      ? { ...mockCurrentUser, id: "4", username: "admin", email: "admin@univ.edu", role: "admin" }
-      : { ...mockCurrentUser, username: params.username };
-    return mockRequest<LoginResult>({ token: "mock-jwt-token", user });
+  login: async (params: LoginParams) => {
+    const raw = await request<any>({ method: "POST", url: "/auth/login", data: params });
+    const result: LoginResult = {
+      token: raw.token,
+      user: adaptUser(raw.user),
+    };
+    authStore.setSession(result.token, result.user);
+    return result;
   },
   // POST /auth/register
   register: (params: RegisterParams) =>
-    mockRequest<{ success: boolean }>({ success: true }),
-  // POST /auth/logout
-  logout: () => mockRequest<{ success: boolean }>({ success: true }),
-  // GET /auth/me
-  getCurrentUser: () => mockRequest<User>(mockCurrentUser),
+    request<void>({ method: "POST", url: "/auth/register", data: params }),
+  // logout is client-side only
+  logout: () => {
+    authStore.clear();
+    return Promise.resolve({ success: true });
+  },
+  // getCurrentUser reads from localStorage (backend has no /auth/me)
+  getCurrentUser: (): Promise<User | null> => {
+    const user = authStore.getUser();
+    return Promise.resolve(user);
+  },
 };

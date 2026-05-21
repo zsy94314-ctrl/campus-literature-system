@@ -1,5 +1,4 @@
-import { mockRequest } from "./request";
-import { mockSearchHistory } from "@/mock/reviews";
+import { request } from "./request";
 
 export interface SearchHistoryItem {
   id: string;
@@ -7,18 +6,23 @@ export interface SearchHistoryItem {
   time: string;
 }
 
+function adaptHistory(raw: any): SearchHistoryItem {
+  return {
+    id: String(raw.id),
+    keyword: raw.keyword || "",
+    time: raw.createTime || "",
+  };
+}
+
 export const searchHistoryApi = {
   // GET /search-history
-  list: () => mockRequest<SearchHistoryItem[]>(mockSearchHistory),
-  // POST /search-history
-  add: (keyword: string) =>
-    mockRequest<SearchHistoryItem>({
-      id: Date.now().toString(),
-      keyword,
-      time: new Date().toLocaleString(),
-    }),
-  // DELETE /search-history/:id
-  remove: (id: string) => mockRequest<{ success: boolean }>({ success: true }),
-  // DELETE /search-history
-  clear: () => mockRequest<{ success: boolean }>({ success: true }),
+  list: async (): Promise<SearchHistoryItem[]> => {
+    const raw = await request<any[]>({ method: "GET", url: "/search-history" });
+    return raw.map(adaptHistory);
+  },
+  // Backend automatically records search history on /literatures/search,
+  // so add/remove/clear are no-ops to keep page components unchanged.
+  add: (_keyword: string) => Promise.resolve({ success: true }),
+  remove: (_id: string) => Promise.resolve({ success: true }),
+  clear: () => Promise.resolve({ success: true }),
 };

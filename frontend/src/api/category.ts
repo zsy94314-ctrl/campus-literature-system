@@ -1,5 +1,4 @@
-import { mockRequest } from "./request";
-import { mockCategories } from "@/mock/literatures";
+import { request } from "./request";
 
 export interface Category {
   id: string;
@@ -7,14 +6,26 @@ export interface Category {
   count: number;
 }
 
+function adaptCategory(raw: any): Category {
+  return {
+    id: String(raw.id),
+    name: raw.name || "",
+    count: 0,
+  };
+}
+
 export const categoryApi = {
   // GET /categories
-  list: () => mockRequest<Category[]>(mockCategories),
+  list: async (): Promise<Category[]> => {
+    const raw = await request<any[]>({ method: "GET", url: "/categories" });
+    return raw.map(adaptCategory);
+  },
   // POST /categories
   create: (name: string) =>
-    mockRequest<Category>({ id: Date.now().toString(), name, count: 0 }),
+    request<Category>({ method: "POST", url: "/categories", data: { name, parentId: 0, sortOrder: 0 } }),
   // PUT /categories/:id
-  update: (id: string, name: string) => mockRequest<Category>({ id, name, count: 0 }),
+  update: (id: string, name: string) =>
+    request<Category>({ method: "PUT", url: `/categories/${id}`, data: { name, parentId: 0, sortOrder: 0 } }),
   // DELETE /categories/:id
-  remove: (id: string) => mockRequest<{ success: boolean }>({ success: true }),
+  remove: (id: string) => request<void>({ method: "DELETE", url: `/categories/${id}` }),
 };

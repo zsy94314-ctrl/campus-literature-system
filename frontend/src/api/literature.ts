@@ -1,5 +1,5 @@
-import { mockRequest } from "./request";
-import { mockLiteratures, type Literature } from "@/mock/literatures";
+import { request } from "./request";
+import type { Literature } from "@/mock/literatures";
 
 export interface SearchParams {
   keyword?: string;
@@ -24,66 +24,119 @@ export interface PageResult<T> {
   pageSize: number;
 }
 
-function filterAndSort(params: SearchParams | AdvancedSearchParams): Literature[] {
-  let list = [...mockLiteratures];
-  const adv = params as AdvancedSearchParams;
-  if (params.keyword) {
-    const k = params.keyword.toLowerCase();
-    list = list.filter(
-      (l) =>
-        l.title.toLowerCase().includes(k) ||
-        l.abstract.toLowerCase().includes(k) ||
-        l.keywords.some((kw) => kw.toLowerCase().includes(k)),
-    );
+function adaptLiterature(raw: any): Literature {
+  return {
+    id: String(raw.id),
+    title: raw.title || "",
+    authors: raw.authors
+      ? String(raw.authors)
+          .split(/,|，/)
+          .map((s) => s.trim())
+          .filter(Boolean)
+      : [],
+    abstract: raw.abstractText || raw.abstract || "",
+    keywords: raw.keywords
+      ? String(raw.keywords)
+          .split(/,|，/)
+          .map((s) => s.trim())
+          .filter(Boolean)
+      : [],
+    journal: raw.journal || "",
+    year: raw.publishYear || raw.year || 0,
+    doi: raw.doi || "",
+    citations: raw.citationCount || raw.citations || 0,
+    category: raw.categoryName || raw.category || "",
+  };
+}
+
+function buildLiteraturePayload(data: Partial<Literature> & { categoryId?: number; category?: string }): any {
+  const payload: any = {
+    title: data.title,
+    authors: Array.isArray(data.authors) ? data.authors.join(",") : data.authors,
+    abstractText: data.abstract,
+    keywords: Array.isArray(data.keywords) ? data.keywords.join(",") : data.keywords,
+    journal: data.journal,
+    publishYear: data.year,
+    doi: data.doi,
+    citationCount: data.citations,
+  };
+  if (data.categoryId !== undefined) {
+    payload.categoryId = data.categoryId;
   }
-  if (params.author) list = list.filter((l) => l.authors.some((a) => a.includes(params.author!)));
-  if (params.category) list = list.filter((l) => l.category === params.category);
-  if (params.year) list = list.filter((l) => l.year === params.year);
-  if (adv.title) list = list.filter((l) => l.title.includes(adv.title!));
-  if (adv.journal) list = list.filter((l) => l.journal.includes(adv.journal!));
-  if (adv.yearFrom) list = list.filter((l) => l.year >= adv.yearFrom!);
-  if (adv.yearTo) list = list.filter((l) => l.year <= adv.yearTo!);
-  if (adv.doi) list = list.filter((l) => l.doi.includes(adv.doi!));
-  if (params.sortBy === "year") list.sort((a, b) => b.year - a.year);
-  else if (params.sortBy === "citations") list.sort((a, b) => b.citations - a.citations);
-  return list;
+  return payload;
 }
 
 export const literatureApi = {
-  // GET /literatures
-  search: (params: SearchParams) => {
-    const list = filterAndSort(params);
-    return mockRequest<PageResult<Literature>>({
-      list,
-      total: list.length,
-      page: params.page ?? 1,
-      pageSize: params.pageSize ?? 10,
+  // GET /literatures/search
+  search: async (params: SearchParams): Promise<PageResult<Literature>> => {
+    const page = params.page ?? 1;
+    const size = params.pageSize ?? 10;
+    const raw = await request<any>({
+      method: "GET",
+      url: "/literatures/search",
+      params: {
+        keyword: params.keyword,
+        author: params.author,
+        categoryId: params.category && !isNaN(Number(params.category)) ? Number(params.category) : undefined,
+        year: params.year,
+        sortBy: params.sortBy,
+        page,
+        size,
+      },
     });
+    return {
+      list: (raw.records || []).map(adaptLiterature),
+      total: raw.total || 0,
+      page,
+      pageSize: size,
+    };
   },
-  // GET /literatures/advanced
-  advancedSearch: (params: AdvancedSearchParams) => {
-    const list = filterAndSort(params);
-    return mockRequest<PageResult<Literature>>({
-      list,
-      total: list.length,
-      page: params.page ?? 1,
-      pageSize: params.pageSize ?? 10,
+  // GET /literatures/search (advanced search falls back to basic search)
+  advancedSearch: async (params: AdvancedSearchParams): Promise<PageResult<Literature>> => {
+    const page = params.page ?? 1;
+    const size = params.pageSize ?? 10;
+    const raw = await request<any>({
+      method: "GET",
+      url: "/literatures/search",
+      params: {
+        keyword: params.keyword || params.title,
+        author: params.author,
+        year: params.yearFrom || params.yearTo || params.year,
+        sortBy: params.sortBy,
+        page,
+        size,
+      },
     });
+    return {
+      list: (raw.records || []).map(adaptLiterature),
+      total: raw.total || 0,
+      page,
+      pageSize: size,
+    };
   },
   // GET /literatures/:id
-  getById: (id: string) => {
-    const item = mockLiteratures.find((l) => l.id === id) ?? mockLiteratures[0];
-    return mockRequest<Literature>(item);
+  getById: async (id: string): Promise<Literature> => {
+    const raw = await request<any>({ method: "GET", url: `/literatures/${id}` });
+    return adaptLiterature(raw);
   },
-  // GET /literatures/:id/similar
-  getSimilar: (id: string) =>
-    mockRequest<Literature[]>(mockLiteratures.filter((l) => l.id !== id).slice(0, 3)),
+  // GET /ai/recommend/:id
+  getSimilar: async (id: string): Promise<Literature[]> => {
+    const recs = await request<any[]>({ method: "GET", url: `/ai/recommend/${id}` });
+    const lits = await Promise.all(
+      recs.map((r) => literatureApi.getById(String(r.literatureId)).catch(() => null))
+    );
+    return lits.filter(Boolean) as Literature[];
+  },
   // POST /literatures (admin)
-  create: (data: Omit<Literature, "id">) =>
-    mockRequest<Literature>({ ...data, id: Date.now().toString() }),
+  create: async (data: Omit<Literature, "id"> & { category?: string; categoryId?: number }): Promise<Literature> => {
+    const raw = await request<any>({ method: "POST", url: "/literatures", data: buildLiteraturePayload(data) });
+    return adaptLiterature(raw);
+  },
   // PUT /literatures/:id (admin)
-  update: (id: string, data: Partial<Literature>) =>
-    mockRequest<Literature>({ ...mockLiteratures[0], ...data, id }),
+  update: async (id: string, data: Partial<Literature> & { category?: string; categoryId?: number }): Promise<Literature> => {
+    const raw = await request<any>({ method: "PUT", url: `/literatures/${id}`, data: buildLiteraturePayload(data) });
+    return adaptLiterature(raw);
+  },
   // DELETE /literatures/:id (admin)
-  remove: (id: string) => mockRequest<{ success: boolean }>({ success: true }),
+  remove: (id: string) => request<void>({ method: "DELETE", url: `/literatures/${id}` }),
 };
