@@ -71,4 +71,13 @@ export const aiApi = {
     });
     return (raw || []).map(adaptAiResult);
   },
+
+  // POST /ai/rebuild-index
+  rebuildIndex: async (): Promise<{ count: number }> => {
+    const raw = await request<{ count: number }>({
+      method: "POST",
+      url: "/ai/rebuild-index",
+    });
+    return raw || { count: 0 };
+  },
 };

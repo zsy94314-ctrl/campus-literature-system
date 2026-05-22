@@ -1,10 +1,12 @@
 com\campus\literature\entity\SearchHistory.class
+com\campus\literature\service\impl\ReviewRecordServiceImpl$DirectionDef.class
 com\campus\literature\service\UserService.class
 com\campus\literature\common\ErrorCode.class
 com\campus\literature\entity\ReviewRecord.class
 com\campus\literature\exception\GlobalExceptionHandler.class
 com\campus\literature\service\impl\AiServiceImpl$KeywordScoreResult.class
 com\campus\literature\service\impl\CategoryServiceImpl.class
+com\campus\literature\service\impl\ReviewRecordServiceImpl$DirectionAssignment.class
 com\campus\literature\controller\CategoryController.class
 com\campus\literature\service\impl\LiteratureServiceImpl.class
 com\campus\literature\common\PageResult.class
@@ -28,6 +30,7 @@ com\campus\literature\dto\LiteratureSearchRequest.class
 com\campus\literature\service\LiteratureService.class
 com\campus\literature\dto\LoginRequest.class
 com\campus\literature\mapper\LiteratureVectorMapper.class
+com\campus\literature\service\impl\AiServiceImpl$TopicProfile.class
 com\campus\literature\entity\Literature.class
 com\campus\literature\vo\LiteratureListVO.class
 com\campus\literature\exception\BusinessException.class
@@ -60,6 +63,7 @@ com\campus\literature\service\AdminService.class
 com\campus\literature\dto\CategoryRequest.class
 com\campus\literature\security\JwtUtil.class
 com\campus\literature\dto\UserStatusRequest.class
+com\campus\literature\service\impl\ReviewRecordServiceImpl$ReviewTopic.class
 com\campus\literature\vo\SemanticSearchVO.class
 com\campus\literature\dto\ReviewGenerateRequest.class
 com\campus\literature\CampusLiteratureApplication.class

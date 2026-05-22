@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { adminApi } from "@/api/admin";
 import { literatureApi } from "@/api/literature";
+import { aiApi } from "@/api/ai";
 import type { Literature } from "@/mock/literatures";
-import { Users, FileText, Sparkles, Tags, ArrowRight } from "lucide-react";
+import { Users, FileText, Sparkles, Tags, ArrowRight, Database } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/")({
   beforeLoad: ({ location }) => { requireAdmin(location.href); },
@@ -34,6 +36,20 @@ function AdminHomePage() {
     { label: "综述生成", value: stats.reviewCount, icon: Sparkles, color: "text-violet-500" },
     { label: "分类数量", value: stats.categoryCount, icon: Tags, color: "text-amber-500" },
   ];
+
+  const [rebuilding, setRebuilding] = useState(false);
+
+  const handleRebuildIndex = async () => {
+    setRebuilding(true);
+    try {
+      const res = await aiApi.rebuildIndex();
+      toast.success(`智能索引重建成功，共同步 ${res.count} 篇文献`);
+    } catch (err: any) {
+      toast.error(err?.message || "索引重建失败");
+    } finally {
+      setRebuilding(false);
+    }
+  };
 
   const quickLinks = [
     { to: "/admin/literatures", label: "文献管理", desc: "新增、编辑、删除文献" },
@@ -109,6 +125,21 @@ function AdminHomePage() {
                 <ArrowRight className="h-4 w-4 text-muted-foreground" />
               </Link>
             ))}
+            <button
+              onClick={handleRebuildIndex}
+              disabled={rebuilding}
+              className="flex w-full items-center justify-between rounded-md border p-3 text-sm transition-colors hover:bg-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <div className="flex items-center gap-3">
+                <Database className="h-4 w-4 text-muted-foreground" />
+                <div className="text-left">
+                  <div className="font-medium text-foreground">
+                    {rebuilding ? "正在重建索引..." : "重建智能索引"}
+                  </div>
+                  <div className="text-xs text-muted-foreground">同步文献数据并更新语义检索索引</div>
+                </div>
+              </div>
+            </button>
           </CardContent>
         </Card>
       </div>
