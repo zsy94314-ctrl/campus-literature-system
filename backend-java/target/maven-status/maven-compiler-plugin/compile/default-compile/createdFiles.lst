@@ -3,6 +3,7 @@ com\campus\literature\service\UserService.class
 com\campus\literature\common\ErrorCode.class
 com\campus\literature\entity\ReviewRecord.class
 com\campus\literature\exception\GlobalExceptionHandler.class
+com\campus\literature\service\impl\AiServiceImpl$KeywordScoreResult.class
 com\campus\literature\service\impl\CategoryServiceImpl.class
 com\campus\literature\controller\CategoryController.class
 com\campus\literature\service\impl\LiteratureServiceImpl.class
@@ -75,4 +76,5 @@ com\campus\literature\vo\AiSearchResultVO.class
 com\campus\literature\vo\CategoryVO.class
 com\campus\literature\service\impl\SearchHistoryServiceImpl.class
 com\campus\literature\vo\ReviewRecordVO.class
+com\campus\literature\service\impl\AiServiceImpl$RankedItem.class
 com\campus\literature\vo\LiteratureDetailVO.class

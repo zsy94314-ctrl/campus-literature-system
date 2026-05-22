@@ -20,4 +20,10 @@ public class AiSearchResultVO {
     private Integer citationCount;
     private String documentType;
     private Double similarity;
+
+    /** 综合排序分（semanticSimilarity * 0.60 + keywordScore * 0.30 + categoryScore * 0.10） */
+    private Double finalScore;
+
+    /** 命中原因说明 */
+    private String matchReason;
 }
