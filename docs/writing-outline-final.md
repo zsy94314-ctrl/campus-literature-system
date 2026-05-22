@@ -15,6 +15,12 @@
 
 关键词建议：学术文献检索、多学科语义检索、综述生成、FAISS、LLM API、Spring Boot、RAG。
 
+Keywords 写作提示：英文关键词可对应写为 literature retrieval、multidisciplinary semantic search、review generation、FAISS、LLM API、Spring Boot。数量保持 5 到 7 个，避免加入未实现功能。
+
+图表插入建议：正文图表优先引用 `docs/diagrams.md` 中的 Mermaid 图，报告正文只保留图号、图名和必要说明，避免把大段 Mermaid 源码直接堆入正文。
+
+运行截图插入建议：运行截图建议统一放入 `docs/screenshots/`，截图清单参考 `docs/screenshots-guide.md`，在正文实现章节少量引用关键截图，完整截图放入附录 D。
+
 ## 1 引言
 
 ### 1.1 项目背景
@@ -479,3 +485,5 @@ npm run build
 - 不要把 API Key 明文存储写成安全方案。
 - 不要写真实 API Key、数据库密码、Token。
 - 不要把 PDF 上传、真实论文库、Docker、流式输出、Cross-Encoder Rerank 写成已实现功能。
+
+附录 F 写作提示：项目开发日志应引用 `docs/dev-log.md`，按阶段说明从 MVP、智能检索、综述生成、LLM 接入到文档整理的过程，并记录已修复问题，不需要粘贴完整聊天记录或代码 diff。

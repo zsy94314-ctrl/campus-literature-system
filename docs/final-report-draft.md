@@ -76,6 +76,10 @@
 
 管理员功能包括文献管理、分类管理、用户管理、数据统计、重建智能检索索引和 LLM API 管理。
 
+此处插入图 5-1 普通用户用例图，详见 `docs/diagrams.md`。
+
+此处插入图 5-2 管理员用例图，详见 `docs/diagrams.md`。
+
 ### 3.2 功能需求
 
 文献检索支持普通关键词检索和高级检索。普通检索匹配标题、摘要、关键词和正文节选。高级检索支持标题、作者、期刊、DOI、分类、文献类型、年份范围和排序。
@@ -92,28 +96,17 @@
 
 ### 4.1 系统架构
 
-此处插入系统架构图。
-
-```mermaid
-flowchart LR
-    U["用户/管理员"] --> F["React 前端"]
-    F --> J["Spring Boot 后端"]
-    J --> M["MySQL"]
-    J --> A["FastAPI backend-ai"]
-    A --> E["sentence-transformers"]
-    A --> X["FAISS 索引文件"]
-    J --> L["OpenAI-compatible LLM API"]
-```
+此处插入图 4-1 系统总体架构图，详见 `docs/diagrams.md`。
 
 ### 4.2 功能结构
 
-此处插入用例图。
+此处插入图 4-2 功能结构图，详见 `docs/diagrams.md`。
 
 普通用户端包括首页、普通检索、高级检索、智能检索、文献详情、收藏、综述生成和综述记录。管理员端包括管理首页、文献管理、分类管理、用户管理、数据统计、智能索引重建和 LLM API 管理。
 
 ### 4.3 数据库设计
 
-此处插入 E-R 图。
+此处插入图 4-3 数据库 E-R 图，详见 `docs/diagrams.md`。
 
 核心表包括：
 
@@ -139,6 +132,8 @@ flowchart LR
 
 智能检索不是简单 FAISS 检索，而是多阶段流程：
 
+此处插入图 6-1 智能检索流程图，详见 `docs/diagrams.md`。
+
 1. backend-ai 使用 sentence-transformers 生成语义向量。
 2. FAISS 进行基础语义召回。
 3. Spring Boot 扩大召回候选池。
@@ -159,6 +154,8 @@ flowchart LR
 
 ### 5.4 综述生成双模式
 
+此处插入图 6-2 综述生成流程图，详见 `docs/diagrams.md`。
+
 离线综述生成：
 
 - 请求 `mode=rule`。
@@ -168,6 +165,8 @@ flowchart LR
 - 基于主题识别、关键词提取、研究方向归纳、问题与趋势生成。
 
 在线 LLM 增强综述生成：
+
+此处插入图 6-3 在线 LLM 综述生成时序图，详见 `docs/diagrams.md`。
 
 - 请求 `mode=llm`。
 - 成功时记录 `generationMode=llm`。
@@ -194,6 +193,8 @@ flowchart LR
 
 ### 5.6 LLM API 管理
 
+此处插入图 6-5 LLM API 管理流程图，详见 `docs/diagrams.md`。
+
 管理员可新增、编辑、删除 LLM 配置，设置 active 配置，测试连接，执行长文本综述测试。配置字段包括名称、Provider、Base URL、Model、API Key、启用状态、active 状态、Timeout 和备注。API Key 前端仅展示脱敏值。
 
 ## 6 详细设计与实现
@@ -202,11 +203,13 @@ flowchart LR
 
 前端使用 TanStack Router 管理路由。`src/api` 下封装认证、文献、收藏、分类、智能检索、综述、检索历史、管理员和 LLM 配置接口。`review-generate.tsx` 支持离线和在线生成方式切换，`review-history.tsx` 支持 generationMode 标签和筛选，`admin.llm-configs.tsx` 支持 LLM API 管理。
 
-此处插入运行截图。
+此处插入系统运行截图，详见 `docs/screenshots-guide.md`。
 
 ### 6.2 Java 后端实现
 
 Java 后端按 Controller、Service、Mapper、Entity、DTO、VO 分层。`JwtInterceptor` 对 `/api/**` 进行登录态解析和权限控制。`AiServiceImpl` 负责调用 backend-ai 并进行多学科重排。`ReviewRecordServiceImpl` 负责综述生成分流与记录保存。`LlmReviewServiceImpl` 负责在线 LLM 调用、输出校验和参考文献补全。
+
+此处插入图 6-4 管理员重建智能索引时序图，详见 `docs/diagrams.md`。
 
 ### 6.3 Python 智能检索服务实现
 
@@ -311,8 +314,12 @@ npm run dev
 
 ### 附录 D 系统运行截图
 
-此处插入首页、检索页、文献详情、智能检索、综述生成、综述记录、管理员后台、LLM API 管理等截图。
+此处插入首页、检索页、文献详情、智能检索、综述生成、综述记录、管理员后台、LLM API 管理等截图，截图清单详见 `docs/screenshots-guide.md`。
 
 ### 附录 E AI 辅助记录
 
 详见 `docs/ai-records.md`。
+
+### 附录 F 项目开发日志
+
+详见 `docs/dev-log.md`。
