@@ -12,3 +12,12 @@ INFO:     127.0.0.1:51440 - "POST /semantic-search HTTP/1.1" 200 OK
 INFO:     127.0.0.1:62580 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:62580 - "POST /semantic-search HTTP/1.1" 200 OK
 INFO:     127.0.0.1:62580 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62805 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65126 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62165 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57636 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56601 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62824 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53973 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57337 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55984 - "POST /semantic-search HTTP/1.1" 200 OK
