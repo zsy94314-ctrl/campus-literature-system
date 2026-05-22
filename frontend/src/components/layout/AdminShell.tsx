@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { authStore } from "@/lib/auth-store";
 import { Button } from "@/components/ui/button";
 import { LayoutDashboard, FileText, Users, Tags, BarChart3, LogOut, ArrowLeft } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useEffect, useState } from "react";
 
 const items = [
@@ -30,7 +31,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-muted/30">
+    <div className="flex min-h-screen bg-background">
       <aside className="flex w-60 shrink-0 flex-col border-r bg-card">
         <div className="flex h-16 items-center gap-2 border-b px-6">
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
@@ -71,6 +72,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         <header className="flex h-16 items-center justify-between border-b bg-card px-6">
           <h1 className="text-sm font-medium text-muted-foreground">校园学术文献智能检索平台 · 管理控制台</h1>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <span className="text-sm text-foreground">{mounted ? username : "管理员"}</span>
             <Button variant="ghost" size="icon" onClick={handleLogout}>
               <LogOut className="h-4 w-4" />

@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { authStore } from "@/lib/auth-store";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Search, Star, FileText, ClipboardList, User, LogOut } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useEffect, useState } from "react";
 
 const userNav = [
@@ -71,6 +72,7 @@ export function AppHeader() {
         </Link>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           {isAdmin && (
             <Button asChild variant="outline" size="sm">
               <Link to="/admin">管理后台</Link>
