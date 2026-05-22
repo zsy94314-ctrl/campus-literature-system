@@ -10,16 +10,23 @@ com\campus\literature\service\impl\ReviewRecordServiceImpl$DirectionAssignment.c
 com\campus\literature\controller\CategoryController.class
 com\campus\literature\service\impl\LiteratureServiceImpl.class
 com\campus\literature\common\PageResult.class
+com\campus\literature\service\LlmConfigService.class
 com\campus\literature\dto\LiteratureUpdateRequest.class
+com\campus\literature\mapper\LlmConfigMapper.class
 com\campus\literature\common\Result.class
 com\campus\literature\vo\StatisticsVO.class
+com\campus\literature\dto\LlmConfigUpdateRequest.class
 com\campus\literature\mapper\SearchHistoryMapper.class
+com\campus\literature\controller\LlmConfigController.class
 com\campus\literature\mapper\ReviewRecordMapper.class
+com\campus\literature\service\impl\LlmConfigServiceImpl.class
+com\campus\literature\entity\LlmConfig.class
 com\campus\literature\controller\SearchHistoryController.class
 com\campus\literature\mapper\CategoryMapper.class
 com\campus\literature\dto\AiDocumentDTO.class
 com\campus\literature\dto\RegisterRequest.class
 com\campus\literature\service\impl\ReviewRecordServiceImpl.class
+com\campus\literature\vo\LlmConfigVO.class
 com\campus\literature\vo\UserVO.class
 com\campus\literature\config\DataInitializer.class
 com\campus\literature\security\UserContext.class
@@ -30,6 +37,7 @@ com\campus\literature\dto\LiteratureSearchRequest.class
 com\campus\literature\service\LiteratureService.class
 com\campus\literature\dto\LoginRequest.class
 com\campus\literature\mapper\LiteratureVectorMapper.class
+com\campus\literature\service\impl\LlmReviewServiceImpl.class
 com\campus\literature\service\impl\AiServiceImpl$TopicProfile.class
 com\campus\literature\entity\Literature.class
 com\campus\literature\vo\LiteratureListVO.class
@@ -55,6 +63,7 @@ com\campus\literature\entity\Favorite.class
 com\campus\literature\service\impl\FavoriteServiceImpl.class
 com\campus\literature\security\UserContext$UserInfo.class
 com\campus\literature\service\AiService.class
+com\campus\literature\dto\LlmConfigCreateRequest.class
 com\campus\literature\entity\AdminLog.class
 com\campus\literature\entity\Category.class
 com\campus\literature\vo\CategoryStatisticsVO.class
@@ -65,6 +74,7 @@ com\campus\literature\security\JwtUtil.class
 com\campus\literature\dto\UserStatusRequest.class
 com\campus\literature\service\impl\ReviewRecordServiceImpl$ReviewTopic.class
 com\campus\literature\vo\SemanticSearchVO.class
+com\campus\literature\service\LlmReviewService.class
 com\campus\literature\dto\ReviewGenerateRequest.class
 com\campus\literature\CampusLiteratureApplication.class
 com\campus\literature\vo\ReviewRecordVO$ReferenceVO.class

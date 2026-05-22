@@ -14,6 +14,7 @@ public class ReviewRecordVO {
     private Long id;
     private String topic;
     private String content;
+    private String generationMode;
     private List<ReferenceVO> references;
     private LocalDateTime createTime;
 

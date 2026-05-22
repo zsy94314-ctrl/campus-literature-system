@@ -24,6 +24,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as LiteratureIdRouteImport } from './routes/literature.$id'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminStatisticsRouteImport } from './routes/admin.statistics'
+import { Route as AdminLlmConfigsRouteImport } from './routes/admin.llm-configs'
 import { Route as AdminLiteraturesRouteImport } from './routes/admin.literatures'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
 
@@ -102,6 +103,11 @@ const AdminStatisticsRoute = AdminStatisticsRouteImport.update({
   path: '/admin/statistics',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLlmConfigsRoute = AdminLlmConfigsRouteImport.update({
+  id: '/admin/llm-configs',
+  path: '/admin/llm-configs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLiteraturesRoute = AdminLiteraturesRouteImport.update({
   id: '/admin/literatures',
   path: '/admin/literatures',
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/search-history': typeof SearchHistoryRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/literatures': typeof AdminLiteraturesRoute
+  '/admin/llm-configs': typeof AdminLlmConfigsRoute
   '/admin/statistics': typeof AdminStatisticsRoute
   '/admin/users': typeof AdminUsersRoute
   '/literature/$id': typeof LiteratureIdRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/search-history': typeof SearchHistoryRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/literatures': typeof AdminLiteraturesRoute
+  '/admin/llm-configs': typeof AdminLlmConfigsRoute
   '/admin/statistics': typeof AdminStatisticsRoute
   '/admin/users': typeof AdminUsersRoute
   '/literature/$id': typeof LiteratureIdRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/search-history': typeof SearchHistoryRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/literatures': typeof AdminLiteraturesRoute
+  '/admin/llm-configs': typeof AdminLlmConfigsRoute
   '/admin/statistics': typeof AdminStatisticsRoute
   '/admin/users': typeof AdminUsersRoute
   '/literature/$id': typeof LiteratureIdRoute
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/search-history'
     | '/admin/categories'
     | '/admin/literatures'
+    | '/admin/llm-configs'
     | '/admin/statistics'
     | '/admin/users'
     | '/literature/$id'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/search-history'
     | '/admin/categories'
     | '/admin/literatures'
+    | '/admin/llm-configs'
     | '/admin/statistics'
     | '/admin/users'
     | '/literature/$id'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/search-history'
     | '/admin/categories'
     | '/admin/literatures'
+    | '/admin/llm-configs'
     | '/admin/statistics'
     | '/admin/users'
     | '/literature/$id'
@@ -245,6 +257,7 @@ export interface RootRouteChildren {
   SearchHistoryRoute: typeof SearchHistoryRoute
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminLiteraturesRoute: typeof AdminLiteraturesRoute
+  AdminLlmConfigsRoute: typeof AdminLlmConfigsRoute
   AdminStatisticsRoute: typeof AdminStatisticsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   LiteratureIdRoute: typeof LiteratureIdRoute
@@ -358,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminStatisticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/llm-configs': {
+      id: '/admin/llm-configs'
+      path: '/admin/llm-configs'
+      fullPath: '/admin/llm-configs'
+      preLoaderRoute: typeof AdminLlmConfigsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/literatures': {
       id: '/admin/literatures'
       path: '/admin/literatures'
@@ -389,6 +409,7 @@ const rootRouteChildren: RootRouteChildren = {
   SearchHistoryRoute: SearchHistoryRoute,
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminLiteraturesRoute: AdminLiteraturesRoute,
+  AdminLlmConfigsRoute: AdminLlmConfigsRoute,
   AdminStatisticsRoute: AdminStatisticsRoute,
   AdminUsersRoute: AdminUsersRoute,
   LiteratureIdRoute: LiteratureIdRoute,

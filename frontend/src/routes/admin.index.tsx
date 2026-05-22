@@ -8,7 +8,7 @@ import { adminApi } from "@/api/admin";
 import { literatureApi } from "@/api/literature";
 import { aiApi } from "@/api/ai";
 import type { Literature } from "@/mock/literatures";
-import { Users, FileText, Sparkles, Tags, ArrowRight, Database } from "lucide-react";
+import { Users, FileText, Sparkles, Tags, ArrowRight, Database, BrainCircuit } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/")({
@@ -56,6 +56,7 @@ function AdminHomePage() {
     { to: "/admin/users", label: "用户管理", desc: "查看与管理注册用户" },
     { to: "/admin/categories", label: "分类管理", desc: "维护学科分类体系" },
     { to: "/admin/statistics", label: "数据统计", desc: "查看平台运营数据" },
+    { to: "/admin/llm-configs", label: "LLM API 管理", desc: "配置在线综述生成使用的大模型 API" },
   ];
 
   return (

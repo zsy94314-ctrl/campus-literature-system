@@ -21,6 +21,7 @@ public class ReviewRecord {
     private String literatureIds;
     private String content;
     private String referenceText;
+    private String generationMode;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

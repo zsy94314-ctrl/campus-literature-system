@@ -2,6 +2,7 @@ export interface Review {
   id: string;
   topic: string;
   content: string;
+  generationMode?: string;
   references: string[]; // literature ids
   createdAt: string;
 }

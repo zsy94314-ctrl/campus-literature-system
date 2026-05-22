@@ -4,6 +4,7 @@ import type { Review } from "@/mock/reviews";
 export interface GenerateReviewParams {
   topic: string;
   literatureIds: string[];
+  mode?: "rule" | "llm";
 }
 
 export function formatReviewTitle(topic: string): string {
@@ -18,6 +19,7 @@ function adaptReview(raw: any): Review {
     id: String(raw.id),
     topic: raw.topic || "",
     content: raw.content || "",
+    generationMode: raw.generationMode || "rule",
     references: Array.isArray(raw.references)
       ? raw.references.map((r: any) => String(r.literatureId || r))
       : [],
@@ -34,6 +36,7 @@ export const reviewApi = {
       data: {
         topic: params.topic,
         literatureIds: params.literatureIds.map(Number),
+        mode: params.mode || "rule",
       },
     });
     return adaptReview(raw);

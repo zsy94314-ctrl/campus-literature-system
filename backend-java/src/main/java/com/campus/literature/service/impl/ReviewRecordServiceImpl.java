@@ -3,14 +3,18 @@ package com.campus.literature.service.impl;
 import com.campus.literature.common.ErrorCode;
 import com.campus.literature.dto.ReviewGenerateRequest;
 import com.campus.literature.entity.Literature;
+import com.campus.literature.entity.LlmConfig;
 import com.campus.literature.entity.ReviewRecord;
 import com.campus.literature.exception.BusinessException;
 import com.campus.literature.mapper.LiteratureMapper;
+import com.campus.literature.mapper.LlmConfigMapper;
 import com.campus.literature.mapper.ReviewRecordMapper;
 import com.campus.literature.security.UserContext;
+import com.campus.literature.service.LlmReviewService;
 import com.campus.literature.service.ReviewRecordService;
 import com.campus.literature.vo.ReviewRecordVO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -20,12 +24,15 @@ import java.util.stream.Collectors;
 /**
  * 综述记录服务实现（综合归纳型结构化综述生成）
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReviewRecordServiceImpl implements ReviewRecordService {
 
     private final ReviewRecordMapper reviewRecordMapper;
     private final LiteratureMapper literatureMapper;
+    private final LlmConfigMapper llmConfigMapper;
+    private final LlmReviewService llmReviewService;
 
     // ==================== 综述主题枚举 ====================
 
@@ -390,6 +397,7 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         Long userId = UserContext.getCurrentUserId();
         String topic = request.getTopic();
         List<Long> literatureIds = request.getLiteratureIds();
+        String mode = request.getMode();
 
         if (!StringUtils.hasText(topic)) {
             throw new BusinessException(ErrorCode.PARAM_ERROR.getCode(), "综述主题不能为空");
@@ -406,7 +414,31 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
             throw new BusinessException(ErrorCode.PARAM_ERROR.getCode(), "部分文献不存在，请重新选择");
         }
 
-        String content = buildReviewContent(topic, literatures);
+        String content;
+        String generationMode;
+
+        // 判断生成模式
+        boolean useLlm = "llm".equalsIgnoreCase(mode);
+        if (useLlm) {
+            LlmConfig activeConfig = llmConfigMapper.selectActive();
+            if (activeConfig == null || activeConfig.getApiKey() == null || activeConfig.getApiKey().isEmpty()) {
+                log.warn("LLM 配置不可用，降级为离线生成");
+                content = buildReviewContent(topic, literatures);
+                generationMode = "llm_fallback_rule";
+            } else {
+                try {
+                    content = llmReviewService.generateReview(topic, literatures, activeConfig);
+                    generationMode = "llm";
+                } catch (Exception e) {
+                    log.warn("LLM 综述生成失败，降级为离线生成: {}", e.getMessage());
+                    content = buildReviewContent(topic, literatures);
+                    generationMode = "llm_fallback_rule";
+                }
+            }
+        } else {
+            content = buildReviewContent(topic, literatures);
+            generationMode = "rule";
+        }
 
         List<ReviewRecordVO.ReferenceVO> references = literatures.stream()
                 .map(lit -> {
@@ -426,12 +458,14 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         record.setLiteratureIds(literatureIds.stream().map(String::valueOf).collect(Collectors.joining(",")));
         record.setContent(content);
         record.setReferenceText(refText);
+        record.setGenerationMode(generationMode);
         reviewRecordMapper.insert(record);
 
         ReviewRecordVO vo = new ReviewRecordVO();
         vo.setId(record.getId());
         vo.setTopic(record.getTopic());
         vo.setContent(record.getContent());
+        vo.setGenerationMode(generationMode);
         vo.setReferences(references);
         vo.setCreateTime(java.time.LocalDateTime.now());
         return vo;
@@ -772,6 +806,7 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         vo.setId(record.getId());
         vo.setTopic(record.getTopic());
         vo.setContent(record.getContent());
+        vo.setGenerationMode(record.getGenerationMode());
         vo.setCreateTime(record.getCreateTime());
 
         if (record.getReferenceText() != null && !record.getReferenceText().isEmpty()) {

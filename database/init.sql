@@ -184,3 +184,19 @@ VALUES
 ('人工智能在高校教学中的应用研究', '张三, 李四', '本文分析了人工智能技术在高校教学中的应用场景，包括智能推荐、个性化学习和教学评价等方面。', '人工智能,高校教学,个性化学习', '教育信息化研究', 2023, '10.0000/example001', 1, 12, '系统录入', '期刊论文', 'https://example.com/paper001', '本文首先介绍了人工智能在高校教学中的发展背景，随后详细分析了智能推荐系统在课程资源匹配中的应用效果。'),
 ('基于机器学习的学生学习行为分析', '王五', '本文利用机器学习方法对学生学习行为数据进行分析，探索学习行为与学习效果之间的关系。', '机器学习,学习行为,数据分析', '计算机教育', 2022, '10.0000/example002', 3, 8, '系统录入', '会议论文', 'https://example.com/paper002', '实验部分采用了随机森林与支持向量机两种算法进行对比，结果表明随机森林在行为分类任务上表现更优。'),
 ('面向学术文献的智能检索系统设计', '赵六, 陈七', '本文设计了一种面向学术文献的智能检索系统，通过关键词匹配和语义相似度计算提升检索效果。', '文献检索,语义检索,智能系统', '软件工程与应用', 2024, '10.0000/example003', 2, 15, '系统录入', '期刊论文', 'https://example.com/paper003', '系统架构分为数据采集层、索引构建层和检索服务层三层，支持布尔检索和向量语义检索两种模式。');
+
+-- LLM API 配置表
+CREATE TABLE IF NOT EXISTS llm_config (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '配置ID',
+    name VARCHAR(100) NOT NULL COMMENT '配置名称，如 OpenAI、DeepSeek、通义千问',
+    provider VARCHAR(50) NOT NULL COMMENT 'openai-compatible / openai / deepseek / qwen / custom',
+    base_url VARCHAR(255) NOT NULL COMMENT 'API Base URL',
+    model VARCHAR(100) NOT NULL COMMENT '模型名称',
+    api_key TEXT COMMENT 'API Key，后端保存，前端返回时必须脱敏',
+    enabled TINYINT DEFAULT 1 COMMENT '是否启用',
+    active TINYINT DEFAULT 0 COMMENT '是否为当前使用配置',
+    timeout_seconds INT DEFAULT 30 COMMENT '超时时间',
+    remark VARCHAR(255) COMMENT '备注',
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    update_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+) COMMENT='LLM API 配置表';

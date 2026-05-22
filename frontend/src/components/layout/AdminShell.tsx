@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { authStore } from "@/lib/auth-store";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, FileText, Users, Tags, BarChart3, LogOut, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, FileText, Users, Tags, BarChart3, LogOut, ArrowLeft, BrainCircuit } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,7 @@ const items = [
   { to: "/admin/categories", label: "分类管理", icon: Tags },
   { to: "/admin/users", label: "用户管理", icon: Users },
   { to: "/admin/statistics", label: "数据统计", icon: BarChart3 },
+  { to: "/admin/llm-configs", label: "LLM API 管理", icon: BrainCircuit },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {

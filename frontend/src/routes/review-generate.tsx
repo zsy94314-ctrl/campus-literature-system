@@ -12,7 +12,7 @@ import { aiApi } from "@/api/ai";
 import { reviewApi, formatReviewTitle } from "@/api/review";
 import type { Literature } from "@/mock/literatures";
 import type { Review } from "@/mock/reviews";
-import { Sparkles, Search } from "lucide-react";
+import { Sparkles, Search, Cpu, BrainCircuit } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/review-generate")({
@@ -28,6 +28,7 @@ function ReviewGeneratePage() {
   const [result, setResult] = useState<Review | null>(null);
   const [loading, setLoading] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [generateMode, setGenerateMode] = useState<"rule" | "llm">("rule");
 
   const selectedPapers = selectedIds.map((id) => allLiterature[id]).filter(Boolean);
 
@@ -79,9 +80,13 @@ function ReviewGeneratePage() {
     if (selectedIds.length < 2) return toast.error("请至少选择 2 篇参考文献");
     setLoading(true);
     try {
-      const r = await reviewApi.generate({ topic, literatureIds: selectedIds });
+      const r = await reviewApi.generate({ topic, literatureIds: selectedIds, mode: generateMode });
       setResult(r);
-      toast.success("综述生成成功");
+      if (r.generationMode === "llm_fallback_rule") {
+        toast.success("综述生成成功（LLM 不可用，已自动降级为离线生成）");
+      } else {
+        toast.success("综述生成成功");
+      }
     } catch (err: any) {
       toast.error(err?.message || "综述生成失败");
     } finally {
@@ -204,9 +209,44 @@ function ReviewGeneratePage() {
             </Card>
           )}
 
-          <Button className="w-full" onClick={generate} disabled={loading}>
-            {loading ? "正在生成..." : "生成综述"}
-          </Button>
+          <Card>
+            <CardContent className="space-y-3 pt-4">
+              <div className="text-sm font-medium">生成方式</div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setGenerateMode("rule")}
+                  className={`flex flex-1 items-center gap-2 rounded-md border p-3 text-left text-sm transition-colors ${
+                    generateMode === "rule"
+                      ? "border-primary bg-primary/5 text-primary"
+                      : "hover:bg-secondary"
+                  }`}
+                >
+                  <Cpu className="h-4 w-4 shrink-0" />
+                  <div>
+                    <div className="font-medium">离线综述生成</div>
+                    <div className="text-xs text-muted-foreground">使用系统本地规则生成，稳定可用，无需外部 API</div>
+                  </div>
+                </button>
+                <button
+                  onClick={() => setGenerateMode("llm")}
+                  className={`flex flex-1 items-center gap-2 rounded-md border p-3 text-left text-sm transition-colors ${
+                    generateMode === "llm"
+                      ? "border-primary bg-primary/5 text-primary"
+                      : "hover:bg-secondary"
+                  }`}
+                >
+                  <BrainCircuit className="h-4 w-4 shrink-0" />
+                  <div>
+                    <div className="font-medium">在线 LLM 综述生成</div>
+                    <div className="text-xs text-muted-foreground">调用大模型 API，语言表达更自然；不可用将自动降级</div>
+                  </div>
+                </button>
+              </div>
+              <Button className="w-full" onClick={generate} disabled={loading}>
+                {loading ? "正在生成..." : "生成综述"}
+              </Button>
+            </CardContent>
+          </Card>
         </div>
 
         <div>
@@ -224,6 +264,13 @@ function ReviewGeneratePage() {
                   <h3 className="text-lg font-semibold">《{formatReviewTitle(result.topic)}》</h3>
                   <p className="mt-1 text-xs text-muted-foreground">
                     生成时间：{result.createdAt}
+                    {result.generationMode && (
+                      <span className="ml-2">
+                        {result.generationMode === "llm" && "· 生成方式：在线 LLM 综述生成"}
+                        {result.generationMode === "rule" && "· 生成方式：离线综述生成"}
+                        {result.generationMode === "llm_fallback_rule" && "· 生成方式：在线 LLM 不可用，已自动使用离线生成"}
+                      </span>
+                    )}
                   </p>
                   <div className="mt-4 whitespace-pre-wrap rounded-md bg-secondary/40 p-4 text-sm leading-relaxed">
                     {result.content}

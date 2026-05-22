@@ -19,4 +19,6 @@ public class ReviewGenerateRequest {
     @NotEmpty(message = "文献列表不能为空")
     @Size(min = 2, max = 5, message = "参考文献数量必须在2-5篇之间")
     private List<Long> literatureIds;
+
+    private String mode;
 }
