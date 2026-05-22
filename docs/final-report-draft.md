@@ -278,8 +278,6 @@ backend-ai 使用 FastAPI 提供四个接口。重建索引时，将文献文本
 
 ![管理员数据统计页面](docs/screenshots/20-admin-statistics.png)
 
-> 待补充：`docs/screenshots/20-admin-statistics.png`
->
 > 注：管理员数据统计页面基于数据库真实统计，展示用户总数、文献总数、分类数量、收藏总数、综述生成数、检索记录数、LLM 配置数等核心指标，以及分类 Top 10 分布、文献年份分布、文献类型分布、综述生成方式分布、检索类型分布和当前 LLM API 状态，不使用模拟趋势数据。
 
 ## 7 系统测试
@@ -471,7 +469,7 @@ npm run dev
 
 **图 D-20 管理员数据统计页面截图** (`20-admin-statistics.png`)
 
-待补充：`docs/screenshots/20-admin-statistics.png`
+![管理员数据统计页面](docs/screenshots/20-admin-statistics.png)
 
 **图 D-9 重建智能索引成功提示** (`09-admin-rebuild-index.png`)
 
