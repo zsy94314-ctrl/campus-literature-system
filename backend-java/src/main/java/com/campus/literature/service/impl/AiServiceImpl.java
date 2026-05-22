@@ -1,144 +1,268 @@
 package com.campus.literature.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.campus.literature.dto.AiDocumentDTO;
+import com.campus.literature.dto.AiRecommendRequest;
+import com.campus.literature.entity.Category;
 import com.campus.literature.entity.Literature;
+import com.campus.literature.exception.BusinessException;
+import com.campus.literature.mapper.CategoryMapper;
 import com.campus.literature.mapper.LiteratureMapper;
 import com.campus.literature.service.AiService;
-import com.campus.literature.vo.SemanticSearchVO;
+import com.campus.literature.vo.AiSearchResultVO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * AI 服务实现（模拟版本）
+ * AI 服务实现（接入 backend-ai）
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AiServiceImpl implements AiService {
 
     private final LiteratureMapper literatureMapper;
+    private final CategoryMapper categoryMapper;
+
+    @Value("${ai.service.base-url}")
+    private String aiBaseUrl;
+
+    private final RestTemplate restTemplate = new RestTemplate();
 
     @Override
-    public List<SemanticSearchVO> semanticSearch(String query, Integer topK) {
-        if (!StringUtils.hasText(query)) {
-            return List.of();
+    public Map<String, Object> health() {
+        String url = aiBaseUrl + "/health";
+        try {
+            ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                return response.getBody();
+            }
+            throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+        } catch (ResourceAccessException e) {
+            log.warn("backend-ai 连接失败: {}", e.getMessage());
+            throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+        } catch (RestClientException e) {
+            log.warn("backend-ai 请求异常: {}", e.getMessage());
+            throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
         }
+    }
+
+    @Override
+    public Map<String, Object> rebuildIndex() {
+        // 1. 查询所有文献
+        List<Literature> literatures = literatureMapper.selectList(null);
+        if (literatures == null || literatures.isEmpty()) {
+            throw new BusinessException(500, "暂无文献数据，无法重建索引");
+        }
+
+        // 2. 查询所有分类，构建 id->name 映射
+        List<Category> categories = categoryMapper.selectList(null);
+        Map<Long, String> categoryMap = categories.stream()
+                .collect(Collectors.toMap(Category::getId, Category::getName, (a, b) -> a));
+
+        // 3. 构建 DTO 列表
+        List<AiDocumentDTO> documents = literatures.stream().map(lit -> {
+            AiDocumentDTO dto = new AiDocumentDTO();
+            dto.setId(lit.getId());
+            dto.setTitle(lit.getTitle());
+            dto.setCategoryName(categoryMap.getOrDefault(lit.getCategoryId(), ""));
+            dto.setDocumentType(lit.getDocumentType());
+            dto.setKeywords(lit.getKeywords());
+            dto.setAbstractText(lit.getAbstractText());
+            dto.setContent(lit.getContent());
+            return dto;
+        }).collect(Collectors.toList());
+
+        // 4. 调用 backend-ai
+        String url = aiBaseUrl + "/rebuild-index";
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("documents", documents);
+
+        try {
+            ResponseEntity<Map> response = restTemplate.postForEntity(url, requestBody, Map.class);
+            if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
+                throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+            }
+            Map<String, Object> body = response.getBody();
+            if (!isSuccessCode(body.get("code"))) {
+                Object message = body.get("message");
+                throw new BusinessException(500, message != null ? message.toString() : "索引重建失败");
+            }
+            Object data = body.get("data");
+            return data instanceof Map ? (Map<String, Object>) data : Collections.singletonMap("count", documents.size());
+        } catch (ResourceAccessException e) {
+            log.warn("backend-ai 连接失败: {}", e.getMessage());
+            throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+        } catch (RestClientException e) {
+            log.warn("backend-ai 请求异常: {}", e.getMessage());
+            throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+        }
+    }
+
+    @Override
+    public List<AiSearchResultVO> semanticSearch(String query, Integer topK) {
         if (topK == null || topK <= 0) {
             topK = 10;
         }
 
-        // 获取所有文献，模拟语义相似度计算
-        List<Literature> allLiteratures = literatureMapper.selectList(null);
-        String[] queryWords = query.split("\\s+");
+        String url = aiBaseUrl + "/semantic-search";
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("query", query);
+        requestBody.put("topK", topK);
 
-        List<SemanticSearchVO> results = new ArrayList<>();
-        for (Literature lit : allLiteratures) {
-            double score = calcSimilarity(queryWords, lit);
-            if (score > 0) {
-                SemanticSearchVO vo = new SemanticSearchVO();
-                vo.setLiteratureId(lit.getId());
-                vo.setTitle(lit.getTitle());
-                vo.setSimilarity(Math.min(score, 0.99));
-                results.add(vo);
-            }
-        }
-
-        // 按相似度排序并截取 topK
-        return results.stream()
-                .sorted(Comparator.comparingDouble(SemanticSearchVO::getSimilarity).reversed())
-                .limit(topK)
-                .collect(Collectors.toList());
+        List<Map<String, Object>> results = callAiSearchApi(url, requestBody);
+        return mapToAiSearchResultVO(results);
     }
 
     @Override
-    public List<SemanticSearchVO> recommend(Long literatureId) {
-        Literature target = literatureMapper.selectById(literatureId);
-        if (target == null) {
+    public List<AiSearchResultVO> recommend(Long literatureId) {
+        String url = aiBaseUrl + "/recommend";
+        AiRecommendRequest request = new AiRecommendRequest();
+        request.setLiteratureId(literatureId);
+        request.setTopK(5);
+
+        List<Map<String, Object>> results = callAiSearchApi(url, request);
+        // 排除自身（backend-ai 已经排除，但再保险一次）
+        results = results.stream()
+                .filter(r -> !literatureId.equals(convertToLong(r.get("literatureId"))))
+                .collect(Collectors.toList());
+        return mapToAiSearchResultVO(results);
+    }
+
+    private List<Map<String, Object>> callAiSearchApi(String url, Object requestBody) {
+        try {
+            ResponseEntity<Map> response = restTemplate.postForEntity(url, requestBody, Map.class);
+            if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
+                throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+            }
+            Map<String, Object> body = response.getBody();
+            if (!isSuccessCode(body.get("code"))) {
+                Object message = body.get("message");
+                throw new BusinessException(500, message != null ? message.toString() : "智能检索服务调用失败");
+            }
+            Object data = body.get("data");
+            if (data instanceof Map) {
+                Object results = ((Map<?, ?>) data).get("results");
+                if (results instanceof List) {
+                    return (List<Map<String, Object>>) results;
+                }
+            }
+            return List.of();
+        } catch (ResourceAccessException e) {
+            log.warn("backend-ai 连接失败: {}", e.getMessage());
+            throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+        } catch (RestClientException e) {
+            log.warn("backend-ai 请求异常: {}", e.getMessage());
+            throw new BusinessException(500, "智能检索服务未启动，请先启动 backend-ai");
+        }
+    }
+
+    private boolean isSuccessCode(Object code) {
+        if (code == null) {
+            return false;
+        }
+        if (code instanceof Number) {
+            return ((Number) code).intValue() == 200;
+        }
+        try {
+            return Integer.parseInt(code.toString()) == 200;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private List<AiSearchResultVO> mapToAiSearchResultVO(List<Map<String, Object>> results) {
+        if (results == null || results.isEmpty()) {
             return List.of();
         }
 
-        // 获取同分类的其他文献
-        LambdaQueryWrapper<Literature> wrapper = new LambdaQueryWrapper<>();
-        wrapper.ne(Literature::getId, literatureId);
-        if (target.getCategoryId() != null) {
-            wrapper.eq(Literature::getCategoryId, target.getCategoryId());
-        }
-        List<Literature> candidates = literatureMapper.selectList(wrapper);
-
-        // 根据关键词和标题相似度计算推荐分数
-        List<SemanticSearchVO> results = new ArrayList<>();
-        for (Literature lit : candidates) {
-            double score = calcRecommendScore(target, lit);
-            SemanticSearchVO vo = new SemanticSearchVO();
-            vo.setLiteratureId(lit.getId());
-            vo.setTitle(lit.getTitle());
-            vo.setSimilarity(Math.min(score, 0.99));
-            results.add(vo);
-        }
-
-        return results.stream()
-                .sorted(Comparator.comparingDouble(SemanticSearchVO::getSimilarity).reversed())
-                .limit(10)
+        List<Long> ids = results.stream()
+                .map(r -> convertToLong(r.get("literatureId")))
+                .filter(Objects::nonNull)
+                .distinct()
                 .collect(Collectors.toList());
+
+        if (ids.isEmpty()) {
+            return List.of();
+        }
+
+        // 批量查询文献
+        List<Literature> literatures = literatureMapper.selectBatchIds(ids);
+        Map<Long, Literature> literatureMap = literatures.stream()
+                .collect(Collectors.toMap(Literature::getId, lit -> lit));
+
+        // 查询分类名称
+        List<Long> categoryIds = literatures.stream()
+                .map(Literature::getCategoryId)
+                .filter(Objects::nonNull)
+                .distinct()
+                .collect(Collectors.toList());
+        Map<Long, String> categoryNameMap = new HashMap<>();
+        if (!categoryIds.isEmpty()) {
+            List<Category> categories = categoryMapper.selectBatchIds(categoryIds);
+            categoryNameMap = categories.stream()
+                    .collect(Collectors.toMap(Category::getId, Category::getName));
+        }
+
+        List<AiSearchResultVO> voList = new ArrayList<>();
+        for (Map<String, Object> r : results) {
+            Long id = convertToLong(r.get("literatureId"));
+            Double similarity = convertToDouble(r.get("similarity"));
+            Literature lit = literatureMap.get(id);
+            if (lit == null) {
+                continue;
+            }
+            AiSearchResultVO vo = new AiSearchResultVO();
+            vo.setId(lit.getId());
+            vo.setTitle(lit.getTitle());
+            vo.setAuthors(lit.getAuthors());
+            vo.setAbstractText(lit.getAbstractText());
+            vo.setKeywords(lit.getKeywords());
+            vo.setJournal(lit.getJournal());
+            vo.setPublishYear(lit.getPublishYear());
+            vo.setCategoryId(lit.getCategoryId());
+            vo.setCategoryName(categoryNameMap.getOrDefault(lit.getCategoryId(), ""));
+            vo.setCitationCount(lit.getCitationCount());
+            vo.setDocumentType(lit.getDocumentType());
+            vo.setSimilarity(similarity);
+            voList.add(vo);
+        }
+        return voList;
     }
 
-    /**
-     * 计算查询与文献的相似度（基于关键词匹配模拟）
-     */
-    private double calcSimilarity(String[] queryWords, Literature literature) {
-        String text = (literature.getTitle() + " " + literature.getAbstractText() + " " + literature.getKeywords()).toLowerCase();
-        int matchCount = 0;
-        for (String word : queryWords) {
-            if (text.contains(word.toLowerCase())) {
-                matchCount++;
-            }
+    private Long convertToLong(Object value) {
+        if (value == null) {
+            return null;
         }
-        if (matchCount == 0) {
-            return 0;
+        if (value instanceof Number) {
+            return ((Number) value).longValue();
         }
-        // 基础分 + 匹配比例
-        return 0.3 + 0.6 * ((double) matchCount / queryWords.length);
+        try {
+            return Long.valueOf(value.toString());
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
-    /**
-     * 计算两篇文献的推荐相似度
-     */
-    private double calcRecommendScore(Literature target, Literature other) {
-        double score = 0.0;
-
-        // 同分类加分
-        if (target.getCategoryId() != null && target.getCategoryId().equals(other.getCategoryId())) {
-            score += 0.3;
+    private Double convertToDouble(Object value) {
+        if (value == null) {
+            return null;
         }
-
-        // 关键词相似度
-        if (StringUtils.hasText(target.getKeywords()) && StringUtils.hasText(other.getKeywords())) {
-            Set<String> targetKeywords = new HashSet<>(Arrays.asList(target.getKeywords().split(",|，|\\s+")));
-            Set<String> otherKeywords = new HashSet<>(Arrays.asList(other.getKeywords().split(",|，|\\s+")));
-            long common = targetKeywords.stream().filter(otherKeywords::contains).count();
-            if (!targetKeywords.isEmpty()) {
-                score += 0.4 * ((double) common / targetKeywords.size());
-            }
+        if (value instanceof Number) {
+            return ((Number) value).doubleValue();
         }
-
-        // 标题相似度（简单判断包含关系）
-        if (StringUtils.hasText(target.getTitle()) && StringUtils.hasText(other.getTitle())) {
-            String[] targetWords = target.getTitle().split("\\s+");
-            String otherTitle = other.getTitle();
-            int match = 0;
-            for (String word : targetWords) {
-                if (word.length() > 1 && otherTitle.contains(word)) {
-                    match++;
-                }
-            }
-            if (targetWords.length > 0) {
-                score += 0.3 * ((double) match / targetWords.length);
-            }
+        try {
+            return Double.valueOf(value.toString());
+        } catch (NumberFormatException e) {
+            return null;
         }
-
-        return score;
     }
 }

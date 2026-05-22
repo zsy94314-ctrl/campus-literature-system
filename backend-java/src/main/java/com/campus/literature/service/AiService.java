@@ -1,15 +1,20 @@
 package com.campus.literature.service;
 
-import com.campus.literature.vo.SemanticSearchVO;
+import com.campus.literature.vo.AiSearchResultVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * AI 服务接口
  */
 public interface AiService {
 
-    List<SemanticSearchVO> semanticSearch(String query, Integer topK);
+    Map<String, Object> health();
 
-    List<SemanticSearchVO> recommend(Long literatureId);
+    Map<String, Object> rebuildIndex();
+
+    List<AiSearchResultVO> semanticSearch(String query, Integer topK);
+
+    List<AiSearchResultVO> recommend(Long literatureId);
 }

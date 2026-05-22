@@ -32,6 +32,7 @@ F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\ser
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\security\JwtInterceptor.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\ReviewRecordVO.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\LiteratureListVO.java
+F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\dto\AiRecommendRequest.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\service\impl\SearchHistoryServiceImpl.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\dto\CategoryRequest.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\mapper\LiteratureVectorMapper.java
@@ -46,6 +47,7 @@ F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\con
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\dto\LiteratureCreateRequest.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\entity\SearchHistory.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\exception\GlobalExceptionHandler.java
+F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\AiSearchResultVO.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\StatisticsVO.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\service\impl\UserServiceImpl.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\controller\AiController.java
@@ -55,12 +57,14 @@ F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\con
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\mapper\UserMapper.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\service\FavoriteService.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\LoginVO.java
+F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\dto\AiSearchRequest.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\mapper\ReviewRecordMapper.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\service\ReviewRecordService.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\entity\AdminLog.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\exception\BusinessException.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\service\impl\ReviewRecordServiceImpl.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\config\MybatisPlusConfig.java
+F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\dto\AiDocumentDTO.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\UserVO.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\common\Result.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\entity\ReviewRecord.java

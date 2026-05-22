@@ -79,6 +79,16 @@ public class JwtInterceptor implements HandlerInterceptor {
         if ("/api/categories".equals(uri) || "/api/categories/statistics".equals(uri)) {
             return true;
         }
+        // AI 接口：健康检查、语义检索、相似推荐
+        if ("/api/ai/health".equals(uri)) {
+            return true;
+        }
+        if ("/api/ai/semantic-search".equals(uri)) {
+            return true;
+        }
+        if (uri.matches("/api/ai/recommend/\\d+")) {
+            return true;
+        }
         return false;
     }
 

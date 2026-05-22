@@ -14,6 +14,7 @@ com\campus\literature\mapper\SearchHistoryMapper.class
 com\campus\literature\mapper\ReviewRecordMapper.class
 com\campus\literature\controller\SearchHistoryController.class
 com\campus\literature\mapper\CategoryMapper.class
+com\campus\literature\dto\AiDocumentDTO.class
 com\campus\literature\dto\RegisterRequest.class
 com\campus\literature\service\impl\ReviewRecordServiceImpl.class
 com\campus\literature\vo\UserVO.class
@@ -35,12 +36,14 @@ com\campus\literature\service\impl\UserServiceImpl.class
 com\campus\literature\entity\LiteratureVector.class
 com\campus\literature\dto\LiteratureCreateRequest.class
 com\campus\literature\config\CorsConfig.class
+com\campus\literature\dto\AiSearchRequest.class
 com\campus\literature\vo\SearchHistoryVO.class
 com\campus\literature\controller\AiController.class
 com\campus\literature\controller\LiteratureController.class
 com\campus\literature\entity\User.class
 com\campus\literature\vo\FavoriteVO.class
 com\campus\literature\controller\FavoriteController.class
+com\campus\literature\dto\AiRecommendRequest.class
 com\campus\literature\vo\LoginVO.class
 com\campus\literature\security\JwtInterceptor.class
 com\campus\literature\service\SearchHistoryService.class
@@ -68,6 +71,7 @@ com\campus\literature\mapper\AdminLogMapper.class
 com\campus\literature\service\ReviewRecordService.class
 com\campus\literature\controller\ReviewRecordController.class
 com\campus\literature\controller\AdminController.class
+com\campus\literature\vo\AiSearchResultVO.class
 com\campus\literature\vo\CategoryVO.class
 com\campus\literature\service\impl\SearchHistoryServiceImpl.class
 com\campus\literature\vo\ReviewRecordVO.class
