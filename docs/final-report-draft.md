@@ -10,6 +10,18 @@
 
 关键词：学术文献检索；多学科语义检索；综述生成；FAISS；LLM API；Spring Boot
 
+## Abstract
+
+With the increasing number of academic materials in university courses and research training, traditional keyword retrieval has limitations in natural language understanding, cross-disciplinary topic identification, and literature review compilation. This paper designs and implements a campus academic literature intelligent retrieval and review generation system. The frontend is built with React + Vite + TypeScript, the main backend with Spring Boot + MyBatis-Plus + MySQL, and the intelligent semantic retrieval service with FastAPI + sentence-transformers + FAISS.
+
+The system supports user registration and login, literature keyword retrieval, advanced retrieval, multi-disciplinary intelligent semantic retrieval, literature detail viewing, favorites, similar literature recommendation, intelligent reference recommendation, offline rule-based review generation, online LLM-enhanced review generation, and review record management. The admin panel supports literature management, category management, user management, real-data statistics, intelligent index rebuilding, and LLM API configuration management. The intelligent retrieval module improves cross-disciplinary relevance through topic profiling, query expansion, MySQL keyword supplement recall, and a comprehensive re-ranking algorithm with `finalScore` and `matchReason`. The review generation module adopts a dual-mode design where offline rule-based generation serves as the stable default and online LLM generation serves as an enhancement, with automatic fallback when LLM is unavailable.
+
+All literature data in the system are simulated course project data, not a real paper database. The administrator statistics panel is based on real database aggregation, without mock trend data.
+
+**Keywords:** academic literature retrieval; multi-disciplinary semantic retrieval; literature review generation; FAISS; LLM API; Spring Boot
+
+---
+
 ## 1 引言
 
 ### 1.1 项目背景
@@ -371,13 +383,135 @@ npm run dev
 
 ## 参考文献
 
-此处填写课程教材、Spring Boot、React、Vite、MyBatis-Plus、FastAPI、sentence-transformers、FAISS、OpenAI-compatible API 等参考资料。
+[1] VMware Tanzu. Spring Boot Reference Documentation[EB/OL]. https://spring.io/projects/spring-boot
+
+[2] Meta Open Source. React Documentation[EB/OL]. https://react.dev/
+
+[3] Oracle. MySQL 8.0 Reference Manual[EB/OL]. https://dev.mysql.com/doc/refman/8.0/en/
+
+[4] Sebastián Ramírez. FastAPI Documentation[EB/OL]. https://fastapi.tiangolo.com/
+
+[5] Johnson J, Douze M, Jégou H. Billion-scale similarity search with GPUs[J]. IEEE Transactions on Big Data, 2019, 7(1): 535-547.
+
+[6] Reimers N, Gurevych I. Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks[C]. Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP), 2019: 3982-3992.
+
+[7] Lewis P, Perez E, Piktus A, et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks[C]. Advances in Neural Information Processing Systems (NeurIPS), 2020, 33: 9459-9474.
+
+[8] MyBatis-Plus. MyBatis-Plus Documentation[EB/OL]. https://baomidou.com/
+
+[9] TanStack. TanStack Router Documentation[EB/OL]. https://tanstack.com/router/
+
+[10] OpenAI. OpenAI API Reference[EB/OL]. https://platform.openai.com/docs/api-reference
 
 ## 附录
 
 ### 附录 A 数据库脚本
 
-此处插入核心建表语句。
+系统数据库采用 MySQL 8.0，核心表包括 `user`、`category`、`literature`、`favorite`、`search_history`、`review_record`、`llm_config`、`admin_log` 和 `literature_vector`。以下为简化建表说明，完整 SQL 脚本见 `database/init.sql`、`database/update_categories.sql`、`database/literature_seed_500_high_quality.sql` 和 `database/update_llm_config.sql`。
+
+**user 表（用户表）**
+
+```sql
+CREATE TABLE user (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    real_name VARCHAR(50),
+    email VARCHAR(100),
+    role VARCHAR(20) DEFAULT 'USER',
+    status INT DEFAULT 1,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**category 表（分类表）**
+
+```sql
+CREATE TABLE category (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    parent_id BIGINT DEFAULT 0,
+    sort_order INT DEFAULT 0,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**literature 表（文献表）**
+
+```sql
+CREATE TABLE literature (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    authors VARCHAR(255),
+    abstract_text TEXT,
+    keywords VARCHAR(255),
+    journal VARCHAR(255),
+    publish_year INT,
+    doi VARCHAR(100),
+    category_id BIGINT,
+    citation_count INT DEFAULT 0,
+    document_type VARCHAR(50),
+    content TEXT,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**favorite 表（收藏表）**
+
+```sql
+CREATE TABLE favorite (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    literature_id BIGINT NOT NULL,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**search_history 表（检索历史表）**
+
+```sql
+CREATE TABLE search_history (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    keyword VARCHAR(255) NOT NULL,
+    search_type VARCHAR(30) DEFAULT 'NORMAL',
+    result_count INT DEFAULT 0,
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**review_record 表（综述记录表）**
+
+```sql
+CREATE TABLE review_record (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    topic VARCHAR(255) NOT NULL,
+    literature_ids TEXT,
+    content LONGTEXT,
+    reference_text TEXT,
+    generation_mode VARCHAR(30),
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**llm_config 表（LLM 配置表）**
+
+```sql
+CREATE TABLE llm_config (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    provider VARCHAR(50),
+    base_url VARCHAR(255),
+    model VARCHAR(100),
+    api_key VARCHAR(255),
+    enabled INT DEFAULT 1,
+    active INT DEFAULT 0,
+    timeout_seconds INT DEFAULT 120,
+    remark VARCHAR(255),
+    create_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
 
 ### 附录 B 接口说明
 
@@ -389,7 +523,7 @@ npm run dev
 
 ### 附录 D 系统运行截图
 
-以下截图按模块分类排列，所有截图文件位于 `docs/screenshots/` 目录。其中 1～12 为已有截图，13～22 为待补充截图。
+以下截图按模块分类排列，所有截图文件位于 `docs/screenshots/` 目录。
 
 #### D.1 基础访问与用户认证
 
@@ -399,11 +533,11 @@ npm run dev
 
 **图 D-13 用户登录页面截图** (`13-login.png`)
 
-待补充：`docs/screenshots/13-login.png`
+![用户登录页面截图](docs/screenshots/13-login.png)
 
 **图 D-14 用户注册页面截图** (`14-register.png`)
 
-待补充：`docs/screenshots/14-register.png`
+![用户注册页面截图](docs/screenshots/14-register.png)
 
 #### D.2 文献检索与详情
 
@@ -413,7 +547,7 @@ npm run dev
 
 **图 D-15 高级检索页面截图** (`15-advanced-search.png`)
 
-待补充：`docs/screenshots/15-advanced-search.png`
+![高级检索页面截图](docs/screenshots/15-advanced-search.png)
 
 **图 D-3 智能检索运行效果** (`03-search-ai.png`)
 
@@ -425,7 +559,7 @@ npm run dev
 
 **图 D-16 我的收藏页面截图** (`16-favorites.png`)
 
-待补充：`docs/screenshots/16-favorites.png`
+![我的收藏页面截图](docs/screenshots/16-favorites.png)
 
 #### D.3 综述生成与记录
 
@@ -435,7 +569,7 @@ npm run dev
 
 **图 D-21 离线综述生成结果截图** (`21-review-rule-result.png`)
 
-待补充：`docs/screenshots/21-review-rule-result.png`
+![离线综述生成结果截图](docs/screenshots/21-review-rule-result.png)
 
 **图 D-6 在线 LLM 综述生成结果** (`06-review-llm-result.png`)
 
@@ -447,7 +581,7 @@ npm run dev
 
 **图 D-22 综述记录按生成方式筛选结果截图** (`22-review-history-filter.png`)
 
-待补充：`docs/screenshots/22-review-history-filter.png`
+![综述记录按生成方式筛选结果截图](docs/screenshots/22-review-history-filter.png)
 
 #### D.4 管理员后台
 
@@ -457,15 +591,15 @@ npm run dev
 
 **图 D-17 管理员文献管理页面截图** (`17-admin-literature.png`)
 
-待补充：`docs/screenshots/17-admin-literature.png`
+![管理员文献管理页面截图](docs/screenshots/17-admin-literature.png)
 
 **图 D-18 管理员分类管理页面截图** (`18-admin-category.png`)
 
-待补充：`docs/screenshots/18-admin-category.png`
+![管理员分类管理页面截图](docs/screenshots/18-admin-category.png)
 
 **图 D-19 管理员用户管理页面截图** (`19-admin-users.png`)
 
-待补充：`docs/screenshots/19-admin-users.png`
+![管理员用户管理页面截图](docs/screenshots/19-admin-users.png)
 
 **图 D-20 管理员数据统计页面截图** (`20-admin-statistics.png`)
 
