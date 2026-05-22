@@ -18,8 +18,10 @@ com\campus\literature\vo\UserVO.class
 com\campus\literature\config\DataInitializer.class
 com\campus\literature\security\UserContext.class
 com\campus\literature\mapper\FavoriteMapper.class
+com\campus\literature\vo\CategoryStatVO.class
 com\campus\literature\dto\LiteratureSearchRequest.class
 com\campus\literature\service\LiteratureService.class
+com\campus\literature\vo\ReviewModeDistributionVO.class
 com\campus\literature\dto\LoginRequest.class
 com\campus\literature\mapper\LiteratureVectorMapper.class
 com\campus\literature\service\impl\LlmReviewServiceImpl.class
@@ -34,6 +36,7 @@ com\campus\literature\vo\FavoriteVO.class
 com\campus\literature\dto\AiRecommendRequest.class
 com\campus\literature\security\JwtInterceptor.class
 com\campus\literature\entity\Favorite.class
+com\campus\literature\vo\DocumentTypeDistributionVO.class
 com\campus\literature\service\impl\FavoriteServiceImpl.class
 com\campus\literature\service\AiService.class
 com\campus\literature\dto\LlmConfigCreateRequest.class
@@ -46,6 +49,7 @@ com\campus\literature\vo\ReviewRecordVO$ReferenceVO.class
 com\campus\literature\config\WebConfig.class
 com\campus\literature\config\MybatisPlusConfig.class
 com\campus\literature\service\impl\AdminServiceImpl.class
+com\campus\literature\vo\YearDistributionVO.class
 com\campus\literature\vo\AiSearchResultVO.class
 com\campus\literature\service\impl\SearchHistoryServiceImpl.class
 com\campus\literature\service\impl\ReviewRecordServiceImpl$DirectionDef.class
@@ -74,6 +78,7 @@ com\campus\literature\controller\LiteratureController.class
 com\campus\literature\controller\FavoriteController.class
 com\campus\literature\vo\LoginVO.class
 com\campus\literature\service\SearchHistoryService.class
+com\campus\literature\vo\SearchTypeDistributionVO.class
 com\campus\literature\security\UserContext$UserInfo.class
 com\campus\literature\entity\Category.class
 com\campus\literature\vo\CategoryStatisticsVO.class

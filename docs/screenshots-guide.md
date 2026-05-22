@@ -48,7 +48,7 @@
 | `17-admin-literature.png` | 管理员文献管理页面 | 展示文献列表、增删改查操作 |
 | `18-admin-category.png` | 管理员分类管理页面 | 展示两级学科分类的维护界面 |
 | `19-admin-users.png` | 管理员用户管理页面 | 展示用户列表和权限管理 |
-| `20-admin-statistics.png` | 管理员数据统计页面 | 展示系统运营统计数据和图表 |
+| `20-admin-statistics.png` | 管理员数据统计页面 | 展示真实统计指标、分类 Top 10 分布、年份分布、文献类型分布、综述生成方式分布、检索类型分布和 LLM 状态 |
 | `09-admin-rebuild-index.png` | 重建智能索引入口或成功提示 | 展示重建索引按钮、操作提示或成功结果 |
 | `10-admin-llm-config.png` | LLM API 管理页面 | 必须遮挡 API Key；展示配置列表、active 状态和脱敏 Key |
 | `11-llm-test-success.png` | LLM 测试连接成功 | 展示测试连接成功提示，遮挡所有敏感配置 |

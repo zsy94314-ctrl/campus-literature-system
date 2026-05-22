@@ -12,6 +12,52 @@ function adaptUser(raw: any): User {
   };
 }
 
+export interface CategoryStat {
+  name: string;
+  count: number;
+}
+
+export interface YearDistribution {
+  year: number;
+  count: number;
+}
+
+export interface DocumentTypeDistribution {
+  type: string;
+  count: number;
+}
+
+export interface ReviewModeDistribution {
+  mode: string;
+  label: string;
+  count: number;
+}
+
+export interface SearchTypeDistribution {
+  type: string;
+  label: string;
+  count: number;
+}
+
+export interface StatisticsData {
+  userCount: number;
+  literatureCount: number;
+  reviewCount: number;
+  categoryCount: number;
+  favoriteCount: number;
+  searchHistoryCount: number;
+  llmConfigCount: number;
+  activeLlmName: string | null;
+  activeLlmProvider: string | null;
+  activeLlmModel: string | null;
+  activeLlmEnabled: boolean;
+  categoryTop: CategoryStat[];
+  yearDistribution: YearDistribution[];
+  documentTypeDistribution: DocumentTypeDistribution[];
+  reviewModeDistribution: ReviewModeDistribution[];
+  searchTypeDistribution: SearchTypeDistribution[];
+}
+
 export const adminApi = {
   // GET /admin/users
   listUsers: async (): Promise<User[]> => {
@@ -26,23 +72,25 @@ export const adminApi = {
       data: { status: status === "active" ? 1 : 0 },
     }),
   // GET /admin/statistics
-  getStatistics: async () => {
+  getStatistics: async (): Promise<StatisticsData> => {
     const raw = await request<any>({ method: "GET", url: "/admin/statistics" });
     return {
       userCount: raw.userCount || 0,
       literatureCount: raw.literatureCount || 0,
       reviewCount: raw.reviewCount || 0,
       categoryCount: raw.categoryCount || 0,
-      // Provide a default recentTrend so the statistics page chart doesn't break
-      recentTrend: [
-        { date: "周一", value: 320 },
-        { date: "周二", value: 412 },
-        { date: "周三", value: 380 },
-        { date: "周四", value: 504 },
-        { date: "周五", value: 612 },
-        { date: "周六", value: 290 },
-        { date: "周日", value: 245 },
-      ],
+      favoriteCount: raw.favoriteCount || 0,
+      searchHistoryCount: raw.searchHistoryCount || 0,
+      llmConfigCount: raw.llmConfigCount || 0,
+      activeLlmName: raw.activeLlmName || null,
+      activeLlmProvider: raw.activeLlmProvider || null,
+      activeLlmModel: raw.activeLlmModel || null,
+      activeLlmEnabled: !!raw.activeLlmEnabled,
+      categoryTop: raw.categoryTop || [],
+      yearDistribution: raw.yearDistribution || [],
+      documentTypeDistribution: raw.documentTypeDistribution || [],
+      reviewModeDistribution: raw.reviewModeDistribution || [],
+      searchTypeDistribution: raw.searchTypeDistribution || [],
     };
   },
 };
