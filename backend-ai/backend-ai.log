@@ -30,3 +30,10 @@ INFO:     127.0.0.1:56215 - "POST /recommend HTTP/1.1" 200 OK
 INFO:     127.0.0.1:56215 - "POST /recommend HTTP/1.1" 200 OK
 INFO:     127.0.0.1:62026 - "POST /semantic-search HTTP/1.1" 200 OK
 INFO:     127.0.0.1:65283 - "POST /rebuild-index HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65427 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65427 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54518 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54518 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51096 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51096 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65399 - "POST /semantic-search HTTP/1.1" 200 OK
