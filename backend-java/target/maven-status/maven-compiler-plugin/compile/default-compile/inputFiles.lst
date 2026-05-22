@@ -1,6 +1,7 @@
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\config\DataInitializer.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\service\impl\FavoriteServiceImpl.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\SearchHistoryVO.java
+F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\vo\CategoryStatisticsVO.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\service\impl\LiteratureServiceImpl.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\common\ErrorCode.java
 F:\campus-literature-system\backend-java\src\main\java\com\campus\literature\entity\Literature.java

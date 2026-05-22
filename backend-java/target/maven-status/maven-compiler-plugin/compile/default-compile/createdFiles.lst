@@ -50,6 +50,7 @@ com\campus\literature\security\UserContext$UserInfo.class
 com\campus\literature\service\AiService.class
 com\campus\literature\entity\AdminLog.class
 com\campus\literature\entity\Category.class
+com\campus\literature\vo\CategoryStatisticsVO.class
 com\campus\literature\mapper\LiteratureMapper.class
 com\campus\literature\service\AdminService.class
 com\campus\literature\dto\CategoryRequest.class

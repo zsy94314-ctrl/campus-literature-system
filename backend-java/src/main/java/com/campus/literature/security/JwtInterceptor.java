@@ -75,8 +75,8 @@ public class JwtInterceptor implements HandlerInterceptor {
         if (uri.matches("/api/literatures/\\d+")) {
             return true;
         }
-        // 分类列表
-        if ("/api/categories".equals(uri)) {
+        // 分类列表与分类统计
+        if ("/api/categories".equals(uri) || "/api/categories/statistics".equals(uri)) {
             return true;
         }
         return false;

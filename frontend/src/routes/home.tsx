@@ -3,9 +3,9 @@ import { AppShell } from "@/components/layout/AppShell";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { literatureApi } from "@/api/literature";
-import { categoryApi, type Category } from "@/api/category";
+import { categoryApi, type CategoryStatistics } from "@/api/category";
 import type { Literature } from "@/mock/literatures";
 import { Search, TrendingUp, BookMarked, Sparkles } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
@@ -18,24 +18,12 @@ function HomePage() {
   const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const [hot, setHot] = useState<Literature[]>([]);
-  const [cats, setCats] = useState<Category[]>([]);
-  const [allLits, setAllLits] = useState<Literature[]>([]);
+  const [catStats, setCatStats] = useState<CategoryStatistics[]>([]);
 
   useEffect(() => {
     literatureApi.search({ sortBy: "citations", pageSize: 4 }).then((r) => setHot(r.list.slice(0, 4)));
-    literatureApi.search({ page: 1, pageSize: 100 }).then((r) => setAllLits(r.list));
-    categoryApi.list().then(setCats);
+    categoryApi.statistics().then(setCatStats);
   }, []);
-
-  const catCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    allLits.forEach((l) => {
-      if (l.categoryId) {
-        counts[l.categoryId] = (counts[l.categoryId] || 0) + 1;
-      }
-    });
-    return counts;
-  }, [allLits]);
 
   return (
     <AppShell>
@@ -119,14 +107,14 @@ function HomePage() {
             <CardTitle className="text-base">学科分类</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
-            {cats.map((c) => (
+            {catStats.map((c) => (
               <Link
-                key={c.id}
+                key={c.categoryId}
                 to="/search"
-                search={{ category: c.name } as never}
+                search={{ category: c.categoryId } as never}
                 className="rounded-full border px-3 py-1 text-xs text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
               >
-                {c.name} · {catCounts[c.id] || 0}
+                {c.categoryName} · {c.count}
               </Link>
             ))}
           </CardContent>

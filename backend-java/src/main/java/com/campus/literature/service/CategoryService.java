@@ -1,6 +1,7 @@
 package com.campus.literature.service;
 
 import com.campus.literature.dto.CategoryRequest;
+import com.campus.literature.vo.CategoryStatisticsVO;
 import com.campus.literature.vo.CategoryVO;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
 public interface CategoryService {
 
     List<CategoryVO> getAllCategories();
+
+    List<CategoryStatisticsVO> getCategoryStatistics();
 
     void create(CategoryRequest request);
 

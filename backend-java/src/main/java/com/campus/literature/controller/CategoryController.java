@@ -6,6 +6,7 @@ import com.campus.literature.dto.CategoryRequest;
 import com.campus.literature.exception.BusinessException;
 import com.campus.literature.security.UserContext;
 import com.campus.literature.service.CategoryService;
+import com.campus.literature.vo.CategoryStatisticsVO;
 import com.campus.literature.vo.CategoryVO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,11 @@ public class CategoryController {
     @GetMapping
     public Result<List<CategoryVO>> getAllCategories() {
         return Result.success(categoryService.getAllCategories());
+    }
+
+    @GetMapping("/statistics")
+    public Result<List<CategoryStatisticsVO>> getCategoryStatistics() {
+        return Result.success(categoryService.getCategoryStatistics());
     }
 
     @PostMapping

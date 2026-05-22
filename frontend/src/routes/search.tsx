@@ -25,7 +25,7 @@ function SearchPage() {
   const { q, category: initCat } = Route.useSearch();
   const [keyword, setKeyword] = useState(q);
   const [author, setAuthor] = useState("");
-  const [category, setCategory] = useState(initCat);
+  const [category, setCategory] = useState(initCat || "all");
   const [year, setYear] = useState<string>("");
   const [sortBy, setSortBy] = useState<SearchParams["sortBy"]>("relevance");
   const [list, setList] = useState<Literature[]>([]);
@@ -52,11 +52,39 @@ function SearchPage() {
     setLoading(false);
   };
 
+  // 加载分类列表
   useEffect(() => {
     categoryApi.list().then(setCats);
-    runSearch(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // 同步 URL 参数变化（当从首页点击分类跳转时，需同步到本地状态并自动检索）
+  useEffect(() => {
+    setKeyword(q);
+    const cat = initCat || "all";
+    setCategory(cat);
+    // 使用函数式更新确保使用最新 category 值发起检索
+    setPage(1);
+    // 由于 setCategory 是异步的，直接调用 runSearch 可能拿不到最新值，
+    // 所以在这里直接发起检索，使用 cat 而非 category state
+    const doSearch = async () => {
+      setLoading(true);
+      const res = await literatureApi.search({
+        keyword: q,
+        author: "",
+        category: cat && cat !== "all" ? cat : undefined,
+        year: undefined,
+        sortBy: "relevance",
+        page: 1,
+        pageSize,
+      });
+      setList(res.list);
+      setTotal(res.total);
+      setPage(1);
+      setLoading(false);
+    };
+    doSearch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q, initCat]);
 
   return (
     <AppShell>
