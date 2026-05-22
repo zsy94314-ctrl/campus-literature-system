@@ -203,15 +203,35 @@
 
 前端使用 TanStack Router 管理路由。`src/api` 下封装认证、文献、收藏、分类、智能检索、综述、检索历史、管理员和 LLM 配置接口。`review-generate.tsx` 支持离线和在线生成方式切换，`review-history.tsx` 支持 generationMode 标签和筛选，`admin.llm-configs.tsx` 支持 LLM API 管理。
 
-此处插入系统运行截图，详见 `docs/screenshots-guide.md`。建议在正文中选择展示以下关键截图：
+系统前端运行截图如下：
 
-- 此处插入图 6-6 首页运行截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-7 普通检索运行截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-8 智能检索结果截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-9 文献详情与相似文献推荐截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-10 综述生成双模式选择截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-11 在线 LLM 综述生成结果截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-12 综述记录 generationMode 标签和筛选截图，详见 `docs/screenshots-guide.md`。
+**图 6-6 首页运行效果**
+
+![首页运行效果](docs/screenshots/01-home.png)
+
+**图 6-7 普通检索运行效果**
+
+![普通检索运行效果](docs/screenshots/02-search-normal.png)
+
+**图 6-8 智能检索运行效果**
+
+![智能检索运行效果](docs/screenshots/03-search-ai.png)
+
+**图 6-9 文献详情与相似文献推荐**
+
+![文献详情与相似文献推荐](docs/screenshots/04-literature-detail-recommend.png)
+
+**图 6-10 综述生成双模式选择**
+
+![综述生成双模式选择](docs/screenshots/05-review-generate-mode.png)
+
+**图 6-11 在线 LLM 综述生成结果**
+
+![在线 LLM 综述生成结果](docs/screenshots/06-review-llm-result.png)
+
+**图 6-12 综述记录 generationMode 标签和筛选**
+
+![综述记录 generationMode 标签和筛选](docs/screenshots/07-review-history-generation-mode.png)
 
 ### 6.2 Java 后端实现
 
@@ -229,13 +249,29 @@ backend-ai 使用 FastAPI 提供四个接口。重建索引时，将文献文本
 
 ### 6.5 管理员后台运行截图说明
 
-管理员后台截图用于展示系统管理能力。建议在正文或附录中插入管理员后台首页、重建智能索引、LLM API 管理、LLM 测试连接成功和三个服务启动终端截图。涉及 LLM API 管理页面时，必须遮挡 API Key、Token、数据库密码等敏感信息。
+管理员后台运行截图如下。涉及 LLM API 管理页面时，API Key 已做脱敏处理。
 
-- 此处插入图 6-13 管理员后台首页截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-14 重建智能索引入口或成功提示截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-15 LLM API 管理页面截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-16 LLM 测试连接成功截图，详见 `docs/screenshots-guide.md`。
-- 此处插入图 6-17 backend-ai、backend-java、frontend 三个服务启动终端截图，详见 `docs/screenshots-guide.md`。
+**图 6-13 管理员后台首页**
+
+![管理员后台首页](docs/screenshots/08-admin-dashboard.png)
+
+**图 6-14 重建智能索引成功提示**
+
+![重建智能索引成功提示](docs/screenshots/09-admin-rebuild-index.png)
+
+**图 6-15 LLM API 管理页面**
+
+![LLM API 管理页面](docs/screenshots/10-admin-llm-config.png)
+
+**图 6-16 LLM 测试连接成功**
+
+![LLM 测试连接成功](docs/screenshots/11-llm-test-success.png)
+
+**图 6-17 三服务启动与项目运行终端截图**
+
+![三服务启动与项目运行终端截图](docs/screenshots/12-services-running.png)
+
+> 注：该截图展示项目运行与 Git 提交记录等终端信息，用于说明系统运行和版本管理情况。
 
 ## 7 系统测试
 
@@ -346,7 +382,63 @@ npm run dev
 
 ### 附录 D 系统运行截图
 
-此处插入首页、检索页、文献详情、智能检索、综述生成、综述记录、管理员后台、LLM API 管理等截图，截图清单详见 `docs/screenshots-guide.md`。
+以下截图按模块分类排列，所有截图文件位于 `docs/screenshots/` 目录。
+
+#### D.1 用户端截图
+
+**图 D-1 首页运行效果** (`01-home.png`)
+
+![首页运行效果](docs/screenshots/01-home.png)
+
+**图 D-2 普通检索运行效果** (`02-search-normal.png`)
+
+![普通检索运行效果](docs/screenshots/02-search-normal.png)
+
+**图 D-3 智能检索运行效果** (`03-search-ai.png`)
+
+![智能检索运行效果](docs/screenshots/03-search-ai.png)
+
+**图 D-4 文献详情与相似文献推荐** (`04-literature-detail-recommend.png`)
+
+![文献详情与相似文献推荐](docs/screenshots/04-literature-detail-recommend.png)
+
+**图 D-5 综述生成双模式选择** (`05-review-generate-mode.png`)
+
+![综述生成双模式选择](docs/screenshots/05-review-generate-mode.png)
+
+**图 D-6 在线 LLM 综述生成结果** (`06-review-llm-result.png`)
+
+![在线 LLM 综述生成结果](docs/screenshots/06-review-llm-result.png)
+
+**图 D-7 综述记录 generationMode 标签和筛选** (`07-review-history-generation-mode.png`)
+
+![综述记录 generationMode 标签和筛选](docs/screenshots/07-review-history-generation-mode.png)
+
+#### D.2 管理员后台截图
+
+**图 D-8 管理员后台首页** (`08-admin-dashboard.png`)
+
+![管理员后台首页](docs/screenshots/08-admin-dashboard.png)
+
+**图 D-9 重建智能索引成功提示** (`09-admin-rebuild-index.png`)
+
+![重建智能索引成功提示](docs/screenshots/09-admin-rebuild-index.png)
+
+**图 D-10 LLM API 管理页面** (`10-admin-llm-config.png`)
+
+![LLM API 管理页面](docs/screenshots/10-admin-llm-config.png)
+
+**图 D-11 LLM 测试连接成功** (`11-llm-test-success.png`)
+
+![LLM 测试连接成功](docs/screenshots/11-llm-test-success.png)
+
+#### D.3 其他截图
+
+**图 D-12 三服务启动与项目运行终端截图** (`12-services-running.png`)
+
+![三服务启动与项目运行终端截图](docs/screenshots/12-services-running.png)
+
+> 注：该截图展示项目运行与 Git 提交记录等终端信息，用于说明系统运行和版本管理情况。
 
 ### 附录 E AI 辅助记录
 

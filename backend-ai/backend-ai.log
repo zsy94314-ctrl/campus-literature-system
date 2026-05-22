@@ -21,3 +21,12 @@ INFO:     127.0.0.1:62824 - "POST /semantic-search HTTP/1.1" 200 OK
 INFO:     127.0.0.1:53973 - "POST /semantic-search HTTP/1.1" 200 OK
 INFO:     127.0.0.1:57337 - "POST /semantic-search HTTP/1.1" 200 OK
 INFO:     127.0.0.1:55984 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55266 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55266 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55266 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64893 - "GET / HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49404 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56215 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56215 - "POST /recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62026 - "POST /semantic-search HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65283 - "POST /rebuild-index HTTP/1.1" 200 OK

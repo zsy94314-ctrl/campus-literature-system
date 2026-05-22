@@ -25,7 +25,7 @@
 | `09-admin-rebuild-index.png` | 重建智能索引入口或成功提示 | 展示重建索引按钮、操作提示或成功结果 |
 | `10-admin-llm-config.png` | LLM API 管理页面 | 必须遮挡 API Key；展示配置列表、active 状态和脱敏 Key |
 | `11-llm-test-success.png` | LLM 测试连接成功 | 展示测试连接成功提示，遮挡所有敏感配置 |
-| `12-services-running.png` | 三个服务启动终端 | 展示 backend-ai、backend-java、frontend 正常运行状态 |
+| `12-services-running.png` | 服务启动与项目运行终端截图 | 展示项目运行与 Git 提交记录等终端信息，用于说明系统运行和版本管理情况 |
 
 ## 附录 D 引用建议
 
@@ -42,4 +42,4 @@
 - 图 D-9 重建智能索引：`docs/screenshots/09-admin-rebuild-index.png`
 - 图 D-10 LLM API 管理：`docs/screenshots/10-admin-llm-config.png`
 - 图 D-11 LLM 测试连接成功：`docs/screenshots/11-llm-test-success.png`
-- 图 D-12 服务启动终端：`docs/screenshots/12-services-running.png`
+- 图 D-12 三服务启动与项目运行终端截图：`docs/screenshots/12-services-running.png`
