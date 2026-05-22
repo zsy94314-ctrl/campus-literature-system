@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,61 +32,25 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
     @Override
     public ReviewRecordVO generate(ReviewGenerateRequest request) {
         Long userId = UserContext.getCurrentUserId();
+        String topic = request.getTopic();
+        List<Long> literatureIds = request.getLiteratureIds();
 
-        // 获取文献列表
-        List<Literature> literatures = literatureMapper.selectBatchIds(request.getLiteratureIds());
-        if (literatures.isEmpty()) {
-            throw new BusinessException(ErrorCode.PARAM_ERROR);
+        if (!StringUtils.hasText(topic)) {
+            throw new BusinessException(ErrorCode.PARAM_ERROR.getCode(), "综述主题不能为空");
+        }
+        if (literatureIds == null || literatureIds.size() < 2) {
+            throw new BusinessException(ErrorCode.PARAM_ERROR.getCode(), "请至少选择 2 篇参考文献");
+        }
+        if (literatureIds.size() > 5) {
+            throw new BusinessException(ErrorCode.PARAM_ERROR.getCode(), "最多选择 5 篇参考文献");
         }
 
-        String displayTitle = formatTopic(request.getTopic());
-        StringBuilder content = new StringBuilder();
-        content.append("# ").append(displayTitle).append("\n\n");
-
-        // 研究背景
-        content.append("## 一、研究背景\n\n");
-        content.append("随着科学技术的快速发展，").append(request.getTopic())
-                .append("逐渐成为学术界和产业界关注的热点。");
-        content.append("本文基于").append(literatures.size()).append("篇相关文献，对该领域的研究现状进行综述。\n\n");
-
-        // 研究现状
-        content.append("## 二、研究现状\n\n");
-        for (int i = 0; i < literatures.size(); i++) {
-            Literature lit = literatures.get(i);
-            content.append(i + 1).append(". **").append(lit.getTitle()).append("**\n");
-            content.append("   - 作者：").append(lit.getAuthors()).append("\n");
-            if (StringUtils.hasText(lit.getContent())) {
-                content.append("   - 正文节选：").append(lit.getContent()).append("\n");
-            }
-            content.append("   - 摘要：").append(lit.getAbstractText()).append("\n\n");
+        List<Literature> literatures = literatureMapper.selectBatchIds(literatureIds);
+        if (literatures.size() != literatureIds.size()) {
+            throw new BusinessException(ErrorCode.PARAM_ERROR.getCode(), "部分文献不存在，请重新选择");
         }
 
-        // 主要研究方向
-        content.append("## 三、主要研究方向\n\n");
-        content.append("根据上述文献分析，该领域的主要研究方向包括：\n");
-        content.append("1. 理论研究：深入探讨相关概念、模型和算法。\n");
-        content.append("2. 应用实践：将研究成果应用于实际场景中。\n");
-        content.append("3. 系统开发：设计和实现相关的智能系统或平台。\n\n");
-
-        // 存在问题
-        content.append("## 四、存在问题\n\n");
-        content.append("当前研究仍面临一些挑战：\n");
-        content.append("1. 数据质量和规模限制。\n");
-        content.append("2. 算法的泛化能力有待提升。\n");
-        content.append("3. 理论与实践的结合不够紧密。\n\n");
-
-        // 未来发展趋势
-        content.append("## 五、发展趋势\n\n");
-        content.append("展望未来，该领域的发展趋势包括：\n");
-        content.append("1. 多模态融合与跨领域应用。\n");
-        content.append("2. 大模型技术的深入应用。\n");
-        content.append("3. 个性化与智能化服务。\n\n");
-
-        // 参考来源
-        content.append("## 六、参考文献来源\n\n");
-        for (Literature lit : literatures) {
-            content.append("- ").append(lit.getTitle()).append("（").append(lit.getAuthors()).append("）\n");
-        }
+        String content = buildReviewContent(topic, literatures);
 
         // 构建参考列表
         List<ReviewRecordVO.ReferenceVO> references = literatures.stream()
@@ -103,9 +68,9 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         // 保存记录
         ReviewRecord record = new ReviewRecord();
         record.setUserId(userId);
-        record.setTopic(request.getTopic());
-        record.setLiteratureIds(String.join(",", request.getLiteratureIds().stream().map(String::valueOf).collect(Collectors.toList())));
-        record.setContent(content.toString());
+        record.setTopic(topic);
+        record.setLiteratureIds(literatureIds.stream().map(String::valueOf).collect(Collectors.joining(",")));
+        record.setContent(content);
         record.setReferenceText(refText);
         reviewRecordMapper.insert(record);
 
@@ -115,7 +80,6 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         vo.setTopic(record.getTopic());
         vo.setContent(record.getContent());
         vo.setReferences(references);
-        // 数据库自动填充可能未及时回填，使用当前时间
         vo.setCreateTime(java.time.LocalDateTime.now());
         return vo;
     }
@@ -165,7 +129,172 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         if (t.contains("综述")) {
             return t;
         }
-        return t + "领域研究综述";
+        return t + "研究综述";
+    }
+
+    private String buildReviewContent(String topic, List<Literature> literatures) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("《").append(formatTopic(topic)).append("》\n\n");
+
+        // 一、研究背景
+        sb.append("一、研究背景\n\n");
+        sb.append(topic).append("是当前学术研究的重要议题，涉及理论探索与实践应用的双重维度。");
+        sb.append("随着相关技术的不断发展，该领域吸引了越来越多的学者关注。");
+        sb.append("为全面把握该领域的研究脉络，本文选取了").append(literatures.size()).append("篇代表性文献进行深入分析，");
+        sb.append("力求从研究现状、核心方向、存在问题及未来趋势等方面进行系统性综述。\n\n");
+
+        // 二、研究现状
+        sb.append("二、研究现状\n\n");
+        for (int i = 0; i < literatures.size(); i++) {
+            Literature lit = literatures.get(i);
+            String sourceText = StringUtils.hasText(lit.getContent()) ? lit.getContent() : lit.getAbstractText();
+            sb.append("[").append(i + 1).append("] ").append(lit.getTitle()).append("\n");
+            sb.append("作者：").append(lit.getAuthors()).append("；发表于《").append(lit.getJournal()).append("》（").append(lit.getPublishYear()).append("）\n");
+            if (StringUtils.hasText(sourceText)) {
+                String excerpt = extractExcerpt(sourceText, 180);
+                // 避免数据库内容本身已带"正文节选："前缀导致重复显示
+                if (excerpt.startsWith("正文节选：")) {
+                    excerpt = excerpt.substring("正文节选：".length());
+                }
+                sb.append("内容概述：").append(excerpt).append("\n");
+            }
+            if (StringUtils.hasText(lit.getKeywords())) {
+                sb.append("关键词：").append(lit.getKeywords()).append("\n");
+            }
+            sb.append("\n");
+        }
+
+        // 三、主要研究方向
+        sb.append("三、主要研究方向\n\n");
+        sb.append("基于上述文献的系统分析，可将").append(topic).append("领域的研究归纳为以下几个主要方向：\n\n");
+
+        String[][] directionPool = {
+                {"理论基础与方法论研究", "相关学者致力于构建该领域的理论框架，探索适用于该主题的研究方法与分析模型。"},
+                {"系统平台与关键技术开发", "研究聚焦于设计与实现支持该领域应用的技术平台与核心算法。"},
+                {"应用场景与实践验证", "通过案例研究、实验验证等方式，检验相关理论和方法在实际场景中的适用性。"},
+                {"效果评价与治理机制研究", "关注该领域应用效果的评估指标构建，以及相应的规范治理与风险防控机制。"}
+        };
+
+        for (int i = 0; i < literatures.size() && i < directionPool.length; i++) {
+            Literature lit = literatures.get(i);
+            String[] dir = directionPool[i];
+            sb.append(i + 1).append(". ").append(dir[0]).append("\n");
+            String sourceText = StringUtils.hasText(lit.getContent()) ? lit.getContent() : lit.getAbstractText();
+            if (StringUtils.hasText(sourceText)) {
+                String excerpt = extractExcerpt(sourceText, 120);
+                if (excerpt.startsWith("正文节选：")) {
+                    excerpt = excerpt.substring("正文节选：".length());
+                }
+                sb.append("   ").append(excerpt).append("\n");
+            } else {
+                sb.append("   ").append(dir[1]).append("\n");
+            }
+            sb.append("\n");
+        }
+
+        // 四、存在问题
+        sb.append("四、存在问题\n\n");
+        sb.append("尽管").append(topic).append("取得了阶段性成果，但在发展过程中仍暴露出若干亟待解决的问题：\n\n");
+
+        int problemCount = 1;
+        for (Literature lit : literatures) {
+            String abs = lit.getAbstractText();
+            if (StringUtils.hasText(abs)) {
+                String problem = extractProblemSentence(abs);
+                if (StringUtils.hasText(problem) && hasNegativeKeyword(problem)) {
+                    sb.append(problemCount++).append(". ").append(lit.getTitle()).append("的研究指出，")
+                            .append(problem).append("\n");
+                }
+            }
+        }
+        if (problemCount <= 2) {
+            sb.append(problemCount++).append(". 数据来源相对单一，实验样本的覆盖范围和代表性有待进一步扩大，影响了研究结论的普适性。\n");
+            sb.append(problemCount++).append(". 现有模型或算法的可解释性不足，在实际推广应用中面临可信度与透明度的双重挑战。\n");
+            sb.append(problemCount++).append(". 跨领域、跨场景的系统性验证仍然缺乏，研究的深度与广度均有待拓展。\n");
+        }
+        sb.append("\n");
+
+        // 五、发展趋势
+        sb.append("五、发展趋势\n\n");
+        sb.append("展望未来，").append(topic).append("将朝着以下方向持续演进：\n\n");
+        String[] trends = {
+                "多源数据融合与智能分析：整合文本、行为、图像等多模态数据，借助语义检索与知识图谱技术，实现更全面、更深入的知识发现。",
+                "跨学科协同与理论创新：打破单一学科壁垒，促进教育学、计算机科学、管理学等领域的深度交叉，催生新的理论增长点。",
+                "可解释性与公平性提升：在追求技术性能的同时，更加注重算法的透明性、可解释性以及结果的公平性与伦理合规。",
+                "智能化服务与决策支持：基于大数据与人工智能技术，构建面向高校教学、科研管理与公共服务等场景的智能决策支持系统。",
+                "评价体系的完善与治理优化：建立科学、全面的效果评价指标体系，完善相关的规范治理机制，推动该领域的健康可持续发展。"
+        };
+        for (int i = 0; i < trends.length; i++) {
+            sb.append(i + 1).append(". ").append(trends[i]).append("\n");
+        }
+        sb.append("\n");
+
+        // 六、参考文献来源
+        sb.append("六、参考文献来源\n\n");
+        for (int i = 0; i < literatures.size(); i++) {
+            Literature lit = literatures.get(i);
+            sb.append("[").append(i + 1).append("] ").append(lit.getAuthors())
+                    .append(". ").append(lit.getTitle())
+                    .append(". 《").append(lit.getJournal()).append("》, ")
+                    .append(lit.getPublishYear()).append(".\n");
+        }
+
+        return sb.toString();
+    }
+
+    private String extractExcerpt(String text, int maxLen) {
+        if (!StringUtils.hasText(text)) {
+            return "";
+        }
+        String clean = text.replaceAll("\\s+", " ").trim();
+        if (clean.length() <= maxLen) {
+            return clean;
+        }
+        int end = clean.lastIndexOf("。", maxLen);
+        if (end <= maxLen / 2) {
+            end = clean.lastIndexOf(".", maxLen);
+        }
+        if (end <= maxLen / 2) {
+            end = clean.lastIndexOf("；", maxLen);
+        }
+        if (end <= maxLen / 2) {
+            end = maxLen;
+        }
+        return clean.substring(0, end) + (end < clean.length() ? "..." : "");
+    }
+
+    private String extractProblemSentence(String text) {
+        if (!StringUtils.hasText(text)) {
+            return "";
+        }
+        String[] sentences = text.split("[。；.\\n]");
+        // 优先匹配明确的问题关键词
+        for (String s : sentences) {
+            String t = s.trim();
+            if (t.contains("不足") || t.contains("局限") || t.contains("缺陷") || t.contains("挑战")
+                    || t.contains("困难") || t.contains("瓶颈") || t.contains("薄弱") || t.contains("欠缺")) {
+                return t;
+            }
+        }
+        // 其次匹配"问题"，但要排除常见非问题表述
+        for (String s : sentences) {
+            String t = s.trim();
+            if (t.contains("问题") && !t.contains("研究问题") && !t.contains("分析问题")
+                    && !t.contains("问题分析") && !t.contains("解决问题") && !t.contains("提升问题")) {
+                return t;
+            }
+        }
+        return "";
+    }
+
+    private boolean hasNegativeKeyword(String text) {
+        if (!StringUtils.hasText(text)) {
+            return false;
+        }
+        String t = text;
+        return t.contains("不足") || t.contains("局限") || t.contains("缺陷") || t.contains("挑战")
+                || t.contains("困难") || t.contains("瓶颈") || t.contains("薄弱") || t.contains("欠缺")
+                || t.contains("短板") || t.contains("滞后") || t.contains("不足");
     }
 
     private ReviewRecordVO convertToVO(ReviewRecord record) {
@@ -186,7 +315,7 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
                     }).collect(Collectors.toList());
             vo.setReferences(refs);
         } else {
-            vo.setReferences(new java.util.ArrayList<>());
+            vo.setReferences(new ArrayList<>());
         }
         return vo;
     }

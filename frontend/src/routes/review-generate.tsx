@@ -8,12 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
-import { literatureApi } from "@/api/literature";
+import { aiApi } from "@/api/ai";
 import { reviewApi, formatReviewTitle } from "@/api/review";
-import { favoriteApi } from "@/api/favorite";
 import type { Literature } from "@/mock/literatures";
 import type { Review } from "@/mock/reviews";
-import { Sparkles, Search, Heart } from "lucide-react";
+import { Sparkles, Search } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/review-generate")({
@@ -23,7 +22,7 @@ export const Route = createFileRoute("/review-generate")({
 
 function ReviewGeneratePage() {
   const [topic, setTopic] = useState("");
-  const [pool, setPool] = useState<Literature[]>([]);
+  const [pool, setPool] = useState<(Literature & { similarity?: number })[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [allLiterature, setAllLiterature] = useState<Record<string, Literature>>({});
   const [result, setResult] = useState<Review | null>(null);
@@ -40,43 +39,51 @@ function ReviewGeneratePage() {
     });
   };
 
-  const searchRelated = async () => {
+  const recommendPapers = async () => {
     if (!topic.trim()) {
-      toast.error("请先输入综述主题");
+      toast.error("请输入综述主题");
       return;
     }
     setSearching(true);
     try {
-      const res = await literatureApi.search({ keyword: topic, page: 1, pageSize: 20 });
-      setPool(res.list);
-      mergeIntoAll(res.list);
-    } finally {
-      setSearching(false);
-    }
-  };
-
-  const loadFavorites = async () => {
-    setSearching(true);
-    try {
-      const res = await favoriteApi.list();
+      const res = await aiApi.semanticSearch({ query: topic.trim(), topK: 20 });
       setPool(res);
       mergeIntoAll(res);
+    } catch (err: any) {
+      const msg = err?.message || "";
+      if (msg.includes("请先重建智能检索索引") || msg.includes("智能检索服务")) {
+        toast.error("智能检索服务不可用，请确认 backend-ai 已启动并重建索引");
+      } else {
+        toast.error(msg || "智能推荐失败");
+      }
     } finally {
       setSearching(false);
     }
   };
 
-  const toggle = (id: string) =>
-    setSelectedIds((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  const toggle = (id: string) => {
+    setSelectedIds((s) => {
+      if (s.includes(id)) {
+        return s.filter((x) => x !== id);
+      }
+      if (s.length >= 5) {
+        toast.error("最多选择 5 篇参考文献");
+        return s;
+      }
+      return [...s, id];
+    });
+  };
 
   const generate = async () => {
-    if (!topic.trim()) return toast.error("请先输入综述主题");
-    if (selectedIds.length === 0) return toast.error("请选择至少一篇参考文献");
+    if (!topic.trim()) return toast.error("请输入综述主题");
+    if (selectedIds.length < 2) return toast.error("请至少选择 2 篇参考文献");
     setLoading(true);
     try {
       const r = await reviewApi.generate({ topic, literatureIds: selectedIds });
       setResult(r);
       toast.success("综述生成成功");
+    } catch (err: any) {
+      toast.error(err?.message || "综述生成失败");
     } finally {
       setLoading(false);
     }
@@ -84,13 +91,13 @@ function ReviewGeneratePage() {
 
   return (
     <AppShell>
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-4">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-primary" />
-                生成综述
+                智能综述生成
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -99,51 +106,59 @@ function ReviewGeneratePage() {
                 <Input
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
-                  placeholder="例如：深度学习在医学影像中的应用"
+                  placeholder="例如：人工智能在高校教学中的应用"
                 />
               </div>
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={searchRelated} disabled={searching}>
-                  <Search className="mr-2 h-4 w-4" />
-                  {searching ? "检索中..." : "检索相关文献"}
-                </Button>
-                <Button variant="outline" onClick={loadFavorites} disabled={searching}>
-                  <Heart className="mr-2 h-4 w-4" />
-                  加载我的收藏
-                </Button>
-              </div>
+              <Button variant="outline" onClick={recommendPapers} disabled={searching}>
+                <Search className="mr-2 h-4 w-4" />
+                {searching ? "推荐中..." : "智能推荐参考文献"}
+              </Button>
             </CardContent>
           </Card>
 
           {pool.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">文献列表</CardTitle>
+                <CardTitle className="text-base">
+                  推荐文献列表
+                  <span className="ml-2 text-xs font-normal text-muted-foreground">
+                    （语义相似度由高到低）
+                  </span>
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
                   {pool.map((l) => (
                     <label
                       key={l.id}
-                      className="flex cursor-pointer items-start gap-3 rounded-md border p-3 hover:bg-secondary/40"
+                      className={`flex cursor-pointer items-start gap-3 rounded-md border p-3 transition-colors ${
+                        selectedIds.includes(l.id) ? "bg-secondary/60" : "hover:bg-secondary/40"
+                      }`}
                     >
                       <Checkbox
                         checked={selectedIds.includes(l.id)}
                         onCheckedChange={() => toggle(l.id)}
+                        disabled={!selectedIds.includes(l.id) && selectedIds.length >= 5}
                         className="mt-0.5"
                       />
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-sm font-medium">{l.title}</div>
                         <div className="text-xs text-muted-foreground">
-                          {l.authors.join(", ")} · {l.year}
+                          {l.authors.join(", ")} · {l.year} · {l.journal}
                           {l.documentType ? ` · ${l.documentType}` : ""}
+                          {l.category ? ` · ${l.category}` : ""}
                         </div>
-                        <div className="mt-1 flex flex-wrap gap-1">
+                        <div className="mt-1 flex flex-wrap items-center gap-1">
                           {l.keywords.map((k) => (
                             <Badge key={k} variant="outline" className="text-[10px]">
                               {k}
                             </Badge>
                           ))}
+                          {l.similarity != null && (
+                            <Badge variant="default" className="text-[10px]">
+                              语义相似度：{(l.similarity * 100).toFixed(1)}%
+                            </Badge>
+                          )}
                         </div>
                       </div>
                     </label>
@@ -157,7 +172,12 @@ function ReviewGeneratePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  已选择文献（{selectedPapers.length} 篇）
+                  已选择文献（{selectedPapers.length} / 5 篇）
+                  {selectedPapers.length < 2 && (
+                    <span className="ml-2 text-xs font-normal text-destructive">
+                      至少选择 2 篇
+                    </span>
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -185,7 +205,7 @@ function ReviewGeneratePage() {
           )}
 
           <Button className="w-full" onClick={generate} disabled={loading}>
-            {loading ? "正在生成..." : "一键生成综述"}
+            {loading ? "正在生成..." : "生成综述"}
           </Button>
         </div>
 

@@ -2,6 +2,7 @@ package com.campus.literature.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.List;
@@ -16,5 +17,6 @@ public class ReviewGenerateRequest {
     private String topic;
 
     @NotEmpty(message = "文献列表不能为空")
+    @Size(min = 2, max = 5, message = "参考文献数量必须在2-5篇之间")
     private List<Long> literatureIds;
 }
