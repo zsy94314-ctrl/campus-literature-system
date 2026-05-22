@@ -25,4 +25,6 @@ public interface LlmConfigService {
     void activate(Long id);
 
     String testConnection(Long id);
+
+    java.util.Map<String, Object> testReview(Long id);
 }

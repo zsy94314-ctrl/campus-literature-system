@@ -56,4 +56,8 @@ export const llmConfigApi = {
     const res = await request<any>({ method: "POST", url: `/admin/llm-configs/${id}/test` });
     return res?.data || "";
   },
+
+  testReview: async (id: number): Promise<any> => {
+    return request<any>({ method: "POST", url: `/admin/llm-configs/${id}/test-review`, timeout: 240000 });
+  },
 };

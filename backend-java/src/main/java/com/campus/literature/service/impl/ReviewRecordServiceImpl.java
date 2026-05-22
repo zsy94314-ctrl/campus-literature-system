@@ -422,7 +422,7 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
         if (useLlm) {
             LlmConfig activeConfig = llmConfigMapper.selectActive();
             if (activeConfig == null || activeConfig.getApiKey() == null || activeConfig.getApiKey().isEmpty()) {
-                log.warn("LLM 配置不可用，降级为离线生成");
+                log.warn("[REVIEW_GENERATE] 降级原因=NO_ACTIVE_CONFIG | mode=llm");
                 content = buildReviewContent(topic, literatures);
                 generationMode = "llm_fallback_rule";
             } else {
@@ -430,7 +430,30 @@ public class ReviewRecordServiceImpl implements ReviewRecordService {
                     content = llmReviewService.generateReview(topic, literatures, activeConfig);
                     generationMode = "llm";
                 } catch (Exception e) {
-                    log.warn("LLM 综述生成失败，降级为离线生成: {}", e.getMessage());
+                    String msg = e.getMessage() != null ? e.getMessage() : "";
+                    String reason = "UNKNOWN_ERROR";
+                    if (msg.startsWith("EMPTY_API_KEY")) {
+                        reason = "EMPTY_API_KEY";
+                    } else if (msg.startsWith("TIMEOUT:")) {
+                        reason = "TIMEOUT";
+                    } else if (msg.startsWith("HTTP_ERROR:")) {
+                        reason = "HTTP_ERROR";
+                    } else if (msg.startsWith("JSON_PARSE_ERROR")) {
+                        reason = "JSON_PARSE_ERROR";
+                    } else if (msg.startsWith("EMPTY_RESPONSE")) {
+                        reason = "EMPTY_RESPONSE";
+                    } else if (msg.startsWith("FINISH_REASON_LENGTH")) {
+                        reason = "FINISH_REASON_LENGTH";
+                    } else if (msg.startsWith("MISSING_SECTION")) {
+                        reason = "MISSING_SECTION";
+                    } else if (msg.startsWith("TRUNCATED_ENDING")) {
+                        reason = "TRUNCATED_ENDING";
+                    } else if (msg.startsWith("INCOMPLETE_REFERENCES")) {
+                        reason = "INCOMPLETE_REFERENCES";
+                    } else if (msg.startsWith("INVALID_REFERENCE_INDEX")) {
+                        reason = "INVALID_REFERENCE_INDEX";
+                    }
+                    log.warn("[REVIEW_GENERATE] 降级原因={} | mode=llm | error={}", reason, msg);
                     content = buildReviewContent(topic, literatures);
                     generationMode = "llm_fallback_rule";
                 }

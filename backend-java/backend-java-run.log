@@ -7,312 +7,35 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2026-05-22T16:20:24.585+08:00  INFO 8772 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Starting CampusLiteratureApplication v1.0.0 using Java 25.0.2 with PID 8772 (F:\campus-literature-system\backend-java\target\literature-1.0.0.jar started by zsy in F:\campus-literature-system\backend-java)
-2026-05-22T16:20:24.587+08:00  INFO 8772 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-05-22T19:26:50.603+08:00  INFO 16480 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Starting CampusLiteratureApplication v1.0.0 using Java 25.0.2 with PID 16480 (F:\campus-literature-system\backend-java\target\literature-1.0.0.jar started by zsy in F:\campus-literature-system\backend-java)
+2026-05-22T19:26:50.605+08:00  INFO 16480 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : No active profile set, falling back to 1 default profile: "default"
 WARNING: A restricted method in java.lang.System has been called
 WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (jar:nested:/F:/campus-literature-system/backend-java/target/literature-1.0.0.jar/!BOOT-INF/lib/tomcat-embed-core-10.1.16.jar!/)
 WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
 WARNING: Restricted methods will be blocked in a future release unless native access is enabled
 
-2026-05-22T16:20:25.359+08:00  INFO 8772 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2026-05-22T16:20:25.364+08:00  INFO 8772 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2026-05-22T16:20:25.364+08:00  INFO 8772 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
-2026-05-22T16:20:25.385+08:00  INFO 8772 --- [campus-literature-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2026-05-22T16:20:25.385+08:00  INFO 8772 --- [campus-literature-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 747 ms
+2026-05-22T19:26:51.371+08:00  INFO 16480 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-22T19:26:51.376+08:00  INFO 16480 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-22T19:26:51.376+08:00  INFO 16480 --- [campus-literature-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-05-22T19:26:51.398+08:00  INFO 16480 --- [campus-literature-system] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-22T19:26:51.399+08:00  INFO 16480 --- [campus-literature-system] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 746 ms
 Logging initialized using 'class org.apache.ibatis.logging.stdout.StdOutImpl' adapter.
-Initialization Sequence datacenterId:23 workerId:27
+Initialization Sequence datacenterId:23 workerId:6
  _ _   |_  _ _|_. ___ _ |    _ 
 | | |\/|_)(_| | |_\  |_)||_|_\ 
      /               |         
                         3.5.5 
-2026-05-22T16:20:25.955+08:00  INFO 8772 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
-2026-05-22T16:20:25.959+08:00  INFO 8772 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Started CampusLiteratureApplication in 1.651 seconds (process running for 1.893)
+2026-05-22T19:26:52.038+08:00  INFO 16480 --- [campus-literature-system] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-05-22T19:26:52.043+08:00  INFO 16480 --- [campus-literature-system] [           main] c.c.l.CampusLiteratureApplication        : Started CampusLiteratureApplication in 1.691 seconds (process running for 1.928)
 Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44d7e24] was not registered for synchronization because synchronization is not active
-2026-05-22T16:20:25.974+08:00  INFO 8772 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-05-22T16:20:26.118+08:00  INFO 8772 --- [campus-literature-system] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-05-22T16:20:26.118+08:00  INFO 8772 --- [campus-literature-system] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2026-05-22T16:20:26.119+08:00  INFO 8772 --- [campus-literature-system] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2026-05-22T16:20:26.182+08:00  INFO 8772 --- [campus-literature-system] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2c2e3460
-2026-05-22T16:20:26.184+08:00  INFO 8772 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-JDBC Connection [HikariProxyConnection@2132762784 wrapping com.mysql.cj.jdbc.ConnectionImpl@2c2e3460] will not be managed by Spring
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@634f58d2] was not registered for synchronization because synchronization is not active
+2026-05-22T19:26:52.057+08:00  INFO 16480 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-22T19:26:52.233+08:00  INFO 16480 --- [campus-literature-system] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@52c46334
+2026-05-22T19:26:52.234+08:00  INFO 16480 --- [campus-literature-system] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+JDBC Connection [HikariProxyConnection@1257319011 wrapping com.mysql.cj.jdbc.ConnectionImpl@52c46334] will not be managed by Spring
 ==>  Preparing: SELECT * FROM user WHERE username = ? LIMIT 1
 ==> Parameters: admin(String)
 <==    Columns: id, username, password_hash, real_name, email, role, status, create_time, update_time
 <==        Row: 1, admin, $2a$10$UoblLYsChhV1aMCj/6/PnOhlKgHfMCLcFzOhZ9bhzRKf9uExPqeaS, 系统管理员, admin@example.com, ADMIN, 1, 2026-05-21 17:15:04, 2026-05-21 17:15:04
 <==      Total: 1
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@44d7e24]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c7b4d29] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1974395099 wrapping com.mysql.cj.jdbc.ConnectionImpl@2c2e3460] will not be managed by Spring
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE id IN ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )
-==> Parameters: 322(Long), 154(Long), 153(Long), 85(Long), 160(Long), 361(Long), 320(Long), 144(Long), 427(Long), 82(Long), 378(Long), 143(Long), 86(Long), 425(Long), 147(Long), 92(Long), 454(Long), 125(Long), 87(Long), 347(Long), 83(Long), 313(Long), 155(Long), 158(Long), 141(Long), 157(Long), 461(Long), 149(Long), 138(Long), 311(Long), 89(Long), 80(Long), 91(Long), 90(Long), 140(Long), 267(Long), 79(Long), 84(Long), 81(Long), 78(Long), 321(Long), 423(Long), 130(Long), 323(Long), 344(Long), 266(Long), 121(Long), 139(Long), 324(Long), 176(Long), 150(Long), 94(Long), 314(Long), 215(Long), 356(Long), 126(Long), 318(Long), 49(Long), 95(Long), 119(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 49, 面向课程教学的微生物群落模型构建, 吴越、熊伟, <<BLOB>>, 生物科学，微生物群落，可持续发展，建模分析，数据评估, 环境与地球科学, 2020, 10.1000/campus.2020.0049, 11, 292, null, 模拟数据, 会议论文, https://example.edu/literature/0049, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 78, 基于对比实验的知识图谱区域样本研究, 蒋楠、林雪、吴越, <<BLOB>>, 计算机科学与人工智能，知识图谱，数据治理，智能系统, 智能系统学报, 2023, 10.1000/campus.2023.0078, 13, 128, null, 模拟数据, 学位论文, https://example.edu/literature/0078, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 79, 面向科研服务的计算机视觉模型构建, 马欣、刘洋, <<BLOB>>, 计算机科学与人工智能，计算机视觉，教育技术，算法模型，智能系统, 工程技术研究, 2022, 10.1000/campus.2022.0079, 13, 35, null, 模拟数据, 期刊论文, https://example.edu/literature/0079, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 80, 智能问答的风险识别与治理策略研究, 何雨、郑磊, <<BLOB>>, 计算机科学与人工智能，智能问答，医学信息学，智能系统，数据治理, 计算机应用研究, 2024, 10.1000/campus.2024.0080, 13, 143, null, 模拟数据, 期刊论文, https://example.edu/literature/0080, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 81, 基于数据治理视角的计算机视觉机制研究, 王博、高峰、邓宇, <<BLOB>>, 计算机科学与人工智能，计算机视觉，数据治理，系统设计，算法模型, 智能系统学报, 2024, 10.1000/campus.2024.0081, 13, 190, null, 模拟数据, 会议论文, https://example.edu/literature/0081, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 82, 基于智慧校园视角的计算机视觉机制研究, 何雨、王博, <<BLOB>>, 计算机科学与人工智能，计算机视觉，智慧校园，智能系统，数据治理, 软件工程与应用, 2023, 10.1000/campus.2023.0082, 13, 154, null, 模拟数据, 期刊论文, https://example.edu/literature/0082, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 83, 基于对比实验的语义检索高校场景研究, 熊伟、魏然, <<BLOB>>, 计算机科学与人工智能，语义检索，智慧校园，智能系统，系统设计, 智能系统学报, 2024, 10.1000/campus.2024.0083, 13, 37, null, 模拟数据, 期刊论文, https://example.edu/literature/0083, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 84, 面向跨学科场景的语义检索协同研究, 周敏、黄静, <<BLOB>>, 计算机科学与人工智能，语义检索，数据治理，算法模型, 计算机应用研究, 2021, 10.1000/campus.2021.0084, 13, 29, null, 模拟数据, 期刊论文, https://example.edu/literature/0084, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 85, 融合智慧校园的智能问答方法与实践, 郑磊、韩冰, <<BLOB>>, 计算机科学与人工智能，智能问答，智慧校园，智能系统，数据治理, 工程技术研究, 2021, 10.1000/campus.2021.0085, 13, 169, null, 模拟数据, 期刊论文, https://example.edu/literature/0085, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 86, 基于智慧校园视角的自然语言处理机制研究, 叶欣、马欣, <<BLOB>>, 计算机科学与人工智能，自然语言处理，智慧校园，系统设计，算法模型, 工程技术研究, 2023, 10.1000/campus.2023.0086, 13, 179, null, 模拟数据, 学位论文, https://example.edu/literature/0086, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 87, 语义检索的现状、问题与发展趋势, 魏然、蒋楠、韩冰, <<BLOB>>, 计算机科学与人工智能，语义检索，智慧校园，算法模型，数据治理, 工程技术研究, 2018, 10.1000/campus.2018.0087, 13, 185, null, 模拟数据, 学位论文, https://example.edu/literature/0087, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 89, 推荐系统平台设计与应用效果分析, 陈思、罗明、邓宇, <<BLOB>>, 计算机科学与人工智能，推荐系统，智慧校园，智能系统，数据治理, 软件工程与应用, 2019, 10.1000/campus.2019.0089, 13, 209, null, 模拟数据, 期刊论文, https://example.edu/literature/0089, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 90, 面向跨学科场景的计算机视觉协同研究, 许然、郑磊、胡伟, <<BLOB>>, 计算机科学与人工智能，计算机视觉，医学信息学，智能系统，数据治理, 智能系统学报, 2020, 10.1000/campus.2020.0090, 13, 163, null, 模拟数据, 期刊论文, https://example.edu/literature/0090, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 91, 基于多源数据分析的计算机视觉高校场景研究, 郑磊、孙涛、郭强, <<BLOB>>, 计算机科学与人工智能，计算机视觉，教育技术，系统设计，数据治理, 智能系统学报, 2022, 10.1000/campus.2022.0091, 13, 193, null, 模拟数据, 会议论文, https://example.edu/literature/0091, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 92, 智能问答的现状、问题与发展趋势, 蒋楠、李雅、魏然, <<BLOB>>, 计算机科学与人工智能，智能问答，智慧校园，智能系统，数据治理, 软件工程与应用, 2024, 10.1000/campus.2024.0092, 13, 201, null, 模拟数据, 期刊论文, https://example.edu/literature/0092, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 94, 软件质量评估驱动的实验平台优化路径研究, 何雨、罗明, <<BLOB>>, 软件工程，软件质量评估，智慧校园，算法模型，智能系统, 软件工程与应用, 2025, 10.1000/campus.2025.0094, 14, 286, null, 模拟数据, 会议论文, https://example.edu/literature/0094, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 95, 基于评价指标构建的软件测试数字校园研究, 蒋楠、马欣、韩冰, <<BLOB>>, 软件工程，软件测试，智慧校园，智能系统，系统设计, 智能系统学报, 2018, 10.1000/campus.2018.0095, 14, 209, null, 模拟数据, 会议论文, https://example.edu/literature/0095, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 119, 基于智慧校园视角的数据可视化机制研究, 曾琪、林雪, <<BLOB>>, 数据科学与数据挖掘，数据可视化，智慧校园，智能系统，系统设计, 工程技术研究, 2021, 10.1000/campus.2021.0119, 15, 267, null, 模拟数据, 学位论文, https://example.edu/literature/0119, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 121, 融合智慧校园的预测模型方法与实践, 李雅、熊伟, <<BLOB>>, 数据科学与数据挖掘，预测模型，智慧校园，算法模型，智能系统, 现代信息技术, 2026, 10.1000/campus.2026.0121, 15, 185, null, 模拟数据, 期刊论文, https://example.edu/literature/0121, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 125, 融合智慧校园的物联网方法与实践, 赵宁、叶欣, <<BLOB>>, 信息与通信工程，物联网，智慧校园，智能系统，系统设计, 计算机应用研究, 2022, 10.1000/campus.2022.0125, 16, 162, null, 模拟数据, 学位论文, https://example.edu/literature/0125, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 126, 数据传输优化在课程教学中的应用与评价, 蒋楠、林雪, <<BLOB>>, 信息与通信工程，数据传输优化，智慧校园，数据治理，算法模型, 智能系统学报, 2026, 10.1000/campus.2026.0126, 16, 275, null, 模拟数据, 期刊论文, https://example.edu/literature/0126, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 130, 面向跨学科场景的物联网协同研究, 高峰、吴越、曾琪, <<BLOB>>, 信息与通信工程，物联网，智慧校园，算法模型，系统设计, 计算机应用研究, 2023, 10.1000/campus.2023.0130, 16, 139, null, 模拟数据, 期刊论文, https://example.edu/literature/0130, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 138, 基于原型系统实现的电子测量大学生群体研究, 吴越、韩冰, <<BLOB>>, 电子工程，电子测量，数据治理，算法模型, 计算机应用研究, 2019, 10.1000/campus.2019.0138, 17, 135, null, 模拟数据, 期刊论文, https://example.edu/literature/0138, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 139, 智能终端的现状、问题与发展趋势, 曹睿、李雅, <<BLOB>>, 电子工程，智能终端，智慧校园，算法模型，系统设计, 软件工程与应用, 2021, 10.1000/campus.2021.0139, 17, 267, null, 模拟数据, 期刊论文, https://example.edu/literature/0139, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 140, 基于访谈研究的智能终端校园治理研究, 刘洋、罗明、孙涛, <<BLOB>>, 电子工程，智能终端，医学信息学，数据治理，智能系统, 现代信息技术, 2018, 10.1000/campus.2018.0140, 17, 281, null, 模拟数据, 会议论文, https://example.edu/literature/0140, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 141, 基于系统设计的嵌入式系统实验平台研究, 何雨、宋洁、杨帆, <<BLOB>>, 电子工程，嵌入式系统，医学信息学，数据治理，智能系统, 计算机应用研究, 2022, 10.1000/campus.2022.0141, 17, 94, null, 模拟数据, 学位论文, https://example.edu/literature/0141, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 143, 基于智慧校园视角的智能终端机制研究, 黄静、何雨, <<BLOB>>, 电子工程，智能终端，智慧校园，算法模型，数据治理, 工程技术研究, 2023, 10.1000/campus.2023.0143, 17, 156, null, 模拟数据, 会议论文, https://example.edu/literature/0143, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 144, 基于原型系统实现的智能终端数字校园研究, 王博、孙涛, <<BLOB>>, 电子工程，智能终端，智慧校园，算法模型，数据治理, 现代信息技术, 2018, 10.1000/campus.2018.0144, 17, 292, null, 模拟数据, 会议论文, https://example.edu/literature/0144, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 147, 电子测量在课程教学中的应用与评价, 王博、叶欣、熊伟, <<BLOB>>, 电子工程，电子测量，教育技术，算法模型，系统设计, 计算机应用研究, 2024, 10.1000/campus.2024.0147, 17, 27, null, 模拟数据, 期刊论文, https://example.edu/literature/0147, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 149, 面向大学生群体的机器人控制模型构建, 罗明、邓宇、熊伟, <<BLOB>>, 智能制造与自动化，机器人控制，智慧校园，系统设计，智能系统, 计算机应用研究, 2020, 10.1000/campus.2020.0149, 18, 272, null, 模拟数据, 期刊论文, https://example.edu/literature/0149, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 150, 面向区域样本的数字孪生模型构建, 杨帆、何雨、孙涛, <<BLOB>>, 智能制造与自动化，数字孪生，医学信息学，智能系统，算法模型, 智能系统学报, 2023, 10.1000/campus.2023.0150, 18, 280, null, 模拟数据, 期刊论文, https://example.edu/literature/0150, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 153, 基于智慧校园视角的工业物联网机制研究, 张晨、黄静, <<BLOB>>, 智能制造与自动化，工业物联网，智慧校园，算法模型，智能系统, 智能系统学报, 2021, 10.1000/campus.2021.0153, 18, 61, null, 模拟数据, 学位论文, https://example.edu/literature/0153, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 154, 基于教育技术视角的工业物联网机制研究, 林雪、何雨, <<BLOB>>, 智能制造与自动化，工业物联网，教育技术，智能系统，算法模型, 工程技术研究, 2021, 10.1000/campus.2021.0154, 18, 230, null, 模拟数据, 会议论文, https://example.edu/literature/0154, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 155, 智能调度平台设计与应用效果分析, 曾琪、周敏、吴越, <<BLOB>>, 智能制造与自动化，智能调度，医学信息学，算法模型，智能系统, 现代信息技术, 2024, 10.1000/campus.2024.0155, 18, 47, null, 模拟数据, 学位论文, https://example.edu/literature/0155, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 157, 数字孪生的现状、问题与发展趋势, 韩冰、曹睿, <<BLOB>>, 智能制造与自动化，数字孪生，智慧校园，算法模型，系统设计, 工程技术研究, 2023, 10.1000/campus.2023.0157, 18, 60, null, 模拟数据, 期刊论文, https://example.edu/literature/0157, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 158, 基于智慧校园视角的质量检测机制研究, 王博、黄静, <<BLOB>>, 智能制造与自动化，质量检测，智慧校园，算法模型，数据治理, 计算机应用研究, 2026, 10.1000/campus.2026.0158, 18, 119, null, 模拟数据, 会议论文, https://example.edu/literature/0158, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 160, 面向跨学科场景的智能调度协同研究, 唐佳、罗明, <<BLOB>>, 智能制造与自动化，智能调度，教育技术，算法模型，系统设计, 智能系统学报, 2020, 10.1000/campus.2020.0160, 18, 144, null, 模拟数据, 会议论文, https://example.edu/literature/0160, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 176, 面向课程教学的炎症反应模型构建, 孙涛、邓宇、刘洋, <<BLOB>>, 基础医学，炎症反应，健康管理，健康服务，数据分析, 健康管理研究, 2023, 10.1000/campus.2023.0176, 20, 139, null, 模拟数据, 学位论文, https://example.edu/literature/0176, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 215, 基于原型系统实现的心理干预数字校园研究, 蒋楠、熊伟, <<BLOB>>, 心理健康，心理干预，行为分析，风险评估，数据分析, 医学信息学杂志, 2020, 10.1000/campus.2020.0215, 23, 190, null, 模拟数据, 期刊论文, https://example.edu/literature/0215, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 266, 多源数据支持的智慧农业研究, 罗明、曹睿, <<BLOB>>, 农学，智慧农业，数据分析，生物技术，绿色发展, 生态环境学报, 2024, 10.1000/campus.2024.0266, 26, 201, null, 模拟数据, 会议论文, https://example.edu/literature/0266, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 267, 智慧农业的现状、问题与发展趋势, 王博、郭强、高峰, <<BLOB>>, 农学，智慧农业，绿色发展，质量控制，生物技术, 食品与生物技术, 2019, 10.1000/campus.2019.0267, 26, 148, null, 模拟数据, 会议论文, https://example.edu/literature/0267, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 311, 面向数字校园的教学评价模型构建, 宋洁、唐佳、罗明, <<BLOB>>, 教育学，教学评价，知识服务，行为分析，数字化转型, 管理科学与实践, 2026, 10.1000/campus.2026.0311, 30, 288, null, 模拟数据, 期刊论文, https://example.edu/literature/0311, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 313, 面向区域样本的智慧课堂模型构建, 张晨、魏然, <<BLOB>>, 教育学，智慧课堂，数字化转型，评价指标，行为分析, 新闻传播评论, 2025, 10.1000/campus.2025.0313, 30, 133, null, 模拟数据, 期刊论文, https://example.edu/literature/0313, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 314, 教学评价在数字校园中的应用与评价, 蒋楠、黄静、曾琪, <<BLOB>>, 教育学，教学评价，数字化转型，行为分析，高校治理, 情报科学, 2018, 10.1000/campus.2018.0314, 30, 130, null, 模拟数据, 期刊论文, https://example.edu/literature/0314, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 318, 个性化学习平台设计与应用效果分析, 叶欣、刘洋, <<BLOB>>, 教育学，个性化学习，高校治理，评价指标，行为分析, 高等教育研究, 2020, 10.1000/campus.2020.0318, 30, 106, null, 模拟数据, 期刊论文, https://example.edu/literature/0318, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 320, 面向高校场景的智慧课堂模型构建, 郭强、曹睿, <<BLOB>>, 教育学，智慧课堂，高校治理，行为分析，数字化转型, 高等教育研究, 2022, 10.1000/campus.2022.0320, 30, 293, null, 模拟数据, 研究报告, https://example.edu/literature/0320, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 321, 混合式教学平台设计与应用效果分析, 魏然、罗明、蒋楠, <<BLOB>>, 教育学，混合式教学，数字化转型，评价指标, 新闻传播评论, 2021, 10.1000/campus.2021.0321, 30, 277, null, 模拟数据, 会议论文, https://example.edu/literature/0321, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 322, 多源数据支持的智慧课堂研究, 赵宁、张晨、曹睿, <<BLOB>>, 教育学，智慧课堂，人工智能，数字化转型，评价指标, 管理科学与实践, 2021, 10.1000/campus.2021.0322, 30, 78, null, 模拟数据, 学位论文, https://example.edu/literature/0322, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 323, 混合式教学平台设计与应用效果分析——基于实验平台的证据, 何雨、李雅、郭强, <<BLOB>>, 教育学，混合式教学，数字化转型，行为分析，评价指标, 管理科学与实践, 2020, 10.1000/campus.2020.0323, 30, 81, null, 模拟数据, 会议论文, https://example.edu/literature/0323, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 324, 融合数字化转型的教育公平方法与实践, 郑磊、吴越, <<BLOB>>, 教育学，教育公平，数字化转型，评价指标, 情报科学, 2019, 10.1000/campus.2019.0324, 30, 274, null, 模拟数据, 期刊论文, https://example.edu/literature/0324, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 344, 教育经济在科研服务中的应用与评价, 高峰、何雨, <<BLOB>>, 经济学，教育经济，数字化转型，行为分析，高校治理, 情报科学, 2019, 10.1000/campus.2019.0344, 32, 175, null, 模拟数据, 学位论文, https://example.edu/literature/0344, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 347, 融合人工智能的数字经济方法与实践, 唐佳、熊伟, <<BLOB>>, 经济学，数字经济，人工智能，高校治理，行为分析, 社会科学研究, 2018, 10.1000/campus.2018.0347, 32, 231, null, 模拟数据, 期刊论文, https://example.edu/literature/0347, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 356, 基于原型系统实现的高校创新创业校园治理研究, 吴越、蒋楠、胡伟, <<BLOB>>, 经济学，高校创新创业，高校治理，数字化转型, 新闻传播评论, 2023, 10.1000/campus.2023.0356, 32, 169, null, 模拟数据, 会议论文, https://example.edu/literature/0356, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 361, 融合人工智能的知识产权方法与实践, 孙涛、曹睿, <<BLOB>>, 法学，知识产权，人工智能，评价指标，数字化转型, 情报科学, 2021, 10.1000/campus.2021.0361, 33, 242, null, 模拟数据, 学位论文, https://example.edu/literature/0361, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 378, 融合人工智能的校园社会支持方法与实践, 曾琪、邓宇, <<BLOB>>, 社会学，校园社会支持，人工智能，评价指标，行为分析, 新闻传播评论, 2019, 10.1000/campus.2019.0378, 34, 185, null, 模拟数据, 期刊论文, https://example.edu/literature/0378, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 423, 基于对比实验的科研数据管理课程教学研究, 韩冰、陈思、罗明, <<BLOB>>, 图书情报与档案管理，科研数据管理，人工智能，高校治理，行为分析, 管理科学与实践, 2021, 10.1000/campus.2021.0423, 37, 234, null, 模拟数据, 期刊论文, https://example.edu/literature/0423, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 425, 基于人工智能视角的知识服务机制研究, 周敏、刘洋, <<BLOB>>, 图书情报与档案管理，知识服务，人工智能，数字化转型，评价指标, 社会科学研究, 2023, 10.1000/campus.2023.0425, 37, 16, null, 模拟数据, 学位论文, https://example.edu/literature/0425, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 427, 融合人工智能的文献计量方法与实践, 李雅、许然, <<BLOB>>, 图书情报与档案管理，文献计量，人工智能，行为分析，高校治理, 情报科学, 2026, 10.1000/campus.2026.0427, 37, 262, null, 模拟数据, 会议论文, https://example.edu/literature/0427, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 454, 面向跨学科场景的人工智能伦理协同研究, 曹睿、何雨, <<BLOB>>, 哲学，人工智能伦理，教育研究，价值研究，数字人文, 艺术教育研究, 2026, 10.1000/campus.2026.0454, 40, 180, null, 模拟数据, 会议论文, https://example.edu/literature/0454, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 461, 面向跨学科场景的人工智能伦理协同研究——基于多学科协同的证据, 魏然、孙涛、熊伟, <<BLOB>>, 哲学，人工智能伦理，数字人文，文本分析，文化传播, 数字人文, 2020, 10.1000/campus.2020.0461, 40, 91, null, 模拟数据, 会议论文, https://example.edu/literature/0461, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==      Total: 60
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5c7b4d29]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a81bac5] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1562483557 wrapping com.mysql.cj.jdbc.ConnectionImpl@2c2e3460] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )
-==> Parameters: 11(Long), 13(Long), 14(Long), 15(Long), 16(Long), 17(Long), 18(Long), 20(Long), 23(Long), 26(Long), 30(Long), 32(Long), 33(Long), 34(Long), 37(Long), 40(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 11, 生物科学, 1, 5, 2026-05-21 21:46:53
-<==        Row: 13, 计算机科学与人工智能, 2, 1, 2026-05-21 21:46:53
-<==        Row: 14, 软件工程, 2, 2, 2026-05-21 21:46:53
-<==        Row: 15, 数据科学与数据挖掘, 2, 3, 2026-05-21 21:46:53
-<==        Row: 16, 信息与通信工程, 2, 4, 2026-05-21 21:46:53
-<==        Row: 17, 电子工程, 2, 5, 2026-05-21 21:46:53
-<==        Row: 18, 智能制造与自动化, 2, 6, 2026-05-21 21:46:53
-<==        Row: 20, 基础医学, 3, 1, 2026-05-21 21:46:53
-<==        Row: 23, 心理健康, 3, 4, 2026-05-21 21:46:53
-<==        Row: 26, 农学, 4, 1, 2026-05-21 21:46:53
-<==        Row: 30, 教育学, 5, 1, 2026-05-21 21:46:53
-<==        Row: 32, 经济学, 5, 3, 2026-05-21 21:46:53
-<==        Row: 33, 法学, 5, 4, 2026-05-21 21:46:53
-<==        Row: 34, 社会学, 5, 5, 2026-05-21 21:46:53
-<==        Row: 37, 图书情报与档案管理, 5, 8, 2026-05-21 21:46:53
-<==        Row: 40, 哲学, 6, 3, 2026-05-21 21:46:53
-<==      Total: 16
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4a81bac5]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2c3870fc] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1765473055 wrapping com.mysql.cj.jdbc.ConnectionImpl@2c2e3460] will not be managed by Spring
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE id IN ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )
-==> Parameters: 218(Long), 214(Long), 213(Long), 215(Long), 394(Long), 228(Long), 223(Long), 217(Long), 227(Long), 216(Long), 383(Long), 222(Long), 225(Long), 207(Long), 220(Long), 392(Long), 224(Long), 389(Long), 388(Long), 390(Long), 387(Long), 196(Long), 221(Long), 197(Long), 396(Long), 385(Long), 395(Long), 209(Long), 393(Long), 190(Long), 219(Long), 183(Long), 317(Long), 456(Long), 363(Long), 365(Long), 381(Long), 313(Long), 373(Long), 245(Long), 386(Long), 384(Long), 364(Long), 382(Long), 226(Long), 188(Long), 459(Long), 378(Long), 48(Long), 132(Long), 404(Long), 158(Long), 210(Long), 325(Long), 454(Long), 379(Long), 187(Long), 80(Long), 380(Long), 199(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 48, 灾害监测驱动的大学生群体优化路径研究, 孙涛、何雨, <<BLOB>>, 地球科学，灾害监测，智能监测，可持续发展，建模分析, 自然科学进展, 2020, 10.1000/campus.2020.0048, 10, 180, null, 模拟数据, 期刊论文, https://example.edu/literature/0048, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 80, 智能问答的风险识别与治理策略研究, 何雨、郑磊, <<BLOB>>, 计算机科学与人工智能，智能问答，医学信息学，智能系统，数据治理, 计算机应用研究, 2024, 10.1000/campus.2024.0080, 13, 143, null, 模拟数据, 期刊论文, https://example.edu/literature/0080, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 132, 校园通信的风险识别与治理策略研究, 张晨、许然, <<BLOB>>, 信息与通信工程，校园通信，医学信息学，系统设计，数据治理, 工程技术研究, 2024, 10.1000/campus.2024.0132, 16, 70, null, 模拟数据, 会议论文, https://example.edu/literature/0132, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 158, 基于智慧校园视角的质量检测机制研究, 王博、黄静, <<BLOB>>, 智能制造与自动化，质量检测，智慧校园，算法模型，数据治理, 计算机应用研究, 2026, 10.1000/campus.2026.0158, 18, 119, null, 模拟数据, 会议论文, https://example.edu/literature/0158, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 183, 基于风险预警视角的炎症反应机制研究, 高峰、郭强、曾琪, <<BLOB>>, 基础医学，炎症反应，风险预警，干预策略，数据分析, 临床与公共健康, 2021, 10.1000/campus.2021.0183, 20, 62, null, 模拟数据, 期刊论文, https://example.edu/literature/0183, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 187, 面向跨学科场景的临床决策支持协同研究, 曹睿、李雅、赵宁, <<BLOB>>, 临床医学，临床决策支持，风险预警，风险评估，数据分析, 公共卫生与预防医学, 2026, 10.1000/campus.2026.0187, 21, 269, null, 模拟数据, 期刊论文, https://example.edu/literature/0187, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 188, 基于问卷调查的疾病风险预测区域样本研究, 陈思、许然、胡伟, <<BLOB>>, 临床医学，疾病风险预测，风险预警，干预策略，健康服务, 医学信息学杂志, 2021, 10.1000/campus.2021.0188, 21, 232, null, 模拟数据, 会议论文, https://example.edu/literature/0188, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 190, 疾病风险预测驱动的课程教学优化路径研究, 马欣、曹睿, <<BLOB>>, 临床医学，疾病风险预测，数据挖掘，干预策略，风险评估, 心理健康教育, 2018, 10.1000/campus.2018.0190, 21, 201, null, 模拟数据, 期刊论文, https://example.edu/literature/0190, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 196, 康复评估驱动的数字校园优化路径研究, 林雪、邓宇, <<BLOB>>, 临床医学，康复评估，风险预警，风险评估，数据分析, 心理健康教育, 2021, 10.1000/campus.2021.0196, 21, 40, null, 模拟数据, 会议论文, https://example.edu/literature/0196, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 197, 校园传染病监测在大学生群体中的应用与评价, 杨帆、李雅, <<BLOB>>, 公共健康，校园传染病监测，数据挖掘，风险评估，健康服务, 健康管理研究, 2021, 10.1000/campus.2021.0197, 22, 83, null, 模拟数据, 学位论文, https://example.edu/literature/0197, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 199, 基于行为分析视角的应急管理机制研究, 郭强、曹睿、林雪, <<BLOB>>, 公共健康，应急管理，行为分析，数据分析，风险评估, 公共卫生与预防医学, 2025, 10.1000/campus.2025.0199, 22, 275, null, 模拟数据, 会议论文, https://example.edu/literature/0199, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 207, 校园传染病监测在大学生群体中的应用与评价——基于大学生群体的证据, 曹睿、郭强, <<BLOB>>, 公共健康，校园传染病监测，数据挖掘，风险评估，健康服务, 心理健康教育, 2020, 10.1000/campus.2020.0207, 22, 186, null, 模拟数据, 期刊论文, https://example.edu/literature/0207, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 209, 基于模型构建的应急管理大学生群体研究, 胡伟、马欣, <<BLOB>>, 公共健康，应急管理，数据挖掘，数据分析，干预策略, 健康管理研究, 2019, 10.1000/campus.2019.0209, 22, 148, null, 模拟数据, 期刊论文, https://example.edu/literature/0209, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 210, 面向跨学科场景的健康风险评估协同研究, 杨帆、马欣, <<BLOB>>, 公共健康，健康风险评估，健康管理，数据分析，健康服务, 临床与公共健康, 2023, 10.1000/campus.2023.0210, 22, 77, null, 模拟数据, 会议论文, https://example.edu/literature/0210, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 213, 心理干预在校园治理中的应用与评价, 杨帆、叶欣、胡伟, <<BLOB>>, 心理健康，心理干预，行为分析，风险评估，健康服务, 临床与公共健康, 2026, 10.1000/campus.2026.0213, 23, 167, null, 模拟数据, 会议论文, https://example.edu/literature/0213, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 214, 大学生心理健康的现状、问题与发展趋势, 许然、韩冰、何雨, <<BLOB>>, 心理健康，大学生心理健康，行为分析，数据分析，健康服务, 公共卫生与预防医学, 2026, 10.1000/campus.2026.0214, 23, 65, null, 模拟数据, 会议论文, https://example.edu/literature/0214, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 215, 基于原型系统实现的心理干预数字校园研究, 蒋楠、熊伟, <<BLOB>>, 心理健康，心理干预，行为分析，风险评估，数据分析, 医学信息学杂志, 2020, 10.1000/campus.2020.0215, 23, 190, null, 模拟数据, 期刊论文, https://example.edu/literature/0215, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 216, 风险预警的现状、问题与发展趋势, 唐佳、许然、何雨, <<BLOB>>, 心理健康，风险预警，行为分析，健康服务，数据分析, 健康管理研究, 2020, 10.1000/campus.2020.0216, 23, 246, null, 模拟数据, 学位论文, https://example.edu/literature/0216, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 217, 风险预警的现状、问题与发展趋势——基于数字校园的证据, 杨帆、吴越, <<BLOB>>, 心理健康，风险预警，数据挖掘，风险评估，数据分析, 临床与公共健康, 2022, 10.1000/campus.2022.0217, 23, 136, null, 模拟数据, 期刊论文, https://example.edu/literature/0217, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 218, 基于数据挖掘视角的大学生心理健康机制研究, 林雪、高峰、赵宁, <<BLOB>>, 心理健康，大学生心理健康，数据挖掘，风险评估，干预策略, 心理健康教育, 2019, 10.1000/campus.2019.0218, 23, 117, null, 模拟数据, 研究报告, https://example.edu/literature/0218, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 219, 心理咨询服务的现状、问题与发展趋势, 赵宁、郭强、黄静, <<BLOB>>, 心理健康，心理咨询服务，健康管理，数据分析，健康服务, 公共卫生与预防医学, 2024, 10.1000/campus.2024.0219, 23, 255, null, 模拟数据, 学位论文, https://example.edu/literature/0219, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 220, 面向实验平台的情绪识别模型构建, 刘洋、曾琪, <<BLOB>>, 心理健康，情绪识别，数据挖掘，干预策略，健康服务, 心理健康教育, 2019, 10.1000/campus.2019.0220, 23, 168, null, 模拟数据, 期刊论文, https://example.edu/literature/0220, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 221, 压力管理在课程教学中的应用与评价, 郭强、蒋楠, <<BLOB>>, 心理健康，压力管理，数据挖掘，健康服务，风险评估, 医学信息学杂志, 2025, 10.1000/campus.2025.0221, 23, 8, null, 模拟数据, 会议论文, https://example.edu/literature/0221, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 222, 多源数据支持的情绪识别研究, 何雨、韩冰、叶欣, <<BLOB>>, 心理健康，情绪识别，行为分析，健康服务，干预策略, 心理健康教育, 2024, 10.1000/campus.2024.0222, 23, 276, null, 模拟数据, 会议论文, https://example.edu/literature/0222, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 223, 心理咨询服务的风险识别与治理策略研究, 曾琪、何雨, <<BLOB>>, 心理健康，心理咨询服务，数据挖掘，数据分析，干预策略, 健康管理研究, 2025, 10.1000/campus.2025.0223, 23, 61, null, 模拟数据, 期刊论文, https://example.edu/literature/0223, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 224, 基于健康管理视角的心理咨询服务机制研究, 郭强、熊伟、吴越, <<BLOB>>, 心理健康，心理咨询服务，健康管理，健康服务，数据分析, 心理健康教育, 2019, 10.1000/campus.2019.0224, 23, 264, null, 模拟数据, 期刊论文, https://example.edu/literature/0224, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 225, 基于案例研究的情绪识别科研服务研究, 邓宇、吴越, <<BLOB>>, 心理健康，情绪识别，数据挖掘，干预策略，风险评估, 医学信息学杂志, 2021, 10.1000/campus.2021.0225, 23, 190, null, 模拟数据, 学位论文, https://example.edu/literature/0225, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 226, 基于数据挖掘视角的压力管理机制研究, 郭强、陈思、熊伟, <<BLOB>>, 心理健康，压力管理，数据挖掘，数据分析，健康服务, 公共卫生与预防医学, 2023, 10.1000/campus.2023.0226, 23, 8, null, 模拟数据, 期刊论文, https://example.edu/literature/0226, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 227, 面向跨学科场景的心理咨询服务协同研究, 周敏、曹睿、黄静, <<BLOB>>, 心理健康，心理咨询服务，风险预警，干预策略，健康服务, 公共卫生与预防医学, 2025, 10.1000/campus.2025.0227, 23, 32, null, 模拟数据, 学位论文, https://example.edu/literature/0227, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 228, 心理干预在实验平台中的应用与评价, 张晨、郑磊、曾琪, <<BLOB>>, 心理健康，心理干预，行为分析，健康服务，风险评估, 医学信息学杂志, 2026, 10.1000/campus.2026.0228, 23, 127, null, 模拟数据, 学位论文, https://example.edu/literature/0228, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 245, 融合健康管理的辅助诊断方法与实践, 曹睿、韩冰、马欣, <<BLOB>>, 医学信息学，辅助诊断，健康管理，干预策略，风险评估, 医学信息学杂志, 2024, 10.1000/campus.2024.0245, 25, 238, null, 模拟数据, 期刊论文, https://example.edu/literature/0245, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 313, 面向区域样本的智慧课堂模型构建, 张晨、魏然, <<BLOB>>, 教育学，智慧课堂，数字化转型，评价指标，行为分析, 新闻传播评论, 2025, 10.1000/campus.2025.0313, 30, 133, null, 模拟数据, 期刊论文, https://example.edu/literature/0313, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 317, 课程思政的风险识别与治理策略研究, 韩冰、马欣, <<BLOB>>, 教育学，课程思政，数字化转型，高校治理，评价指标, 高等教育研究, 2020, 10.1000/campus.2020.0317, 30, 174, null, 模拟数据, 研究报告, https://example.edu/literature/0317, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 325, 创新管理的风险识别与治理策略研究, 赵宁、熊伟, <<BLOB>>, 管理学，创新管理，高校治理，评价指标, 社会科学研究, 2022, 10.1000/campus.2022.0325, 31, 292, null, 模拟数据, 会议论文, https://example.edu/literature/0325, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 363, 基于实证分析的个人信息保护大学生群体研究, 陈思、熊伟、许然, <<BLOB>>, 法学，个人信息保护，数字化转型，行为分析, 高等教育研究, 2021, 10.1000/campus.2021.0363, 33, 80, null, 模拟数据, 期刊论文, https://example.edu/literature/0363, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 364, 校园治理法治化的风险识别与治理策略研究, 曾琪、王博, <<BLOB>>, 法学，校园治理法治化，高校治理，数字化转型，行为分析, 管理科学与实践, 2018, 10.1000/campus.2018.0364, 33, 148, null, 模拟数据, 期刊论文, https://example.edu/literature/0364, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 365, 数据合规在大学生群体中的应用与评价, 何雨、邓宇, <<BLOB>>, 法学，数据合规，知识服务，评价指标，行为分析, 高等教育研究, 2022, 10.1000/campus.2022.0365, 33, 220, null, 模拟数据, 研究报告, https://example.edu/literature/0365, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 373, 大学生群体下校园社会支持的影响因素分析, 罗明、王博, <<BLOB>>, 社会学，校园社会支持，人工智能，行为分析，数字化转型, 新闻传播评论, 2021, 10.1000/campus.2021.0373, 34, 258, null, 模拟数据, 学位论文, https://example.edu/literature/0373, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 378, 融合人工智能的校园社会支持方法与实践, 曾琪、邓宇, <<BLOB>>, 社会学，校园社会支持，人工智能，评价指标，行为分析, 新闻传播评论, 2019, 10.1000/campus.2019.0378, 34, 185, null, 模拟数据, 期刊论文, https://example.edu/literature/0378, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 379, 志愿服务在大学生群体中的应用与评价, 高峰、林雪, <<BLOB>>, 社会学，志愿服务，知识服务，数字化转型，高校治理, 管理科学与实践, 2024, 10.1000/campus.2024.0379, 34, 24, null, 模拟数据, 会议论文, https://example.edu/literature/0379, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 380, 基于多源数据分析的校园社会支持科研服务研究, 宋洁、许然、魏然, <<BLOB>>, 社会学，校园社会支持，人工智能，数字化转型，行为分析, 情报科学, 2025, 10.1000/campus.2025.0380, 34, 57, null, 模拟数据, 期刊论文, https://example.edu/literature/0380, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 381, 基于数字化转型视角的社会支持机制研究, 韩冰、郭强、杨帆, <<BLOB>>, 心理学，社会支持，数字化转型，高校治理，行为分析, 高等教育研究, 2020, 10.1000/campus.2020.0381, 35, 220, null, 模拟数据, 会议论文, https://example.edu/literature/0381, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 382, 融合知识服务的社会支持方法与实践, 张晨、熊伟、周敏, <<BLOB>>, 心理学，社会支持，知识服务，高校治理，行为分析, 管理科学与实践, 2022, 10.1000/campus.2022.0382, 35, 126, null, 模拟数据, 期刊论文, https://example.edu/literature/0382, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 383, 认知负荷的风险识别与治理策略研究, 何雨、罗明、吴越, <<BLOB>>, 心理学，认知负荷，高校治理，评价指标, 高等教育研究, 2024, 10.1000/campus.2024.0383, 35, 37, null, 模拟数据, 会议论文, https://example.edu/literature/0383, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 384, 面向公共服务的行为干预模型构建, 赵宁、李雅, <<BLOB>>, 心理学，行为干预，数字化转型，行为分析, 社会科学研究, 2018, 10.1000/campus.2018.0384, 35, 120, null, 模拟数据, 会议论文, https://example.edu/literature/0384, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 385, 社会支持的风险识别与治理策略研究, 曾琪、张晨、郑磊, <<BLOB>>, 心理学，社会支持，数字化转型，行为分析, 社会科学研究, 2021, 10.1000/campus.2021.0385, 35, 6, null, 模拟数据, 期刊论文, https://example.edu/literature/0385, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 386, 基于知识服务视角的社会支持机制研究, 魏然、熊伟、蒋楠, <<BLOB>>, 心理学，社会支持，知识服务，行为分析，评价指标, 高等教育研究, 2019, 10.1000/campus.2019.0386, 35, 123, null, 模拟数据, 期刊论文, https://example.edu/literature/0386, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 387, 社会支持的风险识别与治理策略研究——基于实验平台的证据, 魏然、韩冰, <<BLOB>>, 心理学，社会支持，高校治理，行为分析, 社会科学研究, 2023, 10.1000/campus.2023.0387, 35, 120, null, 模拟数据, 期刊论文, https://example.edu/literature/0387, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 388, 学习动机的现状、问题与发展趋势, 胡伟、赵宁、杨帆, <<BLOB>>, 心理学，学习动机，高校治理，数字化转型, 新闻传播评论, 2021, 10.1000/campus.2021.0388, 35, 300, null, 模拟数据, 期刊论文, https://example.edu/literature/0388, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 389, 行为干预平台设计与应用效果分析, 宋洁、王博, <<BLOB>>, 心理学，行为干预，知识服务，行为分析，数字化转型, 高等教育研究, 2026, 10.1000/campus.2026.0389, 35, 23, null, 模拟数据, 期刊论文, https://example.edu/literature/0389, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 390, 多源数据支持的自我效能研究, 郭强、许然、高峰, <<BLOB>>, 心理学，自我效能，知识服务，高校治理，评价指标, 管理科学与实践, 2021, 10.1000/campus.2021.0390, 35, 81, null, 模拟数据, 期刊论文, https://example.edu/literature/0390, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 392, 情绪调节的现状、问题与发展趋势, 马欣、黄静、陈思, <<BLOB>>, 心理学，情绪调节，数字化转型，行为分析，评价指标, 情报科学, 2025, 10.1000/campus.2025.0392, 35, 121, null, 模拟数据, 期刊论文, https://example.edu/literature/0392, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 393, 多源数据支持的学习动机研究, 高峰、张晨、曾琪, <<BLOB>>, 心理学，学习动机，知识服务，行为分析，数字化转型, 情报科学, 2018, 10.1000/campus.2018.0393, 35, 178, null, 模拟数据, 期刊论文, https://example.edu/literature/0393, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 394, 情绪调节的现状、问题与发展趋势——基于大学生群体的证据, 吴越、魏然、郭强, <<BLOB>>, 心理学，情绪调节，数字化转型，评价指标，行为分析, 高等教育研究, 2025, 10.1000/campus.2025.0394, 35, 128, null, 模拟数据, 会议论文, https://example.edu/literature/0394, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 395, 面向科研服务的学习动机模型构建, 邓宇、郑磊、王博, <<BLOB>>, 心理学，学习动机，高校治理，评价指标, 情报科学, 2018, 10.1000/campus.2018.0395, 35, 111, null, 模拟数据, 会议论文, https://example.edu/literature/0395, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 396, 面向实验平台的自我效能模型构建, 吴越、魏然, <<BLOB>>, 心理学，自我效能，人工智能，行为分析，数字化转型, 情报科学, 2019, 10.1000/campus.2019.0396, 35, 193, null, 模拟数据, 学位论文, https://example.edu/literature/0396, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 404, 基于问卷调查的舆情分析大学生群体研究, 邓宇、蒋楠, <<BLOB>>, 新闻传播学，舆情分析，高校治理，行为分析，评价指标, 情报科学, 2018, 10.1000/campus.2018.0404, 36, 153, null, 模拟数据, 研究报告, https://example.edu/literature/0404, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 454, 面向跨学科场景的人工智能伦理协同研究, 曹睿、何雨, <<BLOB>>, 哲学，人工智能伦理，教育研究，价值研究，数字人文, 艺术教育研究, 2026, 10.1000/campus.2026.0454, 40, 180, null, 模拟数据, 会议论文, https://example.edu/literature/0454, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 456, 价值教育的风险识别与治理策略研究, 熊伟、高峰、陈思, <<BLOB>>, 哲学，价值教育，文化传播，文本分析，数字人文, 语言与文化研究, 2024, 10.1000/campus.2024.0456, 40, 147, null, 模拟数据, 期刊论文, https://example.edu/literature/0456, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 459, 科学哲学的风险识别与治理策略研究, 何雨、魏然, <<BLOB>>, 哲学，科学哲学，数字人文，文本分析, 艺术教育研究, 2022, 10.1000/campus.2022.0459, 40, 294, null, 模拟数据, 会议论文, https://example.edu/literature/0459, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==      Total: 60
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2c3870fc]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42d0f254] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1415699011 wrapping com.mysql.cj.jdbc.ConnectionImpl@2c2e3460] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )
-==> Parameters: 10(Long), 13(Long), 16(Long), 18(Long), 20(Long), 21(Long), 22(Long), 23(Long), 25(Long), 30(Long), 31(Long), 33(Long), 34(Long), 35(Long), 36(Long), 40(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 10, 地球科学, 1, 4, 2026-05-21 21:46:53
-<==        Row: 13, 计算机科学与人工智能, 2, 1, 2026-05-21 21:46:53
-<==        Row: 16, 信息与通信工程, 2, 4, 2026-05-21 21:46:53
-<==        Row: 18, 智能制造与自动化, 2, 6, 2026-05-21 21:46:53
-<==        Row: 20, 基础医学, 3, 1, 2026-05-21 21:46:53
-<==        Row: 21, 临床医学, 3, 2, 2026-05-21 21:46:53
-<==        Row: 22, 公共健康, 3, 3, 2026-05-21 21:46:53
-<==        Row: 23, 心理健康, 3, 4, 2026-05-21 21:46:53
-<==        Row: 25, 医学信息学, 3, 6, 2026-05-21 21:46:53
-<==        Row: 30, 教育学, 5, 1, 2026-05-21 21:46:53
-<==        Row: 31, 管理学, 5, 2, 2026-05-21 21:46:53
-<==        Row: 33, 法学, 5, 4, 2026-05-21 21:46:53
-<==        Row: 34, 社会学, 5, 5, 2026-05-21 21:46:53
-<==        Row: 35, 心理学, 5, 6, 2026-05-21 21:46:53
-<==        Row: 36, 新闻传播学, 5, 7, 2026-05-21 21:46:53
-<==        Row: 40, 哲学, 6, 3, 2026-05-21 21:46:53
-<==      Total: 16
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@42d0f254]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22be7b6b] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@746164556 wrapping com.mysql.cj.jdbc.ConnectionImpl@2c2e3460] will not be managed by Spring
-==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature WHERE id IN ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )
-==> Parameters: 428(Long), 416(Long), 471(Long), 433(Long), 427(Long), 423(Long), 445(Long), 474(Long), 429(Long), 475(Long), 432(Long), 438(Long), 440(Long), 436(Long), 419(Long), 426(Long), 365(Long), 363(Long), 439(Long), 246(Long), 404(Long), 420(Long), 83(Long), 418(Long), 160(Long), 415(Long), 117(Long), 485(Long), 435(Long), 84(Long), 467(Long), 443(Long), 450(Long), 254(Long), 421(Long), 85(Long), 414(Long), 10(Long), 448(Long), 407(Long), 359(Long), 368(Long), 413(Long), 468(Long), 309(Long), 470(Long), 424(Long), 403(Long), 472(Long), 412(Long), 252(Long), 322(Long), 380(Long), 259(Long), 446(Long), 425(Long), 158(Long), 487(Long), 250(Long), 473(Long)
-<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
-<==        Row: 10, 多学科协同下贝叶斯推断的影响因素分析, 熊伟、周敏, <<BLOB>>, 数学，贝叶斯推断，智能监测，建模分析，实验研究, 生物与生态研究, 2026, 10.1000/campus.2026.0010, 7, 215, null, 模拟数据, 期刊论文, https://example.edu/literature/0010, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 83, 基于对比实验的语义检索高校场景研究, 熊伟、魏然, <<BLOB>>, 计算机科学与人工智能，语义检索，智慧校园，智能系统，系统设计, 智能系统学报, 2024, 10.1000/campus.2024.0083, 13, 37, null, 模拟数据, 期刊论文, https://example.edu/literature/0083, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 84, 面向跨学科场景的语义检索协同研究, 周敏、黄静, <<BLOB>>, 计算机科学与人工智能，语义检索，数据治理，算法模型, 计算机应用研究, 2021, 10.1000/campus.2021.0084, 13, 29, null, 模拟数据, 期刊论文, https://example.edu/literature/0084, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 85, 融合智慧校园的智能问答方法与实践, 郑磊、韩冰, <<BLOB>>, 计算机科学与人工智能，智能问答，智慧校园，智能系统，数据治理, 工程技术研究, 2021, 10.1000/campus.2021.0085, 13, 169, null, 模拟数据, 期刊论文, https://example.edu/literature/0085, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 117, 基于实证分析的学习行为挖掘公共服务研究, 李雅、魏然, <<BLOB>>, 数据科学与数据挖掘，学习行为挖掘，智慧校园，智能系统，算法模型, 智能系统学报, 2022, 10.1000/campus.2022.0117, 15, 148, null, 模拟数据, 会议论文, https://example.edu/literature/0117, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 158, 基于智慧校园视角的质量检测机制研究, 王博、黄静, <<BLOB>>, 智能制造与自动化，质量检测，智慧校园，算法模型，数据治理, 计算机应用研究, 2026, 10.1000/campus.2026.0158, 18, 119, null, 模拟数据, 会议论文, https://example.edu/literature/0158, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 160, 面向跨学科场景的智能调度协同研究, 唐佳、罗明, <<BLOB>>, 智能制造与自动化，智能调度，教育技术，算法模型，系统设计, 智能系统学报, 2020, 10.1000/campus.2020.0160, 18, 144, null, 模拟数据, 会议论文, https://example.edu/literature/0160, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 246, 多源数据支持的临床文本挖掘研究, 郑磊、罗明, <<BLOB>>, 医学信息学，临床文本挖掘，健康管理，干预策略，健康服务, 临床与公共健康, 2021, 10.1000/campus.2021.0246, 25, 14, null, 模拟数据, 会议论文, https://example.edu/literature/0246, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 250, 基于健康管理视角的临床文本挖掘机制研究, 蒋楠、高峰, <<BLOB>>, 医学信息学，临床文本挖掘，健康管理，健康服务，干预策略, 心理健康教育, 2019, 10.1000/campus.2019.0250, 25, 168, null, 模拟数据, 期刊论文, https://example.edu/literature/0250, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 252, 临床文本挖掘的风险识别与治理策略研究, 叶欣、杨帆, <<BLOB>>, 医学信息学，临床文本挖掘，健康管理，风险评估，数据分析, 医学信息学杂志, 2026, 10.1000/campus.2026.0252, 25, 293, null, 模拟数据, 期刊论文, https://example.edu/literature/0252, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 254, 面向高校场景的临床文本挖掘模型构建, 高峰、邓宇、陈思, <<BLOB>>, 医学信息学，临床文本挖掘，数据挖掘，干预策略，风险评估, 心理健康教育, 2022, 10.1000/campus.2022.0254, 25, 199, null, 模拟数据, 会议论文, https://example.edu/literature/0254, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 259, 临床文本挖掘平台设计与应用效果分析, 唐佳、郑磊、郭强, <<BLOB>>, 医学信息学，临床文本挖掘，风险预警，干预策略，健康服务, 健康管理研究, 2018, 10.1000/campus.2018.0259, 25, 228, null, 模拟数据, 会议论文, https://example.edu/literature/0259, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 309, 面向跨学科场景的个性化学习协同研究, 杨帆、周敏, <<BLOB>>, 教育学，个性化学习，知识服务，数字化转型，高校治理, 新闻传播评论, 2022, 10.1000/campus.2022.0309, 30, 54, null, 模拟数据, 学位论文, https://example.edu/literature/0309, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 322, 多源数据支持的智慧课堂研究, 赵宁、张晨、曹睿, <<BLOB>>, 教育学，智慧课堂，人工智能，数字化转型，评价指标, 管理科学与实践, 2021, 10.1000/campus.2021.0322, 30, 78, null, 模拟数据, 学位论文, https://example.edu/literature/0322, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 359, 基于知识服务视角的个人信息保护机制研究, 熊伟、韩冰, <<BLOB>>, 法学，个人信息保护，知识服务，高校治理，行为分析, 高等教育研究, 2018, 10.1000/campus.2018.0359, 33, 183, null, 模拟数据, 研究报告, https://example.edu/literature/0359, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 363, 基于实证分析的个人信息保护大学生群体研究, 陈思、熊伟、许然, <<BLOB>>, 法学，个人信息保护，数字化转型，行为分析, 高等教育研究, 2021, 10.1000/campus.2021.0363, 33, 80, null, 模拟数据, 期刊论文, https://example.edu/literature/0363, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 365, 数据合规在大学生群体中的应用与评价, 何雨、邓宇, <<BLOB>>, 法学，数据合规，知识服务，评价指标，行为分析, 高等教育研究, 2022, 10.1000/campus.2022.0365, 33, 220, null, 模拟数据, 研究报告, https://example.edu/literature/0365, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 368, 知识产权在校园治理中的应用与评价, 邓宇、何雨, <<BLOB>>, 法学，知识产权，高校治理，评价指标, 情报科学, 2019, 10.1000/campus.2019.0368, 33, 207, null, 模拟数据, 期刊论文, https://example.edu/literature/0368, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 380, 基于多源数据分析的校园社会支持科研服务研究, 宋洁、许然、魏然, <<BLOB>>, 社会学，校园社会支持，人工智能，数字化转型，行为分析, 情报科学, 2025, 10.1000/campus.2025.0380, 34, 57, null, 模拟数据, 期刊论文, https://example.edu/literature/0380, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 403, 多源数据支持的舆情分析研究, 李雅、唐佳、孙涛, <<BLOB>>, 新闻传播学，舆情分析，知识服务，高校治理，数字化转型, 情报科学, 2018, 10.1000/campus.2018.0403, 36, 174, null, 模拟数据, 会议论文, https://example.edu/literature/0403, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 404, 基于问卷调查的舆情分析大学生群体研究, 邓宇、蒋楠, <<BLOB>>, 新闻传播学，舆情分析，高校治理，行为分析，评价指标, 情报科学, 2018, 10.1000/campus.2018.0404, 36, 153, null, 模拟数据, 研究报告, https://example.edu/literature/0404, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 407, 融合知识服务的校园媒体方法与实践, 郑磊、李雅, <<BLOB>>, 新闻传播学，校园媒体，知识服务，高校治理，数字化转型, 社会科学研究, 2021, 10.1000/campus.2021.0407, 36, 78, null, 模拟数据, 期刊论文, https://example.edu/literature/0407, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 412, 舆情分析驱动的数字校园优化路径研究, 周敏、熊伟, <<BLOB>>, 新闻传播学，舆情分析，人工智能，高校治理，行为分析, 情报科学, 2019, 10.1000/campus.2019.0412, 36, 108, null, 模拟数据, 研究报告, https://example.edu/literature/0412, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 413, 数字校园下科研数据管理的影响因素分析, 赵宁、曾琪、郭强, <<BLOB>>, 图书情报与档案管理，科研数据管理，知识服务，行为分析，数字化转型, 新闻传播评论, 2025, 10.1000/campus.2025.0413, 37, 161, null, 模拟数据, 期刊论文, https://example.edu/literature/0413, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 414, 数字图书馆平台设计与应用效果分析, 黄静、曹睿、唐佳, <<BLOB>>, 图书情报与档案管理，数字图书馆，数字化转型，评价指标, 情报科学, 2021, 10.1000/campus.2021.0414, 37, 26, null, 模拟数据, 学位论文, https://example.edu/literature/0414, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 415, 知识服务在课程教学中的应用与评价, 孙涛、黄静、郑磊, <<BLOB>>, 图书情报与档案管理，知识服务，高校治理，行为分析，数字化转型, 新闻传播评论, 2024, 10.1000/campus.2024.0415, 37, 171, null, 模拟数据, 会议论文, https://example.edu/literature/0415, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 416, 公共服务下学术文献检索的影响因素分析, 刘洋、林雪, <<BLOB>>, 图书情报与档案管理，学术文献检索，人工智能，行为分析，评价指标, 社会科学研究, 2026, 10.1000/campus.2026.0416, 37, 73, null, 模拟数据, 期刊论文, https://example.edu/literature/0416, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 418, 基于数字化转型视角的知识服务机制研究, 马欣、杨帆、曾琪, <<BLOB>>, 图书情报与档案管理，知识服务，数字化转型，评价指标, 管理科学与实践, 2025, 10.1000/campus.2025.0418, 37, 68, null, 模拟数据, 研究报告, https://example.edu/literature/0418, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 419, 面向校园治理的文献计量模型构建, 孙涛、高峰, <<BLOB>>, 图书情报与档案管理，文献计量，人工智能，行为分析，评价指标, 管理科学与实践, 2022, 10.1000/campus.2022.0419, 37, 167, null, 模拟数据, 会议论文, https://example.edu/literature/0419, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 420, 数字图书馆平台设计与应用效果分析——基于高校场景的证据, 张晨、许然, <<BLOB>>, 图书情报与档案管理，数字图书馆，知识服务，数字化转型，高校治理, 管理科学与实践, 2019, 10.1000/campus.2019.0420, 37, 119, null, 模拟数据, 会议论文, https://example.edu/literature/0420, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 421, 数字图书馆平台设计与应用效果分析——基于公共服务的证据, 胡伟、陈思, <<BLOB>>, 图书情报与档案管理，数字图书馆，高校治理，评价指标, 管理科学与实践, 2025, 10.1000/campus.2025.0421, 37, 60, null, 模拟数据, 期刊论文, https://example.edu/literature/0421, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 423, 基于对比实验的科研数据管理课程教学研究, 韩冰、陈思、罗明, <<BLOB>>, 图书情报与档案管理，科研数据管理，人工智能，高校治理，行为分析, 管理科学与实践, 2021, 10.1000/campus.2021.0423, 37, 234, null, 模拟数据, 期刊论文, https://example.edu/literature/0423, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 424, 基于多源数据分析的科研数据管理区域样本研究, 林雪、郑磊, <<BLOB>>, 图书情报与档案管理，科研数据管理，知识服务，行为分析，评价指标, 管理科学与实践, 2023, 10.1000/campus.2023.0424, 37, 213, null, 模拟数据, 期刊论文, https://example.edu/literature/0424, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 425, 基于人工智能视角的知识服务机制研究, 周敏、刘洋, <<BLOB>>, 图书情报与档案管理，知识服务，人工智能，数字化转型，评价指标, 社会科学研究, 2023, 10.1000/campus.2023.0425, 37, 16, null, 模拟数据, 学位论文, https://example.edu/literature/0425, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 426, 基于评价指标构建的开放获取校园治理研究, 孙涛、刘洋, <<BLOB>>, 图书情报与档案管理，开放获取，数字化转型，行为分析, 新闻传播评论, 2018, 10.1000/campus.2018.0426, 37, 138, null, 模拟数据, 学位论文, https://example.edu/literature/0426, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 427, 融合人工智能的文献计量方法与实践, 李雅、许然, <<BLOB>>, 图书情报与档案管理，文献计量，人工智能，行为分析，高校治理, 情报科学, 2026, 10.1000/campus.2026.0427, 37, 262, null, 模拟数据, 会议论文, https://example.edu/literature/0427, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 428, 基于对比实验的学术文献检索区域样本研究, 孙涛、曹睿, <<BLOB>>, 图书情报与档案管理，学术文献检索，数字化转型，行为分析, 管理科学与实践, 2019, 10.1000/campus.2019.0428, 37, 143, null, 模拟数据, 会议论文, https://example.edu/literature/0428, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 429, 面向跨学科场景的文本分析协同研究, 韩冰、邓宇, <<BLOB>>, 文学，文本分析，数字人文, 数字人文, 2024, 10.1000/campus.2024.0429, 38, 12, null, 模拟数据, 会议论文, https://example.edu/literature/0429, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 432, 面向科研服务的网络文学模型构建, 郑磊、许然、罗明, <<BLOB>>, 文学，网络文学，文本挖掘，文本分析，文化传播, 数字人文, 2024, 10.1000/campus.2024.0432, 38, 62, null, 模拟数据, 会议论文, https://example.edu/literature/0432, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 433, 网络文学在高校场景中的应用与评价, 吴越、郑磊, <<BLOB>>, 文学，网络文学，教育研究，文化传播，价值研究, 语言与文化研究, 2021, 10.1000/campus.2021.0433, 38, 95, null, 模拟数据, 期刊论文, https://example.edu/literature/0433, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 435, 面向跨学科场景的校园文化叙事协同研究, 刘洋、杨帆、陈思, <<BLOB>>, 文学，校园文化叙事，教育研究，价值研究，文本分析, 数字人文, 2019, 10.1000/campus.2019.0435, 38, 136, null, 模拟数据, 会议论文, https://example.edu/literature/0435, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 436, 文学传播平台设计与应用效果分析, 马欣、李雅、王博, <<BLOB>>, 文学，文学传播，教育研究，价值研究，文化传播, 数字人文, 2023, 10.1000/campus.2023.0436, 38, 289, null, 模拟数据, 研究报告, https://example.edu/literature/0436, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 438, 多源数据支持的文本分析研究, 罗明、刘洋、周敏, <<BLOB>>, 文学，文本分析，文本挖掘，文化传播，价值研究, 艺术教育研究, 2024, 10.1000/campus.2024.0438, 38, 246, null, 模拟数据, 会议论文, https://example.edu/literature/0438, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 439, 区域样本下网络文学的影响因素分析, 曹睿、林雪、周敏, <<BLOB>>, 文学，网络文学，文本挖掘，数字人文，文本分析, 数字人文, 2019, 10.1000/campus.2019.0439, 38, 249, null, 模拟数据, 期刊论文, https://example.edu/literature/0439, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 440, 文本分析的现状、问题与发展趋势, 李雅、蒋楠, <<BLOB>>, 文学，文本分析，文本挖掘，数字人文, 文化研究论丛, 2022, 10.1000/campus.2022.0440, 38, 269, null, 模拟数据, 期刊论文, https://example.edu/literature/0440, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 443, 多源数据支持的数字人文研究, 唐佳、刘洋、赵宁, <<BLOB>>, 历史学，数字人文，教育研究，价值研究, 语言与文化研究, 2019, 10.1000/campus.2019.0443, 39, 156, null, 模拟数据, 期刊论文, https://example.edu/literature/0443, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 445, 面向大学生群体的史料整理模型构建, 宋洁、刘洋、陈思, <<BLOB>>, 历史学，史料整理，文本挖掘，文化传播，价值研究, 艺术教育研究, 2019, 10.1000/campus.2019.0445, 39, 87, null, 模拟数据, 学位论文, https://example.edu/literature/0445, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 446, 面向多学科协同的数字人文模型构建, 杨帆、马欣, <<BLOB>>, 历史学，数字人文，文化传播，文本分析, 艺术教育研究, 2026, 10.1000/campus.2026.0446, 39, 49, null, 模拟数据, 研究报告, https://example.edu/literature/0446, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 448, 融合数字人文的历史记忆方法与实践, 赵宁、张晨、韩冰, <<BLOB>>, 历史学，历史记忆，数字人文，价值研究，文化传播, 数字人文, 2025, 10.1000/campus.2025.0448, 39, 27, null, 模拟数据, 会议论文, https://example.edu/literature/0448, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 450, 大学生群体下教育史的影响因素分析, 何雨、周敏、刘洋, <<BLOB>>, 历史学，教育史，文本挖掘，文本分析，价值研究, 艺术教育研究, 2025, 10.1000/campus.2025.0450, 39, 15, null, 模拟数据, 期刊论文, https://example.edu/literature/0450, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 467, 二语习得的现状、问题与发展趋势, 赵宁、郑磊, <<BLOB>>, 语言学，二语习得，文本挖掘，数字人文，文本分析, 文化研究论丛, 2024, 10.1000/campus.2024.0467, 41, 102, null, 模拟数据, 研究报告, https://example.edu/literature/0467, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 468, 多源数据支持的话语分析研究, 曹睿、唐佳、叶欣, <<BLOB>>, 语言学，话语分析，教育研究，文化传播，价值研究, 人文社会科学, 2025, 10.1000/campus.2025.0468, 41, 73, null, 模拟数据, 期刊论文, https://example.edu/literature/0468, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 470, 多源数据支持的语料库语言学研究, 魏然、郭强, <<BLOB>>, 语言学，语料库语言学，文化传播，数字人文, 文化研究论丛, 2022, 10.1000/campus.2022.0470, 41, 286, null, 模拟数据, 会议论文, https://example.edu/literature/0470, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 471, 基于多源数据分析的学术写作大学生群体研究, 邓宇、曾琪、林雪, <<BLOB>>, 语言学，学术写作，文化传播，数字人文, 艺术教育研究, 2020, 10.1000/campus.2020.0471, 41, 213, null, 模拟数据, 期刊论文, https://example.edu/literature/0471, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 472, 多源数据支持的语料库语言学研究——基于科研服务的证据, 王博、胡伟、高峰, <<BLOB>>, 语言学，语料库语言学，教育研究，数字人文，文化传播, 语言与文化研究, 2026, 10.1000/campus.2026.0472, 41, 188, null, 模拟数据, 期刊论文, https://example.edu/literature/0472, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 473, 多源数据支持的话语分析研究——基于多学科协同的证据, 赵宁、黄静, <<BLOB>>, 语言学，话语分析，数字人文，文化传播，价值研究, 语言与文化研究, 2021, 10.1000/campus.2021.0473, 41, 162, null, 模拟数据, 期刊论文, https://example.edu/literature/0473, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 474, 学术写作在课程教学中的应用与评价, 林雪、高峰, <<BLOB>>, 语言学，学术写作，文化传播，文本分析, 人文社会科学, 2024, 10.1000/campus.2024.0474, 41, 130, null, 模拟数据, 会议论文, https://example.edu/literature/0474, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 475, 科研服务下学术写作的影响因素分析, 宋洁、曾琪, <<BLOB>>, 语言学，学术写作，文本挖掘，价值研究，数字人文, 人文社会科学, 2025, 10.1000/campus.2025.0475, 41, 163, null, 模拟数据, 会议论文, https://example.edu/literature/0475, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 485, 基于问卷调查的校园美育高校场景研究, 刘洋、吴越、胡伟, <<BLOB>>, 艺术学，校园美育，数字人文，文本分析，价值研究, 文化研究论丛, 2019, 10.1000/campus.2019.0485, 42, 247, null, 模拟数据, 会议论文, https://example.edu/literature/0485, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==        Row: 487, 面向跨学科场景的文化创意协同研究——基于科研服务的证据, 高峰、赵宁、孙涛, <<BLOB>>, 艺术学，文化创意，文本挖掘，价值研究，文化传播, 艺术教育研究, 2018, 10.1000/campus.2018.0487, 42, 153, null, 模拟数据, 研究报告, https://example.edu/literature/0487, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
-<==      Total: 60
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@22be7b6b]
-Creating a new SqlSession
-SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@46c53081] was not registered for synchronization because synchronization is not active
-JDBC Connection [HikariProxyConnection@1789847318 wrapping com.mysql.cj.jdbc.ConnectionImpl@2c2e3460] will not be managed by Spring
-==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? )
-==> Parameters: 7(Long), 13(Long), 15(Long), 18(Long), 25(Long), 30(Long), 33(Long), 34(Long), 36(Long), 37(Long), 38(Long), 39(Long), 41(Long), 42(Long)
-<==    Columns: id, name, parent_id, sort_order, create_time
-<==        Row: 7, 数学, 1, 1, 2026-05-21 21:46:53
-<==        Row: 13, 计算机科学与人工智能, 2, 1, 2026-05-21 21:46:53
-<==        Row: 15, 数据科学与数据挖掘, 2, 3, 2026-05-21 21:46:53
-<==        Row: 18, 智能制造与自动化, 2, 6, 2026-05-21 21:46:53
-<==        Row: 25, 医学信息学, 3, 6, 2026-05-21 21:46:53
-<==        Row: 30, 教育学, 5, 1, 2026-05-21 21:46:53
-<==        Row: 33, 法学, 5, 4, 2026-05-21 21:46:53
-<==        Row: 34, 社会学, 5, 5, 2026-05-21 21:46:53
-<==        Row: 36, 新闻传播学, 5, 7, 2026-05-21 21:46:53
-<==        Row: 37, 图书情报与档案管理, 5, 8, 2026-05-21 21:46:53
-<==        Row: 38, 文学, 6, 1, 2026-05-21 21:46:53
-<==        Row: 39, 历史学, 6, 2, 2026-05-21 21:46:53
-<==        Row: 41, 语言学, 6, 4, 2026-05-21 21:46:53
-<==        Row: 42, 艺术学, 6, 5, 2026-05-21 21:46:53
-<==      Total: 14
-Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@46c53081]
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@634f58d2]

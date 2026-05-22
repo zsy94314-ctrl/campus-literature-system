@@ -82,8 +82,10 @@ function ReviewGeneratePage() {
     try {
       const r = await reviewApi.generate({ topic, literatureIds: selectedIds, mode: generateMode });
       setResult(r);
-      if (r.generationMode === "llm_fallback_rule") {
-        toast.success("综述生成成功（LLM 不可用，已自动降级为离线生成）");
+      if (r.generationMode === "llm") {
+        toast.success("在线 LLM 综述生成成功");
+      } else if (r.generationMode === "llm_fallback_rule") {
+        toast.warning("在线 LLM 输出不完整或不可用，已自动使用离线综述生成");
       } else {
         toast.success("综述生成成功");
       }
@@ -243,7 +245,11 @@ function ReviewGeneratePage() {
                 </button>
               </div>
               <Button className="w-full" onClick={generate} disabled={loading}>
-                {loading ? "正在生成..." : "生成综述"}
+                {loading
+                  ? generateMode === "llm"
+                    ? "正在调用在线 LLM 生成综述，可能需要 1～2 分钟..."
+                    : "正在生成..."
+                  : "生成综述"}
               </Button>
             </CardContent>
           </Card>

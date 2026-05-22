@@ -33,6 +33,7 @@ export const reviewApi = {
     const raw = await request<any>({
       method: "POST",
       url: "/reviews/generate",
+      timeout: 240000,
       data: {
         topic: params.topic,
         literatureIds: params.literatureIds.map(Number),

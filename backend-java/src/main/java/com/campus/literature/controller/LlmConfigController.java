@@ -74,4 +74,11 @@ public class LlmConfigController {
         String result = llmConfigService.testConnection(id);
         return Result.success("连接成功", result);
     }
+
+    @PostMapping("/{id}/test-review")
+    public Result<java.util.Map<String, Object>> testReview(@PathVariable Long id) {
+        checkAdmin();
+        java.util.Map<String, Object> result = llmConfigService.testReview(id);
+        return Result.success("测试完成", result);
+    }
 }

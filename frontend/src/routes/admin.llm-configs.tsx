@@ -137,6 +137,19 @@ function LlmConfigPage() {
     }
   };
 
+  const handleTestReview = async (id: number) => {
+    try {
+      const res = await llmConfigApi.testReview(id);
+      if (res.success) {
+        toast.success(`长文本综述测试成功，耗时 ${res.elapsedMs}ms，内容长度 ${res.contentLength}，包含 ${res.sectionCount} 个章节`);
+      } else {
+        toast.error(`长文本综述测试失败：${res.error}（耗时 ${res.elapsedMs}ms）`);
+      }
+    } catch (err: any) {
+      toast.error(err?.message || "长文本综述测试失败");
+    }
+  };
+
   return (
     <AdminShell>
       <div className="mb-6 flex items-center justify-between">
@@ -196,6 +209,10 @@ function LlmConfigPage() {
                     <Button size="sm" variant="outline" onClick={() => handleTest(cfg.id)}>
                       <TestTube className="mr-1 h-3 w-3" />
                       测试连接
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => handleTestReview(cfg.id)}>
+                      <TestTube className="mr-1 h-3 w-3" />
+                      长文本测试
                     </Button>
                     <Button size="sm" variant="outline" onClick={() => openEdit(cfg)}>
                       <Pencil className="mr-1 h-3 w-3" />

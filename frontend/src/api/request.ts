@@ -53,7 +53,7 @@ http.interceptors.response.use(
 );
 
 // Real request helper: unwraps the backend { code, message, data } envelope.
-export async function request<T>(config: Parameters<typeof http.request>[0]): Promise<T> {
+export async function request<T>(config: Parameters<typeof http.request>[0] & { timeout?: number }): Promise<T> {
   const { data } = await http.request<ApiResponse<T>>(config);
   if (data.code !== 200) {
     throw new Error(data.message || "请求失败");
