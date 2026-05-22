@@ -6833,3 +6833,183 @@ JDBC Connection [HikariProxyConnection@1006323190 wrapping com.mysql.cj.jdbc.Con
 <==        Row: 500, 面向校园治理的文化遗产传播模型构建, 周敏、胡伟、叶欣, <<BLOB>>, 文化研究，文化遗产传播，文本挖掘，文本分析，数字人文, 文化研究论丛, 2025, 10.1000/campus.2025.0500, 43, 89, null, 模拟数据, 学位论文, https://example.edu/literature/0500, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
 <==      Total: 500
 Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b3c4ac1]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b86a087] was not registered for synchronization because synchronization is not active
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d750b22] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@101953622 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c6e97a0] will not be managed by Spring
+==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category ORDER BY sort_order ASC
+==> Parameters: 
+<==    Columns: id, name, parent_id, sort_order, create_time
+<==        Row: 1, 自然科学, 0, 1, 2026-05-21 21:46:53
+<==        Row: 26, 农学, 4, 1, 2026-05-21 21:46:53
+<==        Row: 7, 数学, 1, 1, 2026-05-21 21:46:53
+<==        Row: 20, 基础医学, 3, 1, 2026-05-21 21:46:53
+<==        Row: 30, 教育学, 5, 1, 2026-05-21 21:46:53
+<==        Row: 13, 计算机科学与人工智能, 2, 1, 2026-05-21 21:46:53
+<==        Row: 38, 文学, 6, 1, 2026-05-21 21:46:53
+<==        Row: 2, 工程与技术, 0, 2, 2026-05-21 21:46:53
+<==        Row: 8, 物理学, 1, 2, 2026-05-21 21:46:53
+<==        Row: 31, 管理学, 5, 2, 2026-05-21 21:46:53
+<==        Row: 14, 软件工程, 2, 2, 2026-05-21 21:46:53
+<==        Row: 21, 临床医学, 3, 2, 2026-05-21 21:46:53
+<==        Row: 27, 食品科学, 4, 2, 2026-05-21 21:46:53
+<==        Row: 39, 历史学, 6, 2, 2026-05-21 21:46:53
+<==        Row: 3, 医学与健康科学, 0, 3, 2026-05-21 21:46:53
+<==        Row: 32, 经济学, 5, 3, 2026-05-21 21:46:53
+<==        Row: 22, 公共健康, 3, 3, 2026-05-21 21:46:53
+<==        Row: 9, 化学, 1, 3, 2026-05-21 21:46:53
+<==        Row: 15, 数据科学与数据挖掘, 2, 3, 2026-05-21 21:46:53
+<==        Row: 28, 生态学, 4, 3, 2026-05-21 21:46:53
+<==        Row: 40, 哲学, 6, 3, 2026-05-21 21:46:53
+<==        Row: 33, 法学, 5, 4, 2026-05-21 21:46:53
+<==        Row: 23, 心理健康, 3, 4, 2026-05-21 21:46:53
+<==        Row: 29, 生物技术, 4, 4, 2026-05-21 21:46:53
+<==        Row: 4, 农业与生命科学, 0, 4, 2026-05-21 21:46:53
+<==        Row: 10, 地球科学, 1, 4, 2026-05-21 21:46:53
+<==        Row: 16, 信息与通信工程, 2, 4, 2026-05-21 21:46:53
+<==        Row: 41, 语言学, 6, 4, 2026-05-21 21:46:53
+<==        Row: 24, 健康管理, 3, 5, 2026-05-21 21:46:53
+<==        Row: 5, 社会科学, 0, 5, 2026-05-21 21:46:53
+<==        Row: 34, 社会学, 5, 5, 2026-05-21 21:46:53
+<==        Row: 11, 生物科学, 1, 5, 2026-05-21 21:46:53
+<==        Row: 17, 电子工程, 2, 5, 2026-05-21 21:46:53
+<==        Row: 42, 艺术学, 6, 5, 2026-05-21 21:46:53
+<==        Row: 12, 环境科学, 1, 6, 2026-05-21 21:46:53
+<==        Row: 6, 人文与艺术, 0, 6, 2026-05-21 21:46:53
+<==        Row: 25, 医学信息学, 3, 6, 2026-05-21 21:46:53
+<==        Row: 35, 心理学, 5, 6, 2026-05-21 21:46:53
+<==        Row: 18, 智能制造与自动化, 2, 6, 2026-05-21 21:46:53
+<==        Row: 43, 文化研究, 6, 6, 2026-05-21 21:46:53
+<==        Row: 36, 新闻传播学, 5, 7, 2026-05-21 21:46:53
+<==        Row: 19, 能源与环境工程, 2, 7, 2026-05-21 21:46:53
+<==        Row: 37, 图书情报与档案管理, 5, 8, 2026-05-21 21:46:53
+<==      Total: 43
+JDBC Connection [HikariProxyConnection@957375651 wrapping com.mysql.cj.jdbc.ConnectionImpl@6266a5c7] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM literature
+==> Parameters: 
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3b86a087]
+<==    Columns: total
+<==        Row: 500
+<==      Total: 1
+==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature ORDER BY id DESC LIMIT ?
+==> Parameters: 10(Long)
+<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
+<==        Row: 500, 面向校园治理的文化遗产传播模型构建, 周敏、胡伟、叶欣, <<BLOB>>, 文化研究，文化遗产传播，文本挖掘，文本分析，数字人文, 文化研究论丛, 2025, 10.1000/campus.2025.0500, 43, 89, null, 模拟数据, 学位论文, https://example.edu/literature/0500, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 499, 文化认同平台设计与应用效果分析——基于区域样本的证据, 韩冰、周敏, <<BLOB>>, 文化研究，文化认同，文本挖掘，价值研究，数字人文, 文化研究论丛, 2018, 10.1000/campus.2018.0499, 43, 214, null, 模拟数据, 期刊论文, https://example.edu/literature/0499, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 498, 基于对比实验的青年亚文化实验平台研究, 邓宇、蒋楠、罗明, <<BLOB>>, 文化研究，青年亚文化，教育研究，价值研究，数字人文, 语言与文化研究, 2026, 10.1000/campus.2026.0498, 43, 107, null, 模拟数据, 期刊论文, https://example.edu/literature/0498, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 497, 跨文化传播的现状、问题与发展趋势, 邓宇、郭强, <<BLOB>>, 文化研究，跨文化传播，文本挖掘，数字人文，文本分析, 人文社会科学, 2025, 10.1000/campus.2025.0497, 43, 184, null, 模拟数据, 学位论文, https://example.edu/literature/0497, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 496, 多源数据支持的数字文化研究, 蒋楠、杨帆, <<BLOB>>, 文化研究，数字文化，教育研究，文本分析，价值研究, 人文社会科学, 2023, 10.1000/campus.2023.0496, 43, 145, null, 模拟数据, 期刊论文, https://example.edu/literature/0496, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 495, 青年亚文化的风险识别与治理策略研究, 何雨、胡伟、唐佳, <<BLOB>>, 文化研究，青年亚文化，教育研究，数字人文，文化传播, 艺术教育研究, 2023, 10.1000/campus.2023.0495, 43, 179, null, 模拟数据, 会议论文, https://example.edu/literature/0495, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 494, 面向跨学科场景的跨文化传播协同研究, 罗明、蒋楠、周敏, <<BLOB>>, 文化研究，跨文化传播，文本挖掘，价值研究，数字人文, 文化研究论丛, 2020, 10.1000/campus.2020.0494, 43, 111, null, 模拟数据, 期刊论文, https://example.edu/literature/0494, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 493, 校园文化的现状、问题与发展趋势, 杨帆、罗明、宋洁, <<BLOB>>, 文化研究，校园文化，数字人文，文化传播, 文化研究论丛, 2021, 10.1000/campus.2021.0493, 43, 298, null, 模拟数据, 会议论文, https://example.edu/literature/0493, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 492, 文化认同平台设计与应用效果分析, 高峰、曾琪, <<BLOB>>, 文化研究，文化认同，教育研究，文化传播，数字人文, 艺术教育研究, 2022, 10.1000/campus.2022.0492, 43, 50, null, 模拟数据, 学位论文, https://example.edu/literature/0492, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 491, 跨文化传播在数字校园中的应用与评价, 高峰、周敏, <<BLOB>>, 文化研究，跨文化传播，数字人文，文本分析，价值研究, 人文社会科学, 2018, 10.1000/campus.2018.0491, 43, 288, null, 模拟数据, 会议论文, https://example.edu/literature/0491, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==      Total: 10
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6d750b22]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@52b96f88] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@94806149 wrapping com.mysql.cj.jdbc.ConnectionImpl@6266a5c7] will not be managed by Spring
+==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
+==> Parameters: 43(Long)
+<==    Columns: id, name, parent_id, sort_order, create_time
+<==        Row: 43, 文化研究, 6, 6, 2026-05-21 21:46:53
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@52b96f88]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6fcfc685] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@1598210822 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c6e97a0] will not be managed by Spring
+Creating a new SqlSession
+==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category ORDER BY sort_order ASC
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cf14a5d] was not registered for synchronization because synchronization is not active
+==> Parameters: 
+JDBC Connection [HikariProxyConnection@1429059940 wrapping com.mysql.cj.jdbc.ConnectionImpl@6266a5c7] will not be managed by Spring
+==>  Preparing: INSERT INTO search_history ( user_id, keyword, search_type, result_count ) VALUES ( ?, ?, ?, ? )
+<==    Columns: id, name, parent_id, sort_order, create_time
+<==        Row: 1, 自然科学, 0, 1, 2026-05-21 21:46:53
+<==        Row: 26, 农学, 4, 1, 2026-05-21 21:46:53
+<==        Row: 7, 数学, 1, 1, 2026-05-21 21:46:53
+<==        Row: 20, 基础医学, 3, 1, 2026-05-21 21:46:53
+<==        Row: 30, 教育学, 5, 1, 2026-05-21 21:46:53
+<==        Row: 13, 计算机科学与人工智能, 2, 1, 2026-05-21 21:46:53
+<==        Row: 38, 文学, 6, 1, 2026-05-21 21:46:53
+==> Parameters: 2(Long), (String), NORMAL(String), 10(Integer)
+<==        Row: 2, 工程与技术, 0, 2, 2026-05-21 21:46:53
+<==        Row: 8, 物理学, 1, 2, 2026-05-21 21:46:53
+<==        Row: 31, 管理学, 5, 2, 2026-05-21 21:46:53
+<==        Row: 14, 软件工程, 2, 2, 2026-05-21 21:46:53
+<==        Row: 21, 临床医学, 3, 2, 2026-05-21 21:46:53
+<==        Row: 27, 食品科学, 4, 2, 2026-05-21 21:46:53
+<==        Row: 39, 历史学, 6, 2, 2026-05-21 21:46:53
+<==        Row: 3, 医学与健康科学, 0, 3, 2026-05-21 21:46:53
+<==        Row: 32, 经济学, 5, 3, 2026-05-21 21:46:53
+<==        Row: 22, 公共健康, 3, 3, 2026-05-21 21:46:53
+<==        Row: 9, 化学, 1, 3, 2026-05-21 21:46:53
+<==        Row: 15, 数据科学与数据挖掘, 2, 3, 2026-05-21 21:46:53
+<==        Row: 28, 生态学, 4, 3, 2026-05-21 21:46:53
+<==        Row: 40, 哲学, 6, 3, 2026-05-21 21:46:53
+<==        Row: 33, 法学, 5, 4, 2026-05-21 21:46:53
+<==        Row: 23, 心理健康, 3, 4, 2026-05-21 21:46:53
+<==        Row: 29, 生物技术, 4, 4, 2026-05-21 21:46:53
+<==        Row: 4, 农业与生命科学, 0, 4, 2026-05-21 21:46:53
+<==        Row: 10, 地球科学, 1, 4, 2026-05-21 21:46:53
+<==        Row: 16, 信息与通信工程, 2, 4, 2026-05-21 21:46:53
+<==        Row: 41, 语言学, 6, 4, 2026-05-21 21:46:53
+<==        Row: 24, 健康管理, 3, 5, 2026-05-21 21:46:53
+<==        Row: 5, 社会科学, 0, 5, 2026-05-21 21:46:53
+<==        Row: 34, 社会学, 5, 5, 2026-05-21 21:46:53
+<==        Row: 11, 生物科学, 1, 5, 2026-05-21 21:46:53
+<==        Row: 17, 电子工程, 2, 5, 2026-05-21 21:46:53
+<==        Row: 42, 艺术学, 6, 5, 2026-05-21 21:46:53
+<==        Row: 12, 环境科学, 1, 6, 2026-05-21 21:46:53
+<==        Row: 6, 人文与艺术, 0, 6, 2026-05-21 21:46:53
+<==        Row: 25, 医学信息学, 3, 6, 2026-05-21 21:46:53
+<==        Row: 35, 心理学, 5, 6, 2026-05-21 21:46:53
+<==        Row: 18, 智能制造与自动化, 2, 6, 2026-05-21 21:46:53
+<==        Row: 43, 文化研究, 6, 6, 2026-05-21 21:46:53
+<==        Row: 36, 新闻传播学, 5, 7, 2026-05-21 21:46:53
+<==        Row: 19, 能源与环境工程, 2, 7, 2026-05-21 21:46:53
+<==        Row: 37, 图书情报与档案管理, 5, 8, 2026-05-21 21:46:53
+<==      Total: 43
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6fcfc685]
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cf14a5d]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@515abcc8] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@688433172 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c6e97a0] will not be managed by Spring
+==>  Preparing: SELECT COUNT(*) AS total FROM literature
+==> Parameters: 
+<==    Columns: total
+<==        Row: 500
+<==      Total: 1
+==>  Preparing: SELECT id,title,authors,abstract_text,keywords,journal,publish_year,doi,category_id,citation_count,file_url,source,document_type,source_url,content,create_time,update_time FROM literature ORDER BY id DESC LIMIT ?
+==> Parameters: 10(Long)
+<==    Columns: id, title, authors, abstract_text, keywords, journal, publish_year, doi, category_id, citation_count, file_url, source, document_type, source_url, content, create_time, update_time
+<==        Row: 500, 面向校园治理的文化遗产传播模型构建, 周敏、胡伟、叶欣, <<BLOB>>, 文化研究，文化遗产传播，文本挖掘，文本分析，数字人文, 文化研究论丛, 2025, 10.1000/campus.2025.0500, 43, 89, null, 模拟数据, 学位论文, https://example.edu/literature/0500, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 499, 文化认同平台设计与应用效果分析——基于区域样本的证据, 韩冰、周敏, <<BLOB>>, 文化研究，文化认同，文本挖掘，价值研究，数字人文, 文化研究论丛, 2018, 10.1000/campus.2018.0499, 43, 214, null, 模拟数据, 期刊论文, https://example.edu/literature/0499, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 498, 基于对比实验的青年亚文化实验平台研究, 邓宇、蒋楠、罗明, <<BLOB>>, 文化研究，青年亚文化，教育研究，价值研究，数字人文, 语言与文化研究, 2026, 10.1000/campus.2026.0498, 43, 107, null, 模拟数据, 期刊论文, https://example.edu/literature/0498, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 497, 跨文化传播的现状、问题与发展趋势, 邓宇、郭强, <<BLOB>>, 文化研究，跨文化传播，文本挖掘，数字人文，文本分析, 人文社会科学, 2025, 10.1000/campus.2025.0497, 43, 184, null, 模拟数据, 学位论文, https://example.edu/literature/0497, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 496, 多源数据支持的数字文化研究, 蒋楠、杨帆, <<BLOB>>, 文化研究，数字文化，教育研究，文本分析，价值研究, 人文社会科学, 2023, 10.1000/campus.2023.0496, 43, 145, null, 模拟数据, 期刊论文, https://example.edu/literature/0496, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 495, 青年亚文化的风险识别与治理策略研究, 何雨、胡伟、唐佳, <<BLOB>>, 文化研究，青年亚文化，教育研究，数字人文，文化传播, 艺术教育研究, 2023, 10.1000/campus.2023.0495, 43, 179, null, 模拟数据, 会议论文, https://example.edu/literature/0495, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 494, 面向跨学科场景的跨文化传播协同研究, 罗明、蒋楠、周敏, <<BLOB>>, 文化研究，跨文化传播，文本挖掘，价值研究，数字人文, 文化研究论丛, 2020, 10.1000/campus.2020.0494, 43, 111, null, 模拟数据, 期刊论文, https://example.edu/literature/0494, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 493, 校园文化的现状、问题与发展趋势, 杨帆、罗明、宋洁, <<BLOB>>, 文化研究，校园文化，数字人文，文化传播, 文化研究论丛, 2021, 10.1000/campus.2021.0493, 43, 298, null, 模拟数据, 会议论文, https://example.edu/literature/0493, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 492, 文化认同平台设计与应用效果分析, 高峰、曾琪, <<BLOB>>, 文化研究，文化认同，教育研究，文化传播，数字人文, 艺术教育研究, 2022, 10.1000/campus.2022.0492, 43, 50, null, 模拟数据, 学位论文, https://example.edu/literature/0492, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==        Row: 491, 跨文化传播在数字校园中的应用与评价, 高峰、周敏, <<BLOB>>, 文化研究，跨文化传播，数字人文，文本分析，价值研究, 人文社会科学, 2018, 10.1000/campus.2018.0491, 43, 288, null, 模拟数据, 会议论文, https://example.edu/literature/0491, <<BLOB>>, 2026-05-21 21:58:01, 2026-05-21 21:58:01
+<==      Total: 10
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@515abcc8]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5cd8cd7b] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@821855996 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c6e97a0] will not be managed by Spring
+==>  Preparing: SELECT id,name,parent_id,sort_order,create_time FROM category WHERE id IN ( ? )
+==> Parameters: 43(Long)
+<==    Columns: id, name, parent_id, sort_order, create_time
+<==        Row: 43, 文化研究, 6, 6, 2026-05-21 21:46:53
+<==      Total: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5cd8cd7b]
+Creating a new SqlSession
+SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19d80020] was not registered for synchronization because synchronization is not active
+JDBC Connection [HikariProxyConnection@66168181 wrapping com.mysql.cj.jdbc.ConnectionImpl@3c6e97a0] will not be managed by Spring
+==>  Preparing: INSERT INTO search_history ( user_id, keyword, search_type, result_count ) VALUES ( ?, ?, ?, ? )
+==> Parameters: 2(Long), (String), NORMAL(String), 10(Integer)
+<==    Updates: 1
+Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@19d80020]
