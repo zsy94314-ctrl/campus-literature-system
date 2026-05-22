@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
 import { literatureApi } from "@/api/literature";
+import { aiApi } from "@/api/ai";
 import { favoriteApi } from "@/api/favorite";
 import type { Literature } from "@/mock/literatures";
 import { Star, ExternalLink } from "lucide-react";
@@ -17,12 +18,20 @@ export const Route = createFileRoute("/literature/$id")({
 function LiteratureDetailPage() {
   const { id } = Route.useParams();
   const [lit, setLit] = useState<Literature | null>(null);
-  const [similar, setSimilar] = useState<Literature[]>([]);
+  const [similar, setSimilar] = useState<(Literature & { similarity: number })[]>([]);
+  const [similarLoading, setSimilarLoading] = useState(false);
   const [favorited, setFavorited] = useState(false);
 
   useEffect(() => {
     literatureApi.getById(id).then(setLit);
-    literatureApi.getSimilar(id).then(setSimilar);
+    setSimilarLoading(true);
+    aiApi
+      .recommend(id)
+      .then(setSimilar)
+      .catch(() => {
+        setSimilar([]);
+      })
+      .finally(() => setSimilarLoading(false));
     favoriteApi.isFavorited(id).then((r) => setFavorited(r.favorited));
   }, [id]);
 
@@ -119,6 +128,10 @@ function LiteratureDetailPage() {
           <CardTitle className="text-base">相似文献推荐</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
+          {similarLoading && <p className="text-sm text-muted-foreground">加载中...</p>}
+          {!similarLoading && similar.length === 0 && (
+            <p className="text-sm text-muted-foreground">暂无相似文献推荐</p>
+          )}
           {similar.map((s) => (
             <Link
               key={s.id}
@@ -126,9 +139,16 @@ function LiteratureDetailPage() {
               params={{ id: s.id }}
               className="flex items-start justify-between rounded-lg border p-4 hover:bg-secondary/60"
             >
-              <div>
+              <div className="flex-1">
                 <div className="font-medium">{s.title}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{s.authors.join(", ")} · {s.year}</div>
+                <div className="mt-1 text-xs text-muted-foreground">
+                  {s.authors.join(", ")} · {s.year}
+                  {s.category ? ` · ${s.category}` : ""}
+                  {s.documentType ? ` · ${s.documentType}` : ""}
+                </div>
+                <div className="mt-1 text-xs font-medium text-primary">
+                  语义相似度：{(s.similarity * 100).toFixed(1)}%
+                </div>
               </div>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </Link>

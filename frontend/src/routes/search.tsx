@@ -6,12 +6,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import { literatureApi, type SearchParams } from "@/api/literature";
+import { aiApi } from "@/api/ai";
 import { categoryApi, type Category } from "@/api/category";
 
 import type { Literature } from "@/mock/literatures";
 import { Search } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/search")({
   validateSearch: (s: Record<string, unknown>) => ({
@@ -23,12 +26,13 @@ export const Route = createFileRoute("/search")({
 
 function SearchPage() {
   const { q, category: initCat } = Route.useSearch();
+  const [searchMode, setSearchMode] = useState<"normal" | "ai">("normal");
   const [keyword, setKeyword] = useState(q);
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState(initCat || "all");
   const [year, setYear] = useState<string>("");
   const [sortBy, setSortBy] = useState<SearchParams["sortBy"]>("relevance");
-  const [list, setList] = useState<Literature[]>([]);
+  const [list, setList] = useState<(Literature & { similarity?: number })[]>([]);
   const [cats, setCats] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -36,6 +40,27 @@ function SearchPage() {
   const pageSize = 10;
 
   const runSearch = async (targetPage = page) => {
+    if (searchMode === "ai") {
+      if (!keyword.trim()) {
+        toast.error("请输入智能检索内容");
+        return;
+      }
+      setLoading(true);
+      try {
+        const res = await aiApi.semanticSearch({ query: keyword.trim(), topK: 20 });
+        setList(res);
+        setTotal(res.length);
+        setPage(1);
+      } catch (err: any) {
+        toast.error(err?.message || "智能检索失败");
+        setList([]);
+        setTotal(0);
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
     setLoading(true);
     const res = await literatureApi.search({
       keyword,
@@ -57,42 +82,57 @@ function SearchPage() {
     categoryApi.list().then(setCats);
   }, []);
 
-  // 同步 URL 参数变化（当从首页点击分类跳转时，需同步到本地状态并自动检索）
+  // 同步 URL 参数变化（普通检索模式下从首页点击分类跳转时自动检索）
   useEffect(() => {
     setKeyword(q);
     const cat = initCat || "all";
     setCategory(cat);
-    // 使用函数式更新确保使用最新 category 值发起检索
     setPage(1);
-    // 由于 setCategory 是异步的，直接调用 runSearch 可能拿不到最新值，
-    // 所以在这里直接发起检索，使用 cat 而非 category state
-    const doSearch = async () => {
-      setLoading(true);
-      const res = await literatureApi.search({
-        keyword: q,
-        author: "",
-        category: cat && cat !== "all" ? cat : undefined,
-        year: undefined,
-        sortBy: "relevance",
-        page: 1,
-        pageSize,
-      });
-      setList(res.list);
-      setTotal(res.total);
-      setPage(1);
-      setLoading(false);
-    };
-    doSearch();
+    // 仅在普通检索模式下自动触发检索；智能检索需用户主动点击
+    if (searchMode === "normal") {
+      const doSearch = async () => {
+        setLoading(true);
+        const res = await literatureApi.search({
+          keyword: q,
+          author: "",
+          category: cat && cat !== "all" ? cat : undefined,
+          year: undefined,
+          sortBy: "relevance",
+          page: 1,
+          pageSize,
+        });
+        setList(res.list);
+        setTotal(res.total);
+        setPage(1);
+        setLoading(false);
+      };
+      doSearch();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q, initCat]);
+
+  // 切换检索模式时重置结果
+  const handleModeChange = (mode: "normal" | "ai") => {
+    setSearchMode(mode);
+    setList([]);
+    setTotal(0);
+    setPage(1);
+  };
 
   return (
     <AppShell>
       <Card>
         <CardContent className="pt-6">
+          <Tabs value={searchMode} onValueChange={(v) => handleModeChange(v as "normal" | "ai")}>
+            <TabsList className="mb-4">
+              <TabsTrigger value="normal">普通检索</TabsTrigger>
+              <TabsTrigger value="ai">智能检索</TabsTrigger>
+            </TabsList>
+          </Tabs>
+
           <div className="flex gap-2">
             <Input
-              placeholder="搜索文献标题、关键词、摘要..."
+              placeholder={searchMode === "ai" ? "输入自然语言描述进行语义检索..." : "搜索文献标题、关键词、摘要..."}
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && runSearch()}
@@ -102,47 +142,56 @@ function SearchPage() {
               检索
             </Button>
           </div>
-          <div className="mt-4 grid gap-4 md:grid-cols-4">
-            <div className="space-y-1.5">
-              <Label className="text-xs">作者</Label>
-              <Input value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="作者姓名" />
+
+          {searchMode === "normal" && (
+            <div className="mt-4 grid gap-4 md:grid-cols-4">
+              <div className="space-y-1.5">
+                <Label className="text-xs">作者</Label>
+                <Input value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="作者姓名" />
+              </div>
+              <div className="space-y-1.5">
+                <Label className="text-xs">分类</Label>
+                <Select value={category} onValueChange={(v) => { setCategory(v); runSearch(1); }}>
+                  <SelectTrigger><SelectValue placeholder="全部" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">全部</SelectItem>
+                    {cats
+                      .filter((c) => c.parentId && c.parentId !== "0")
+                      .map((c) => (
+                        <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-1.5">
+                <Label className="text-xs">年份</Label>
+                <Input value={year} onChange={(e) => setYear(e.target.value)} placeholder="例如 2023" />
+              </div>
+              <div className="space-y-1.5">
+                <Label className="text-xs">排序</Label>
+                <Select value={sortBy} onValueChange={(v) => { setSortBy(v as SearchParams["sortBy"]); runSearch(1); }}>
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="relevance">相关度</SelectItem>
+                    <SelectItem value="year">最新年份</SelectItem>
+                    <SelectItem value="citations">引用次数</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            <div className="space-y-1.5">
-              <Label className="text-xs">分类</Label>
-              <Select value={category} onValueChange={(v) => { setCategory(v); runSearch(1); }}>
-                <SelectTrigger><SelectValue placeholder="全部" /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">全部</SelectItem>
-                  {cats
-                    .filter((c) => c.parentId && c.parentId !== "0")
-                    .map((c) => (
-                      <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
-                    ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-1.5">
-              <Label className="text-xs">年份</Label>
-              <Input value={year} onChange={(e) => setYear(e.target.value)} placeholder="例如 2023" />
-            </div>
-            <div className="space-y-1.5">
-              <Label className="text-xs">排序</Label>
-              <Select value={sortBy} onValueChange={(v) => { setSortBy(v as SearchParams["sortBy"]); runSearch(1); }}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="relevance">相关度</SelectItem>
-                  <SelectItem value="year">最新年份</SelectItem>
-                  <SelectItem value="citations">引用次数</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+          )}
         </CardContent>
       </Card>
 
       <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
-        <span>共找到 {total} 篇文献</span>
-        <Link to="/advanced-search" className="text-primary hover:underline">前往高级检索 →</Link>
+        <span>
+          {searchMode === "ai"
+            ? `智能检索返回前 ${list.length} 条结果`
+            : `共找到 ${total} 篇文献`}
+        </span>
+        {searchMode === "normal" && (
+          <Link to="/advanced-search" className="text-primary hover:underline">前往高级检索 →</Link>
+        )}
       </div>
 
       <div className="mt-3 space-y-3">
@@ -158,40 +207,47 @@ function SearchPage() {
                 {l.documentType ? ` · ${l.documentType}` : ""}
               </div>
               <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{l.abstract}</p>
-              <div className="mt-3 flex flex-wrap gap-1.5">
+              <div className="mt-3 flex flex-wrap items-center gap-2">
                 {l.keywords.map((k) => (
                   <Badge key={k} variant="secondary">{k}</Badge>
                 ))}
+                {l.similarity != null && (
+                  <Badge variant="default" className="ml-auto">
+                    语义相似度：{(l.similarity * 100).toFixed(1)}%
+                  </Badge>
+                )}
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
-        <span>共找到 {total} 篇文献</span>
-        <div className="flex items-center gap-4">
-          <span>第 {page} / {Math.max(1, Math.ceil(total / pageSize))} 页</span>
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={page <= 1}
-              onClick={() => runSearch(page - 1)}
-            >
-              上一页
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              disabled={page >= Math.ceil(total / pageSize)}
-              onClick={() => runSearch(page + 1)}
-            >
-              下一页
-            </Button>
+      {searchMode === "normal" && (
+        <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+          <span>共找到 {total} 篇文献</span>
+          <div className="flex items-center gap-4">
+            <span>第 {page} / {Math.max(1, Math.ceil(total / pageSize))} 页</span>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page <= 1}
+                onClick={() => runSearch(page - 1)}
+              >
+                上一页
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={page >= Math.ceil(total / pageSize)}
+                onClick={() => runSearch(page + 1)}
+              >
+                下一页
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </AppShell>
   );
 }
