@@ -524,3 +524,33 @@ flowchart TD
     GEN --> READ["Spring Boot 读取 active=1 且 enabled=1 配置"]
     READ --> LLM["调用在线 LLM 增强生成"]
 ```
+
+## 图 6-6 RAG 风格综述生成流程图
+
+```mermaid
+flowchart TD
+    T["用户输入综述主题"] --> REC["智能检索推荐相关文献"]
+    REC --> FAISS["FAISS 语义召回"]
+    REC --> MYSQL["MySQL 读取文献元数据与正文节选"]
+    FAISS --> CAND["候选参考文献"]
+    MYSQL --> CAND
+    CAND --> SEL["用户选择 2 到 5 篇文献"]
+    SEL --> EXT["提取标题 / 关键词 / 摘要 / 正文节选"]
+    EXT --> CTX["组织生成上下文"]
+    CTX --> MODE{"选择生成模式"}
+
+    MODE -->|rule| RULE["离线规则归纳生成"]
+    MODE -->|llm| LLM["在线 LLM 增强生成<br/>受约束 prompt"]
+
+    RULE --> REF["参考文献来源补全或替换"]
+    LLM --> CHECK["LLM 输出校验<br/>正文完整性 / finish_reason / 截断检查"]
+    CHECK --> REF
+    REF --> CLEAN["清理非法引用编号"]
+    CLEAN --> SAVE["保存 review_record"]
+    SAVE --> GM["展示 generationMode<br/>rule / llm / llm_fallback_rule"]
+
+    CHECK -->|失败| FALLBACK["降级为离线规则生成"]
+    FALLBACK --> REF
+```
+
+说明：本图表达的是本项目采用的 RAG 思想和检索增强式综述生成流程，不表示完整工业级 RAG 平台。系统没有实现复杂 chunk 管理、专门向量数据库服务、多轮 RAG Agent 或流式 RAG。

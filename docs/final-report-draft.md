@@ -35,21 +35,21 @@
 
 随着高校课程学习和科研训练中学术资料数量不断增加，传统关键词检索在自然语言理解、跨学科主题识别和综述整理方面存在一定不足。本文设计并实现了一个校园学术文献智能检索与综述生成系统。系统采用 React + Vite + TypeScript 构建前端，采用 Spring Boot + MyBatis-Plus + MySQL 构建主后端，采用 FastAPI + sentence-transformers + FAISS 构建智能语义检索服务。
 
-系统支持用户注册登录、文献普通检索、高级检索、多学科智能语义检索、文献详情、收藏、相似文献推荐、智能推荐参考文献、离线综述生成、在线 LLM 增强综述生成以及综述记录管理。管理员端支持文献管理、分类管理、用户管理、数据统计、重建智能检索索引和 LLM API 配置管理。智能检索部分在 FAISS 语义召回基础上，增加多学科主题画像、Query Expansion、MySQL 关键词补充召回、`keywordScore`、`categoryScore`、`weakPenalty`、`finalScore` 和 `matchReason`，缓解跨学科检索跑偏问题。综述生成部分支持离线稳定模式和在线 LLM 增强模式，在线不可用或输出不完整时自动降级为离线生成。
+系统支持用户注册登录、文献普通检索、高级检索、多学科智能语义检索、文献详情、收藏、相似文献推荐、智能推荐参考文献、离线综述生成、在线 LLM 增强综述生成以及综述记录管理。管理员端支持文献管理、分类管理、用户管理、数据统计、重建智能检索索引和 LLM API 配置管理。智能检索部分在 FAISS 语义召回基础上，增加多学科主题画像、Query Expansion、MySQL 关键词补充召回、`keywordScore`、`categoryScore`、`weakPenalty`、`finalScore` 和 `matchReason`，缓解跨学科检索跑偏问题。综述生成部分支持离线稳定模式和在线 LLM 增强模式，在线不可用或输出不完整时自动降级为离线生成。综述生成流程借鉴 RAG（Retrieval-Augmented Generation）思想，先通过智能检索获得主题相关文献，再基于用户选定文献生成综述，并由后端校验和补全参考文献来源。
 
 系统文献数据为课程项目模拟数据，不是真实论文库。在线 LLM 只作为增强模式，离线综述生成是默认稳定方案。系统对 LLM 输出进行完整性校验，并由后端补全参考文献来源，避免模型编造不存在的参考文献。
 
-**关键词：** 学术文献检索；多学科语义检索；综述生成；FAISS；LLM API；Spring Boot
+**关键词：** 学术文献检索；多学科语义检索；综述生成；RAG；FAISS；LLM API；Spring Boot
 
 ## Abstract
 
 With the increasing number of academic materials in university courses and research training, traditional keyword retrieval has limitations in natural language understanding, cross-disciplinary topic identification, and literature review compilation. This paper designs and implements a campus academic literature intelligent retrieval and review generation system. The frontend is built with React + Vite + TypeScript, the main backend with Spring Boot + MyBatis-Plus + MySQL, and the intelligent semantic retrieval service with FastAPI + sentence-transformers + FAISS.
 
-The system supports user registration and login, literature keyword retrieval, advanced retrieval, multi-disciplinary intelligent semantic retrieval, literature detail viewing, favorites, similar literature recommendation, intelligent reference recommendation, offline rule-based review generation, online LLM-enhanced review generation, and review record management. The admin panel supports literature management, category management, user management, real-data statistics, intelligent index rebuilding, and LLM API configuration management. The intelligent retrieval module improves cross-disciplinary relevance through topic profiling, query expansion, MySQL keyword supplement recall, and a comprehensive re-ranking algorithm with `finalScore` and `matchReason`. The review generation module adopts a dual-mode design where offline rule-based generation serves as the stable default and online LLM generation serves as an enhancement, with automatic fallback when LLM is unavailable.
+The system supports user registration and login, literature keyword retrieval, advanced retrieval, multi-disciplinary intelligent semantic retrieval, literature detail viewing, favorites, similar literature recommendation, intelligent reference recommendation, offline rule-based review generation, online LLM-enhanced review generation, and review record management. The admin panel supports literature management, category management, user management, real-data statistics, intelligent index rebuilding, and LLM API configuration management. The intelligent retrieval module improves cross-disciplinary relevance through topic profiling, query expansion, MySQL keyword supplement recall, and a comprehensive re-ranking algorithm with `finalScore` and `matchReason`. The review generation module adopts a dual-mode design where offline rule-based generation serves as the stable default and online LLM generation serves as an enhancement, with automatic fallback when LLM is unavailable. The review generation process follows a RAG-style approach: relevant literature is retrieved first, then the review is generated based on user-selected literature, and reference sources are validated and completed by the backend.
 
 All literature data in the system are simulated course project data, not a real paper database. The administrator statistics panel is based on real database aggregation, without mock trend data.
 
-**Keywords:** academic literature retrieval; multi-disciplinary semantic retrieval; literature review generation; FAISS; LLM API; Spring Boot
+**Keywords:** academic literature retrieval; multi-disciplinary semantic retrieval; review generation; RAG; FAISS; LLM API; Spring Boot
 
 ---
 
@@ -88,6 +88,7 @@ All literature data in the system are simulated course project data, not a real 
 - 在 Spring Boot 中实现多学科主题画像和综合重排。
 - 使用 `matchReason` 提供推荐原因解释。
 - 支持离线综述生成和在线 LLM 增强综述生成。
+- 综述生成流程体现 RAG 思想，通过“检索相关文献—选择参考文献—基于文献内容生成综述—后端校验引用来源”的方式，提高生成内容的依据性和可追溯性。
 - 后端校验 LLM 输出完整性并补全参考文献。
 - 管理员可配置、激活和测试 LLM API，前端只展示脱敏 Key。
 - 管理员数据统计页面基于数据库真实数据，展示核心指标、分类分布、年份分布、文献类型分布、综述生成方式分布、检索类型分布和 LLM 状态，不使用假趋势数据。
@@ -272,6 +273,8 @@ All literature data in the system are simulated course project data, not a real 
 
 此处插入图 6-2 综述生成流程图，详见 `docs/diagrams.md`。
 
+无论 `rule` 还是 `llm` 模式，综述生成都不是脱离文献材料的自由生成，而是基于检索与选择后的本地文献内容进行生成，体现了 RAG 风格的检索增强生成思想。
+
 离线综述生成：
 
 - 请求 `mode=rule`。
@@ -307,11 +310,32 @@ All literature data in the system are simulated course project data, not a real 
 - 清理不存在的引用编号。
 - 不允许 LLM 编造参考文献。
 
+LLM 输出校验是 RAG 风格流程中的约束环节，用于保证生成内容与选中文献来源一致。
+
 ### 5.6 LLM API 管理
 
 此处插入图 6-5 LLM API 管理流程图，详见 `docs/diagrams.md`。
 
 管理员可新增、编辑、删除 LLM 配置，设置 active 配置，测试连接，执行长文本综述测试。配置字段包括名称、Provider、Base URL、Model、API Key、启用状态、active 状态、Timeout 和备注。API Key 前端仅展示脱敏值。
+
+### 5.7 RAG 思想在综述生成中的应用
+
+RAG 是 Retrieval-Augmented Generation，即检索增强生成。它的核心思路是先检索相关材料，再基于检索结果组织生成内容，从而提升生成内容的依据性和可追溯性。本项目不是完整工业级 RAG 平台，也没有实现复杂 chunk 管理、专门向量数据库服务、多轮 RAG Agent 或流式 RAG，而是在课程项目范围内采用 RAG 思想实现检索增强式综述生成。
+
+本系统的 RAG 风格流程如下：
+
+1. 用户输入综述主题。
+2. 系统调用智能检索推荐主题相关文献。
+3. 用户选择 2 到 5 篇文献作为参考材料。
+4. 后端提取选中文献的标题、关键词、摘要和正文节选。
+5. `rule` 模式基于这些本地文献材料进行结构化归纳。
+6. `llm` 模式将这些材料组织进受约束 prompt 调用在线 LLM。
+7. 后端校验正文完整性，补全或替换参考文献来源，并清理非法引用编号。
+8. 系统保存 `review_record` 和 `generationMode`，便于后续查看生成方式。
+
+此处插入图 6-6 RAG 风格综述生成流程图，详见 `docs/diagrams.md`。
+
+该流程与普通 LLM 自由生成不同：系统要求综述内容基于用户选定的本地文献材料，参考文献来源必须来自用户选择的文献，不能由模型自由编造。该设计提升了课程项目场景下综述内容的可控性，但不应表述为完整工业级 RAG 系统。
 
 ## 6 详细设计与实现
 
@@ -321,31 +345,31 @@ All literature data in the system are simulated course project data, not a real 
 
 系统前端运行截图如下：
 
-**图 6-6 首页运行效果**
+**图 6-7 首页运行效果**
 
 ![首页运行效果](docs/screenshots/01-home.png)
 
-**图 6-7 普通检索运行效果**
+**图 6-8 普通检索运行效果**
 
 ![普通检索运行效果](docs/screenshots/02-search-normal.png)
 
-**图 6-8 智能检索运行效果**
+**图 6-9 智能检索运行效果**
 
 ![智能检索运行效果](docs/screenshots/03-search-ai.png)
 
-**图 6-9 文献详情与相似文献推荐**
+**图 6-10 文献详情与相似文献推荐**
 
 ![文献详情与相似文献推荐](docs/screenshots/04-literature-detail-recommend.png)
 
-**图 6-10 综述生成双模式选择**
+**图 6-11 综述生成双模式选择**
 
 ![综述生成双模式选择](docs/screenshots/05-review-generate-mode.png)
 
-**图 6-11 在线 LLM 综述生成结果**
+**图 6-12 在线 LLM 综述生成结果**
 
 ![在线 LLM 综述生成结果](docs/screenshots/06-review-llm-result.png)
 
-**图 6-12 综述记录 generationMode 标签和筛选**
+**图 6-13 综述记录 generationMode 标签和筛选**
 
 ![综述记录 generationMode 标签和筛选](docs/screenshots/07-review-history-generation-mode.png)
 
@@ -367,29 +391,29 @@ backend-ai 使用 FastAPI 提供四个接口。重建索引时，将文献文本
 
 管理员后台运行截图如下。涉及 LLM API 管理页面时，API Key 已做脱敏处理。
 
-**图 6-13 管理员后台首页**
+**图 6-14 管理员后台首页**
 
 ![管理员后台首页](docs/screenshots/08-admin-dashboard.png)
 
-**图 6-14 重建智能索引成功提示**
+**图 6-15 重建智能索引成功提示**
 
 ![重建智能索引成功提示](docs/screenshots/09-admin-rebuild-index.png)
 
-**图 6-15 LLM API 管理页面**
+**图 6-16 LLM API 管理页面**
 
 ![LLM API 管理页面](docs/screenshots/10-admin-llm-config.png)
 
-**图 6-16 LLM 测试连接成功**
+**图 6-17 LLM 测试连接成功**
 
 ![LLM 测试连接成功](docs/screenshots/11-llm-test-success.png)
 
-**图 6-17 三服务启动与项目运行终端截图**
+**图 6-18 三服务启动与项目运行终端截图**
 
 ![三服务启动与项目运行终端截图](docs/screenshots/12-services-running.png)
 
 > 注：该截图展示项目运行与 Git 提交记录等终端信息，用于说明系统运行和版本管理情况。
 
-**图 6-18 管理员数据统计页面**
+**图 6-19 管理员数据统计页面**
 
 ![管理员数据统计页面](docs/screenshots/20-admin-statistics.png)
 
@@ -563,7 +587,7 @@ npm run dev
 
 ### 9.6 后续功能展望
 
-后续展望包括接入真实论文数据库、PDF 上传与全文解析、BM25 + 向量混合检索、Cross-Encoder Rerank、LLM 流式输出、Docker 部署、API Key 加密存储和更严格的引用校验。上述功能当前尚未实现，只作为后续扩展方向。
+后续展望包括接入真实论文数据库、PDF 上传与全文解析、BM25 + 向量混合检索、Cross-Encoder Rerank、LLM 流式输出、Docker 部署、API Key 加密存储和更严格的引用校验。也可进一步完善工业级 RAG 能力，例如文献 chunk 管理、向量数据库、引用段落级溯源、跨文献证据对齐和更严格的事实一致性校验。上述功能当前尚未实现，只作为后续扩展方向。
 
 ## 10 项目总结
 

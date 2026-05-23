@@ -349,6 +349,8 @@ Authorization: Bearer <token>
 
 ### POST /api/reviews/generate
 
+说明：该接口的综述生成流程体现 RAG 思想，即先基于主题和智能检索推荐相关文献，再基于用户选定的文献材料生成综述。请求中的 `literatureIds` 是用户选定的参考文献集合，后端会基于这些文献的标题、关键词、摘要和正文节选组织生成内容，并校验和补全参考文献来源。该接口不是新增标准 RAG 框架接口，也不表示完整工业级 RAG 平台。
+
 请求体：
 
 ```json
@@ -374,6 +376,14 @@ Authorization: Bearer <token>
 | `rule` | `rule` | 离线综述生成 |
 | `llm` | `llm` | 在线 LLM 增强综述生成成功 |
 | `llm` | `llm_fallback_rule` | 在线 LLM 不可用或输出不完整，自动降级离线生成 |
+
+RAG 风格约束：
+
+- `literatureIds` 指定本次综述生成可使用的本地文献材料。
+- `rule` 模式基于选中文献进行规则归纳，不依赖外部 API。
+- `llm` 模式将选中文献内容作为受约束上下文调用管理员配置的在线 LLM。
+- `generationMode` 记录最终生成方式，包括 `rule`、`llm` 和 `llm_fallback_rule`。
+- 参考文献来源由后端校验和补全，不能由 LLM 自由编造。
 
 返回数据：
 

@@ -31,6 +31,8 @@
 - 写正式报告时优先参考 `report-outline-final.md`、`writing-outline-final.md` 和 `final-report-draft.md`。
 - `final-report-draft.md` 是 Markdown 源稿；转换为 docx 时需要按老师参考模板设置封面、Word 自动目录、字体字号、段落间距、页脚页码、图表编号和参考文献格式。
 - 不建议在 Markdown 中手动写死目录页码，正式目录应由 Word 自动生成并只保留三级标题。
+- 项目文档中可使用“RAG 思想”“RAG 风格流程”“检索增强式综述生成”等表述：该能力体现在智能推荐参考文献、用户选择 2 到 5 篇文献、基于选中文献内容生成综述、后端校验和补全参考文献来源。
+- 本项目不是完整工业级 RAG 平台，不应写成实现了复杂 chunk 管理、专门向量数据库、多轮 RAG Agent 或流式 RAG。
 - 查接口以 `api.md` 为准，旧版接口文档已归档。
 - 查开发过程以 `dev-log.md` 为准，旧版 `records/dev-log.md` 已归档为 `archive/records-dev-log.md`。
 - 图表正文引用 `diagrams.md` 中的图号和标题，导出的图片可放入 `diagrams/`。
