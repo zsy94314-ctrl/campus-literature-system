@@ -133,9 +133,13 @@ All literature data in the system are simulated course project data, not a real 
 
 管理员功能包括文献管理、分类管理、用户管理、数据统计、重建智能检索索引和 LLM API 管理。
 
-此处插入图 5-1 普通用户用例图，详见 `docs/diagrams.md`。
+![图 5-1 普通用户用例图](diagrams/figure-5-1-user-usecase.png)
 
-此处插入图 5-2 管理员用例图，详见 `docs/diagrams.md`。
+图 5-1 普通用户用例图
+
+![图 5-2 管理员用例图](diagrams/figure-5-2-admin-usecase.png)
+
+图 5-2 管理员用例图
 
 ### 3.2 功能需求
 
@@ -159,13 +163,21 @@ All literature data in the system are simulated course project data, not a real 
 
 本系统的数据流图按顶层图、0 层图和 1 层图组织，完整 Mermaid 图表见 `docs/diagrams.md`。
 
-此处插入图 3-1 顶层数据流图，详见 `docs/diagrams.md`。
+![图 3-1 顶层数据流图](diagrams/figure-3-1-dfd-context.png)
 
-此处插入图 3-2 0 层数据流图，详见 `docs/diagrams.md`。
+图 3-1 顶层数据流图
 
-此处插入图 3-3 智能检索 1 层数据流图，详见 `docs/diagrams.md`。
+![图 3-2 0 层数据流图](diagrams/figure-3-2-dfd-level0.png)
 
-此处插入图 3-4 综述生成 1 层数据流图，详见 `docs/diagrams.md`。
+图 3-2 0 层数据流图
+
+![图 3-3 智能检索 1 层数据流图](diagrams/figure-3-3-dfd-ai-search.png)
+
+图 3-3 智能检索 1 层数据流图
+
+![图 3-4 综述生成 1 层数据流图](diagrams/figure-3-4-dfd-review-generation.png)
+
+图 3-4 综述生成 1 层数据流图
 
 顶层 DFD 中，外部实体包括普通用户、管理员和在线 LLM API；系统内部通过 Spring Boot 后端协调 MySQL 数据库、backend-ai 服务和 FAISS 索引文件。0 层 DFD 将系统拆分为用户认证、文献检索、智能检索、收藏管理、综述生成、后台管理和 LLM API 管理等处理过程。1 层图重点展开智能检索和综述生成两个核心流程。
 
@@ -197,17 +209,23 @@ All literature data in the system are simulated course project data, not a real 
 
 ### 4.1 系统架构
 
-此处插入图 4-1 系统总体架构图，详见 `docs/diagrams.md`。
+![图 4-1 系统总体架构图](diagrams/figure-4-1-system-architecture.png)
+
+图 4-1 系统总体架构图
 
 ### 4.2 功能结构
 
-此处插入图 4-2 功能结构图，详见 `docs/diagrams.md`。
+![图 4-2 功能结构图](diagrams/figure-4-2-function-structure.png)
+
+图 4-2 功能结构图
 
 普通用户端包括首页、普通检索、高级检索、智能检索、文献详情、收藏、综述生成和综述记录。管理员端包括管理首页、文献管理、分类管理、用户管理、数据统计、智能索引重建和 LLM API 管理。
 
 ### 4.3 数据库设计
 
-此处插入图 4-3 数据库 E-R 图，详见 `docs/diagrams.md`。
+![图 4-3 数据库 E-R 图](diagrams/figure-4-3-er-diagram.png)
+
+图 4-3 数据库 E-R 图
 
 核心表包括：
 
@@ -249,7 +267,9 @@ All literature data in the system are simulated course project data, not a real 
 
 智能检索不是简单 FAISS 检索，而是多阶段流程：
 
-此处插入图 6-1 智能检索流程图，详见 `docs/diagrams.md`。
+![图 6-1 智能检索流程图](diagrams/figure-6-1-semantic-search-flow.png)
+
+图 6-1 智能检索流程图
 
 1. backend-ai 使用 sentence-transformers 生成语义向量。
 2. FAISS 进行基础语义召回。
@@ -271,7 +291,9 @@ All literature data in the system are simulated course project data, not a real 
 
 ### 5.4 综述生成双模式
 
-此处插入图 6-2 综述生成流程图，详见 `docs/diagrams.md`。
+![图 6-2 综述生成流程图](diagrams/figure-6-2-review-generation-flow.png)
+
+图 6-2 综述生成流程图
 
 无论 `rule` 还是 `llm` 模式，综述生成都不是脱离文献材料的自由生成，而是基于检索与选择后的本地文献内容进行生成，体现了 RAG 风格的检索增强生成思想。
 
@@ -285,7 +307,9 @@ All literature data in the system are simulated course project data, not a real 
 
 在线 LLM 增强综述生成：
 
-此处插入图 6-3 在线 LLM 综述生成时序图，详见 `docs/diagrams.md`。
+![图 6-3 在线 LLM 综述生成时序图](diagrams/figure-6-3-llm-review-sequence.png)
+
+图 6-3 在线 LLM 综述生成时序图
 
 - 请求 `mode=llm`。
 - 成功时记录 `generationMode=llm`。
@@ -314,7 +338,9 @@ LLM 输出校验是 RAG 风格流程中的约束环节，用于保证生成内�
 
 ### 5.6 LLM API 管理
 
-此处插入图 6-5 LLM API 管理流程图，详见 `docs/diagrams.md`。
+![图 6-5 LLM API 管理流程图](diagrams/figure-6-5-llm-api-management-flow.png)
+
+图 6-5 LLM API 管理流程图
 
 管理员可新增、编辑、删除 LLM 配置，设置 active 配置，测试连接，执行长文本综述测试。配置字段包括名称、Provider、Base URL、Model、API Key、启用状态、active 状态、Timeout 和备注。API Key 前端仅展示脱敏值。
 
@@ -333,7 +359,9 @@ RAG 是 Retrieval-Augmented Generation，即检索增强生成。它的核心思
 7. 后端校验正文完整性，补全或替换参考文献来源，并清理非法引用编号。
 8. 系统保存 `review_record` 和 `generationMode`，便于后续查看生成方式。
 
-此处插入图 6-6 RAG 风格综述生成流程图，详见 `docs/diagrams.md`。
+![图 6-6 RAG 风格综述生成流程图](diagrams/figure-6-6-rag-review-flow.png)
+
+图 6-6 RAG 风格综述生成流程图
 
 该流程与普通 LLM 自由生成不同：系统要求综述内容基于用户选定的本地文献材料，参考文献来源必须来自用户选择的文献，不能由模型自由编造。该设计提升了课程项目场景下综述内容的可控性，但不应表述为完整工业级 RAG 系统。
 
@@ -377,7 +405,9 @@ RAG 是 Retrieval-Augmented Generation，即检索增强生成。它的核心思
 
 Java 后端按 Controller、Service、Mapper、Entity、DTO、VO 分层。`JwtInterceptor` 对 `/api/**` 进行登录态解析和权限控制。`AiServiceImpl` 负责调用 backend-ai 并进行多学科重排。`ReviewRecordServiceImpl` 负责综述生成分流与记录保存。`LlmReviewServiceImpl` 负责在线 LLM 调用、输出校验和参考文献补全。
 
-此处插入图 6-4 管理员重建智能索引时序图，详见 `docs/diagrams.md`。
+![图 6-4 管理员重建智能索引时序图](diagrams/figure-6-4-rebuild-index-sequence.png)
+
+图 6-4 管理员重建智能索引时序图
 
 ### 6.3 Python 智能检索服务实现
 

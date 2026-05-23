@@ -4,6 +4,8 @@
 
 ## 图 3-1 顶层数据流图
 
+导出图片：docs/diagrams/figure-3-1-dfd-context.png
+
 ```mermaid
 flowchart LR
     U["外部实体：普通用户"]
@@ -26,6 +28,8 @@ flowchart LR
 说明：顶层 DFD 表达系统与外部实体、MySQL 数据库、FAISS 索引文件和在线 LLM API 之间的数据交换。在线 LLM 只用于增强综述生成，不是系统唯一生成方式。
 
 ## 图 3-2 0 层数据流图
+
+导出图片：docs/diagrams/figure-3-2-dfd-level0.png
 
 ```mermaid
 flowchart TB
@@ -86,6 +90,8 @@ flowchart TB
 
 ## 图 3-3 智能检索 1 层数据流图
 
+导出图片：docs/diagrams/figure-3-3-dfd-ai-search.png
+
 ```mermaid
 flowchart TD
     U["普通用户"]
@@ -120,6 +126,8 @@ flowchart TD
 ```
 
 ## 图 3-4 综述生成 1 层数据流图
+
+导出图片：docs/diagrams/figure-3-4-dfd-review-generation.png
 
 ```mermaid
 flowchart TD
@@ -167,6 +175,8 @@ flowchart TD
 
 ## 图 4-1 系统总体架构图
 
+导出图片：docs/diagrams/figure-4-1-system-architecture.png
+
 ```mermaid
 flowchart LR
     U["普通用户 / 管理员"] --> FE["React 前端<br/>Vite + TypeScript"]
@@ -181,6 +191,8 @@ flowchart LR
 说明：Spring Boot 是主业务后端，负责权限、数据库访问、智能检索重排和综述生成分流。backend-ai 负责向量化、FAISS 召回和相似推荐。在线 LLM 是增强能力，离线综述生成仍是默认稳定模式。
 
 ## 图 4-2 功能结构图
+
+导出图片：docs/diagrams/figure-4-2-function-structure.png
 
 ```mermaid
 flowchart TB
@@ -222,6 +234,8 @@ flowchart TB
 ```
 
 ## 图 4-3 数据库 E-R 图
+
+导出图片：docs/diagrams/figure-4-3-er-diagram.png
 
 ```mermaid
 erDiagram
@@ -339,6 +353,8 @@ erDiagram
 
 ## 图 5-1 普通用户用例图
 
+导出图片：docs/diagrams/figure-5-1-user-usecase.png
+
 ```mermaid
 flowchart LR
     USER(("普通用户"))
@@ -370,6 +386,8 @@ flowchart LR
 
 ## 图 5-2 管理员用例图
 
+导出图片：docs/diagrams/figure-5-2-admin-usecase.png
+
 ```mermaid
 flowchart LR
     ADMIN(("管理员"))
@@ -395,6 +413,8 @@ flowchart LR
 
 ## 图 6-1 智能检索流程图
 
+导出图片：docs/diagrams/figure-6-1-semantic-search-flow.png
+
 ```mermaid
 flowchart TD
     Q["用户 query"] --> SB["Spring Boot 接收 /api/ai/semantic-search"]
@@ -414,6 +434,8 @@ flowchart TD
 ```
 
 ## 图 6-2 综述生成流程图
+
+导出图片：docs/diagrams/figure-6-2-review-generation-flow.png
 
 ```mermaid
 flowchart TD
@@ -438,6 +460,8 @@ flowchart TD
 ```
 
 ## 图 6-3 在线 LLM 综述生成时序图
+
+导出图片：docs/diagrams/figure-6-3-llm-review-sequence.png
 
 ```mermaid
 sequenceDiagram
@@ -470,6 +494,8 @@ sequenceDiagram
 
 ## 图 6-4 管理员重建智能索引时序图
 
+导出图片：docs/diagrams/figure-6-4-rebuild-index-sequence.png
+
 ```mermaid
 sequenceDiagram
     actor A as 管理员
@@ -495,6 +521,8 @@ sequenceDiagram
 ```
 
 ## 图 6-5 LLM API 管理流程图
+
+导出图片：docs/diagrams/figure-6-5-llm-api-management-flow.png
 
 ```mermaid
 flowchart TD
@@ -526,6 +554,8 @@ flowchart TD
 ```
 
 ## 图 6-6 RAG 风格综述生成流程图
+
+导出图片：docs/diagrams/figure-6-6-rag-review-flow.png
 
 ```mermaid
 flowchart TD
