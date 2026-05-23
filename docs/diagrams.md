@@ -2,6 +2,169 @@
 
 本文档集中保存正式报告可引用的 Mermaid 图表。报告正文建议只插入图号、图名和简要说明，完整 Mermaid 源码以本文档为准。
 
+## 图 3-1 顶层数据流图
+
+```mermaid
+flowchart LR
+    U["外部实体：普通用户"]
+    A["外部实体：管理员"]
+    L["外部实体：在线 LLM API<br/>DeepSeek / OpenAI-compatible"]
+    S(("校园学术文献智能检索与综述生成系统"))
+    D[("数据存储：MySQL<br/>用户、文献、分类、收藏、综述、LLM 配置")]
+    F[("数据存储：FAISS 索引文件<br/>faiss.index / id_map.json")]
+
+    U -->|"登录请求 / 检索请求 / 收藏请求 / 综述生成请求"| S
+    S -->|"文献检索结果 / 智能检索结果 / 综述内容 / 综述记录"| U
+    A -->|"后台管理请求 / 索引重建请求 / LLM 配置请求"| S
+    S -->|"管理结果 / 统计数据 / 测试结果"| A
+    S -->|"读取与写入业务数据"| D
+    S -->|"语义召回 / 相似推荐 / 索引重建"| F
+    S -->|"在线综述生成请求"| L
+    L -->|"LLM 生成文本 / finish_reason / 错误信息"| S
+```
+
+说明：顶层 DFD 表达系统与外部实体、MySQL 数据库、FAISS 索引文件和在线 LLM API 之间的数据交换。在线 LLM 只用于增强综述生成，不是系统唯一生成方式。
+
+## 图 3-2 0 层数据流图
+
+```mermaid
+flowchart TB
+    U["普通用户"]
+    A["管理员"]
+    L["在线 LLM API"]
+    D1[("user / category / literature")]
+    D2[("favorite / search_history / review_record")]
+    D3[("llm_config")]
+    D4[("FAISS 索引文件")]
+
+    P1(("1 用户认证"))
+    P2(("2 文献检索"))
+    P3(("3 智能检索"))
+    P4(("4 收藏管理"))
+    P5(("5 综述生成"))
+    P6(("6 后台管理"))
+    P7(("7 LLM API 管理"))
+
+    U -->|"登录请求"| P1
+    P1 -->|"登录结果 / JWT"| U
+    P1 -->|"读写用户信息"| D1
+
+    U -->|"文献检索条件"| P2
+    P2 -->|"文献列表 / 文献详情"| U
+    P2 -->|"查询文献与分类 / 写入检索历史"| D1
+    P2 -->|"检索历史"| D2
+
+    U -->|"智能检索 query"| P3
+    P3 -->|"similarity / finalScore / matchReason"| U
+    P3 -->|"读取文献数据 / MySQL 补充召回"| D1
+    P3 -->|"语义召回"| D4
+
+    U -->|"收藏或取消收藏请求"| P4
+    P4 -->|"收藏状态 / 我的收藏"| U
+    P4 -->|"读写收藏数据"| D2
+
+    U -->|"综述主题 / 文献 ID / mode"| P5
+    P5 -->|"综述内容 / generationMode"| U
+    P5 -->|"读取文献 / 保存综述记录"| D1
+    P5 -->|"保存 review_record"| D2
+    P5 -->|"读取 active LLM 配置"| D3
+    P5 -->|"在线生成请求"| L
+    L -->|"生成文本或错误"| P5
+
+    A -->|"文献、分类、用户、统计、索引请求"| P6
+    P6 -->|"后台管理结果 / 统计数据"| A
+    P6 -->|"读写业务数据"| D1
+    P6 -->|"读写统计相关数据"| D2
+    P6 -->|"重建索引"| D4
+
+    A -->|"LLM 配置增删改查 / 测试 / 激活"| P7
+    P7 -->|"配置列表 / 脱敏 Key / 测试结果"| A
+    P7 -->|"读写 LLM 配置"| D3
+    P7 -->|"测试连接请求"| L
+    L -->|"连接测试结果"| P7
+```
+
+## 图 3-3 智能检索 1 层数据流图
+
+```mermaid
+flowchart TD
+    U["普通用户"]
+    D1[("MySQL：literature / category")]
+    D2[("FAISS 索引文件")]
+
+    P31(("3.1 接收 query 与 topK"))
+    P32(("3.2 扩大 recallTopK"))
+    P33(("3.3 backend-ai 语义召回"))
+    P34(("3.4 多学科主题画像识别"))
+    P35(("3.5 Query Expansion"))
+    P36(("3.6 MySQL 关键词补充召回"))
+    P37(("3.7 合并去重候选"))
+    P38(("3.8 keywordScore / categoryScore / weakPenalty"))
+    P39(("3.9 finalScore 综合重排"))
+
+    U -->|"query / topK"| P31
+    P31 -->|"检索参数"| P32
+    P32 -->|"recallTopK"| P33
+    P33 -->|"查询向量与候选 ID"| D2
+    D2 -->|"FAISS 候选 / similarity"| P33
+    P33 -->|"基础候选"| P34
+    P34 -->|"主题画像"| P35
+    P35 -->|"扩展词"| P36
+    P36 -->|"按标题、关键词、摘要、正文补充召回"| D1
+    D1 -->|"补充候选文献"| P36
+    P33 -->|"FAISS 候选"| P37
+    P36 -->|"MySQL 补充候选"| P37
+    P37 -->|"去重候选集"| P38
+    P38 -->|"综合评分要素"| P39
+    P39 -->|"similarity / finalScore / matchReason"| U
+```
+
+## 图 3-4 综述生成 1 层数据流图
+
+```mermaid
+flowchart TD
+    U["普通用户"]
+    L["在线 LLM API"]
+    D1[("MySQL：literature")]
+    D2[("MySQL：llm_config")]
+    D3[("MySQL：review_record")]
+    D4[("FAISS 索引文件")]
+
+    P51(("5.1 输入综述主题"))
+    P52(("5.2 智能推荐参考文献"))
+    P53(("5.3 用户选择 2 到 5 篇文献"))
+    P54(("5.4 判断生成模式 rule / llm"))
+    P55(("5.5 离线规则生成"))
+    P56(("5.6 读取 active LLM 配置"))
+    P57(("5.7 在线 LLM 生成"))
+    P58(("5.8 LLM 输出校验"))
+    P59(("5.9 参考文献补全与非法引用清理"))
+    P60(("5.10 降级为 llm_fallback_rule"))
+    P61(("5.11 保存 review_record"))
+
+    U -->|"综述主题"| P51
+    P51 -->|"主题 query"| P52
+    P52 -->|"语义召回"| D4
+    P52 -->|"读取候选文献"| D1
+    P52 -->|"推荐参考文献列表"| U
+    U -->|"选择文献 ID / mode"| P53
+    P53 -->|"文献 ID 列表"| P54
+    P54 -->|"mode=rule"| P55
+    P55 -->|"离线综述内容 / generationMode=rule"| P61
+    P54 -->|"mode=llm"| P56
+    P56 -->|"读取 active 配置"| D2
+    D2 -->|"Base URL / Model / 服务端密钥配置 / Timeout"| P57
+    P57 -->|"在线生成请求"| L
+    L -->|"生成文本 / finish_reason / 错误"| P57
+    P57 -->|"LLM 输出"| P58
+    P58 -->|"校验通过"| P59
+    P59 -->|"补全文献来源后的综述 / generationMode=llm"| P61
+    P58 -->|"超时、空响应、截断或章节缺失"| P60
+    P60 -->|"离线兜底综述 / generationMode=llm_fallback_rule"| P61
+    P61 -->|"保存综述记录"| D3
+    P61 -->|"综述内容 / generationMode"| U
+```
+
 ## 图 4-1 系统总体架构图
 
 ```mermaid
