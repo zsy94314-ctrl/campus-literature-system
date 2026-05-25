@@ -584,3 +584,286 @@ flowchart TD
 ```
 
 说明：本图表达的是本项目采用的 RAG 思想和检索增强式综述生成流程，不表示完整工业级 RAG 平台。系统没有实现复杂 chunk 管理、专门向量数据库服务、多轮 RAG Agent 或流式 RAG。
+
+## 图 4-4 模块结构图（SC 图）
+
+导出图片：docs/diagrams/figure-4-4-module-structure-sc.png
+
+```mermaid
+flowchart TD
+    SYS["校园学术文献智能检索与综述生成系统"]
+
+    SYS --> USER["普通用户端"]
+    USER --> U1["注册登录"]
+    USER --> U2["普通检索 / 高级检索"]
+    USER --> U3["智能检索"]
+    USER --> U4["文献详情 / 收藏 / 相似推荐"]
+    USER --> U5["综述生成"]
+    USER --> U6["综述记录与 generationMode 筛选"]
+
+    SYS --> ADMIN["管理员端"]
+    ADMIN --> A1["文献管理"]
+    ADMIN --> A2["分类管理"]
+    ADMIN --> A3["用户管理"]
+    ADMIN --> A4["真实数据统计"]
+    ADMIN --> A5["智能索引重建"]
+    ADMIN --> A6["LLM API 管理"]
+
+    SYS --> SPRING["Spring Boot 主业务模块"]
+    SPRING --> C1["Controller 接口层"]
+    SPRING --> C2["Service 业务层"]
+    SPRING --> C3["Mapper 数据访问层"]
+    SPRING --> C4["Security 权限控制"]
+
+    SYS --> AI["backend-ai 智能检索模块"]
+    AI --> B1["健康检查"]
+    AI --> B2["索引重建"]
+    AI --> B3["语义检索"]
+    AI --> B4["相似推荐"]
+
+    SYS --> DATA["数据存储模块"]
+    DATA --> D1["MySQL 业务数据"]
+    DATA --> D2["FAISS 索引文件"]
+    DATA --> D3["id_map.json 映射文件"]
+
+    SYS --> LLM["在线 LLM 增强模块"]
+    LLM --> L1["读取 active LLM 配置"]
+    LLM --> L2["调用 OpenAI-compatible API"]
+    LLM --> L3["输出完整性校验"]
+    LLM --> L4["参考文献补全与降级"]
+```
+
+说明：SC 图强调系统模块层次和调用职责。普通用户端和管理员端通过 Spring Boot 访问业务能力；backend-ai 只负责语义向量检索和索引文件；在线 LLM 是可选增强模块，不是系统唯一生成方式。
+
+## 图 5-3 面向对象类图
+
+导出图片：docs/diagrams/figure-5-3-class-diagram.png
+
+```mermaid
+classDiagram
+    class User {
+        Long id
+        String username
+        String passwordHash
+        String role
+        Integer status
+    }
+
+    class Category {
+        Long id
+        String name
+        Long parentId
+        Integer sortOrder
+    }
+
+    class Literature {
+        Long id
+        String title
+        String authors
+        String abstractText
+        String keywords
+        Long categoryId
+        String content
+    }
+
+    class Favorite {
+        Long id
+        Long userId
+        Long literatureId
+    }
+
+    class SearchHistory {
+        Long id
+        Long userId
+        String keyword
+        String searchType
+        Integer resultCount
+    }
+
+    class ReviewRecord {
+        Long id
+        Long userId
+        String topic
+        String literatureIds
+        String content
+        String referenceText
+        String generationMode
+    }
+
+    class LlmConfig {
+        Long id
+        String provider
+        String baseUrl
+        String model
+        String apiKey
+        Boolean active
+        Integer timeoutSeconds
+    }
+
+    class Controller {
+        接收 REST 请求
+        参数校验
+        返回统一 Result
+    }
+
+    class Service {
+        业务规则
+        智能检索重排
+        综述生成
+        LLM 校验降级
+    }
+
+    class Mapper {
+        MyBatis-Plus 数据访问
+    }
+
+    User "1" --> "*" Favorite : user_id 逻辑关联
+    Literature "1" --> "*" Favorite : literature_id 逻辑关联
+    User "1" --> "*" SearchHistory : user_id 逻辑关联
+    User "1" --> "*" ReviewRecord : user_id 逻辑关联
+    Category "1" --> "*" Category : parent_id 两级分类
+    Category "1" --> "*" Literature : category_id 逻辑关联
+    ReviewRecord "*" --> "*" Literature : literature_ids 保存选中文献
+    Controller --> Service
+    Service --> Mapper
+    Mapper --> User
+    Mapper --> Literature
+    Mapper --> Category
+    Mapper --> ReviewRecord
+    Service --> LlmConfig
+```
+
+说明：本图体现面向对象设计中的实体类、业务层和数据访问层。SQL 中多数关系以逻辑关联实现，报告中不应写成数据库强制外键。
+
+## 图 5-4 智能检索重排算法图
+
+导出图片：docs/diagrams/figure-5-4-semantic-rerank-algorithm.png
+
+```mermaid
+flowchart TD
+    Q["用户 query"] --> RECALL["扩大 recallTopK"]
+    RECALL --> FAISS["backend-ai / FAISS 语义召回"]
+    Q --> TOPIC["多学科主题画像识别"]
+    TOPIC --> EXP["Query Expansion 查询扩展"]
+    EXP --> MYSQL["MySQL 关键词补充召回"]
+
+    FAISS --> MERGE["合并候选"]
+    MYSQL --> MERGE
+    MERGE --> DEDUP["按 literatureId 去重"]
+    DEDUP --> SCORE["逐篇计算得分"]
+
+    SCORE --> SEM["semanticSimilarity"]
+    SCORE --> KEY["keywordScore"]
+    SCORE --> CAT["categoryScore"]
+    SCORE --> PEN["weakPenalty"]
+
+    SEM --> FORMULA["finalScore = semantic * 0.60 + keyword * 0.30 + category * 0.10 - weakPenalty"]
+    KEY --> FORMULA
+    CAT --> FORMULA
+    PEN --> FORMULA
+
+    FORMULA --> REASON["生成 matchReason"]
+    REASON --> SORT["按 finalScore 降序排序"]
+    SORT --> RESULT["返回 similarity / finalScore / matchReason"]
+```
+
+说明：本图来自 `AiServiceImpl.java` 中的智能检索实现。它体现本项目不是直接返回 FAISS TopK，而是将语义召回、关键词补充召回、分类得分和弱相关降权合并为最终排序。
+
+## 图 5-5 LLM 输出校验与降级流程图
+
+导出图片：docs/diagrams/figure-5-5-llm-validation-fallback.png
+
+```mermaid
+flowchart TD
+    START["用户选择 llm 在线综述生成"] --> ACTIVE{"是否存在 active LLM 配置"}
+    ACTIVE -->|否| RULE["离线 rule 生成"]
+    ACTIVE -->|是| PROMPT["基于选中文献组织受约束 prompt"]
+    PROMPT --> CALL["调用 OpenAI-compatible LLM API"]
+    CALL --> EMPTY{"响应是否为空或异常"}
+    EMPTY -->|是| FALLBACK["降级 llm_fallback_rule"]
+    EMPTY -->|否| FINISH{"finish_reason 是否为 length"}
+    FINISH -->|是| RETRY["提高 max_tokens 重试"]
+    RETRY --> LENGTH2{"是否仍 length 截断"}
+    LENGTH2 -->|是| FALLBACK
+    LENGTH2 -->|否| SECTION["检查前五节正文完整性"]
+    FINISH -->|否| SECTION
+    SECTION --> MISS{"是否缺少正文部分"}
+    MISS -->|是| FALLBACK
+    MISS -->|否| ENDING{"结尾是否明显截断"}
+    ENDING -->|是| FALLBACK
+    ENDING -->|否| REF["后端补全或替换参考文献来源"]
+    REF --> CLEAN["清理未选择文献的引用编号"]
+    CLEAN --> SAVE["保存 review_record / generationMode=llm"]
+    RULE --> SAVE_RULE["保存 review_record / generationMode=rule"]
+    FALLBACK --> RULE2["离线 rule 生成"]
+    RULE2 --> SAVE_FB["保存 review_record / generationMode=llm_fallback_rule"]
+```
+
+说明：本图来自 `ReviewRecordServiceImpl.java` 和 `LlmReviewServiceImpl.java` 的实际逻辑。第六节参考文献来源由后端补全或替换，避免 LLM 编造不存在的参考文献。
+
+## 图 6-20 项目代码结构图
+
+导出图片：docs/diagrams/figure-6-20-code-structure.png
+
+```mermaid
+flowchart TD
+    ROOT["campus-literature-system"]
+
+    ROOT --> FE["frontend"]
+    FE --> FE_API["src/api<br/>请求封装"]
+    FE --> FE_ROUTES["src/routes<br/>页面路由"]
+    FE --> FE_COMP["src/components<br/>通用组件"]
+
+    ROOT --> BJ["backend-java"]
+    BJ --> BJ_CTRL["controller<br/>REST 接口"]
+    BJ --> BJ_SERVICE["service/impl<br/>业务实现"]
+    BJ --> BJ_MAPPER["mapper<br/>数据库访问"]
+    BJ --> BJ_ENTITY["entity / dto / vo<br/>数据对象"]
+    BJ --> BJ_SECURITY["security<br/>JWT 与权限拦截"]
+
+    ROOT --> BA["backend-ai"]
+    BA --> BA_MAIN["main.py<br/>FastAPI 服务"]
+    BA --> BA_DATA["data/faiss.index<br/>data/id_map.json"]
+    BA --> BA_REQ["requirements.txt"]
+
+    ROOT --> DB["database"]
+    DB --> DB_INIT["init.sql"]
+    DB --> DB_CAT["update_categories.sql"]
+    DB --> DB_SEED["literature_seed_500_high_quality.sql"]
+    DB --> DB_LLM["update_llm_config.sql"]
+
+    ROOT --> DOCS["docs"]
+    DOCS --> REPORT["final-report-draft.md / final-report.docx"]
+    DOCS --> DIAG["diagrams.md / diagrams 图片"]
+    DOCS --> SHOT["screenshots 运行截图"]
+```
+
+说明：本图用于编码实现章节，说明项目目录和核心代码位置。它不表示新增代码结构，只是对现有仓库组织进行可视化整理。
+
+## 图 7-1 测试与缺陷闭环图
+
+导出图片：docs/diagrams/figure-7-1-test-defect-loop.png
+
+```mermaid
+flowchart LR
+    PLAN["制定测试计划"] --> CASE["设计测试用例"]
+    CASE --> EXEC["执行构建 / 接口 / 页面 / 边界测试"]
+    EXEC --> RECORD{"是否发现问题"}
+    RECORD -->|否| PASS["记录通过结果"]
+    RECORD -->|是| BUG["记录缺陷现象"]
+    BUG --> ANALYZE["分析原因"]
+    ANALYZE --> FIX["修复实现或配置"]
+    FIX --> REG["回归验证"]
+    REG --> RESULT{"是否修复"}
+    RESULT -->|否| ANALYZE
+    RESULT -->|是| PASS
+    PASS --> REPORT["整理测试报告和缺陷分析"]
+
+    EXEC --> BUILD["编译构建测试"]
+    EXEC --> API["接口测试"]
+    EXEC --> UI["页面操作测试"]
+    EXEC --> SEC["权限与异常测试"]
+    EXEC --> LLM["LLM 降级与脱敏测试"]
+```
+
+说明：本图对应系统测试章节，用于展示从测试计划、用例执行、缺陷记录、修复到回归验证的闭环过程。

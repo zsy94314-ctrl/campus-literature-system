@@ -14,7 +14,7 @@
 | `test-cases.md` | 测试用例文档，覆盖构建、认证、检索、综述、LLM、管理员和异常权限测试 |
 | `dev-log.md` | 项目开发日志，记录从 MVP 到智能检索、综述生成、LLM 接入和文档整理的过程 |
 | `ai-records.md` | AI 辅助交互记录，说明 AI 在需求分析、技术讨论、问题排查、测试设计和文档整理中的辅助作用 |
-| `diagrams.md` | Mermaid 图表源码汇总，包含 DFD 图、系统架构图、功能结构图、E-R 图、用例图、流程图和时序图，并标注对应导出图片文件名 |
+| `diagrams.md` | Mermaid 图表源码汇总，包含 DFD 图、系统架构图、功能结构图、模块结构图（SC 图）、E-R 图、类图、用例图、算法流程图、时序图、代码结构图和测试闭环图，并标注对应导出图片文件名 |
 | `screenshots-guide.md` | 运行截图清单，说明后续应截图的页面、建议文件名和敏感信息遮挡要求 |
 | `team-info.md` | 小组成员信息与分工说明，包含成员、学号、角色、主要分工和自评工作比例 |
 
@@ -36,5 +36,5 @@
 - 查接口以 `api.md` 为准，旧版接口文档已归档。
 - 查开发过程以 `dev-log.md` 为准，旧版 `records/dev-log.md` 已归档为 `archive/records-dev-log.md`。
 - 图表正文引用 `diagrams.md` 中的图号和标题，导出的图片可放入 `diagrams/`。
-- `final-report-draft.md` 已引用 `diagrams/` 下的导出图表图片，后续替换图片时保持文件名不变即可。
+- `final-report-draft.md` 已引用 `diagrams/` 下的主要导出图表图片；新增的 SC 图、类图、算法图、代码结构图和测试闭环图需要导出到 `diagrams/` 后再替换正文占位。
 - 系统截图按 `screenshots-guide.md` 的文件名放入 `screenshots/`，涉及 API Key 的页面必须遮挡敏感信息。
