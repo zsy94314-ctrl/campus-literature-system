@@ -14,6 +14,9 @@ RUN sed -i 's|http://deb.debian.org/debian|https://mirrors.aliyun.com/debian|g' 
 # 使用清华源加速 pip，HF 镜像加速模型下载
 ENV HF_ENDPOINT=https://hf-mirror.com
 
+# 先安装 CPU 版 PyTorch，避免 sentence-transformers 自动拉取 CUDA/GPU 版巨大依赖
+RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch torchvision torchaudio
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
