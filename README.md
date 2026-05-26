@@ -261,7 +261,7 @@ LLM 输出控制包括：
 
 ## 文档目录说明
 
-主要文档位于 `docs/`：
+主要文档位于 `docs/`。最终提交版报告以本地 Word/PDF 为准，GitHub 中保留以下支撑文档：
 
 - `docs/report-outline-final.md`：正式报告目录
 - `docs/writing-outline-final.md`：正文写作细纲
@@ -270,7 +270,9 @@ LLM 输出控制包括：
 - `docs/test-cases.md`：系统测试用例
 - `docs/dev-log.md`：开发日志
 - `docs/ai-records.md`：AI 辅助交互记录
-- `docs/final-report-draft.md`：正式报告 Markdown 初稿
+- `docs/diagrams.md`：图表源码汇总
+- `docs/screenshots-guide.md`：运行截图清单
+- `docs/team-info.md`：小组成员信息与分工
 
 ## 注意事项
 

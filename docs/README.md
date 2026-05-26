@@ -4,9 +4,10 @@
 
 ## 主文档
 
+> 最终提交版报告以本地 Word/PDF 为准，本目录保留以下支撑文档。
+
 | 文件 | 用途 |
 | --- | --- |
-| `final-report-draft.md` | 正式报告 Markdown 源稿，已按软件工程三级项目参考结构补齐 DFD、数据字典、测试计划、维护计划、用户手册和小组分工等内容，后续转 docx 时需套用老师 Word 模板 |
 | `report-outline-final.md` | 最终正式目录，作为报告章节结构基准 |
 | `writing-outline-final.md` | 正文写作细纲，已补充软件工程三级项目要求、图表插入建议和注意事项 |
 | `api.md` | 接口文档，覆盖前后端业务接口、管理员接口、LLM API 管理接口和 backend-ai 接口 |
@@ -28,13 +29,13 @@
 
 ## 使用建议
 
-- 写正式报告时优先参考 `report-outline-final.md`、`writing-outline-final.md` 和 `final-report-draft.md`。
-- `final-report-draft.md` 是 Markdown 源稿；转换为 docx 时需要按老师参考模板设置封面、Word 自动目录、字体字号、段落间距、页脚页码、图表编号和参考文献格式。
+- 写正式报告时优先参考 `report-outline-final.md` 和 `writing-outline-final.md`。
+- 最终提交版报告以本地 Word/PDF 为准。
 - 不建议在 Markdown 中手动写死目录页码，正式目录应由 Word 自动生成并只保留三级标题。
 - 项目文档中可使用“RAG 思想”“RAG 风格流程”“检索增强式综述生成”等表述：该能力体现在智能推荐参考文献、用户选择 2 到 5 篇文献、基于选中文献内容生成综述、后端校验和补全参考文献来源。
 - 本项目不是完整工业级 RAG 平台，不应写成实现了复杂 chunk 管理、专门向量数据库、多轮 RAG Agent 或流式 RAG。
 - 查接口以 `api.md` 为准，旧版接口文档已归档。
 - 查开发过程以 `dev-log.md` 为准，旧版 `records/dev-log.md` 已归档为 `archive/records-dev-log.md`。
 - 图表正文引用 `diagrams.md` 中的图号和标题，导出的图片可放入 `diagrams/`。
-- `final-report-draft.md` 已引用 `diagrams/` 下的主要导出图表图片；新增的 SC 图、类图、算法图、代码结构图和测试闭环图需要导出到 `diagrams/` 后再替换正文占位。
+- `diagrams.md` 已引用 `diagrams/` 下的主要导出图表图片；新增的 SC 图、类图、算法图、代码结构图和测试闭环图需要导出到 `diagrams/` 后再替换正文占位。
 - 系统截图按 `screenshots-guide.md` 的文件名放入 `screenshots/`，涉及 API Key 的页面必须遮挡敏感信息。
