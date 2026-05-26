@@ -65,6 +65,9 @@ Thumbs.db
 # --- Documentation (entire directory excluded) ---
 docs/
 
+# --- Agents / Skills ---
+.agents/
+
 # --- Misc ---
 *.tmp
 *.temp
