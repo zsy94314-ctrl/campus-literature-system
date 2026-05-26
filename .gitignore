@@ -1,0 +1,73 @@
+# ============================================================
+#  Campus Literature System — Root .gitignore
+# ============================================================
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Runtime Data ---
+backend-ai/data/
+backend-java/*.log
+backend-ai/*.log
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# --- Java / Maven ---
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# --- Node.js ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Frontend Build Outputs ---
+dist/
+dist-ssr/
+.output/
+.nitro/
+.vinxi/
+
+# --- Environment & Secrets ---
+.env
+.env.local
+.env.*.local
+*.secret
+*.key
+*.pem
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Wrangler / Cloudflare ---
+.wrangler/
+.dev.vars
+
+# --- Documentation (entire directory excluded) ---
+docs/
+
+# --- Misc ---
+*.tmp
+*.temp
+*.pid
+*.seed
+*.pid.lock
