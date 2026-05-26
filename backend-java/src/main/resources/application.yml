@@ -6,8 +6,8 @@ spring:
     name: campus-literature-system
   datasource:
     url: jdbc:mysql://localhost:3306/campus_literature_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: root
-    password: 123456
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 # MyBatis-Plus 配置
@@ -26,7 +26,7 @@ mybatis-plus:
 
 # JWT 配置
 jwt:
-  secret: campus-literature-system-jwt-secret-key-2024
+  secret: ${JWT_SECRET:campus-literature-system-demo-secret}
   expiration: 86400000  # 24小时，单位毫秒
 
 # AI 服务配置

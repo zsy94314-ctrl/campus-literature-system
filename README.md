@@ -159,6 +159,17 @@ http://localhost:8080/api
 - `ai.service.base-url` 指向 `http://localhost:8000`
 - 不要把真实数据库密码、API Key、Token 写入文档或提交到仓库
 
+如本地 MySQL 用户名、密码不同，可通过环境变量覆盖默认演示配置：
+
+```powershell
+$env:DB_USERNAME="root"
+$env:DB_PASSWORD="你的本地 MySQL 密码"
+$env:JWT_SECRET="your-local-jwt-secret"
+mvn spring-boot:run
+```
+
+也可以直接在本地 `application.yml` 中修改为自己的数据库配置，但不要提交真实密码、真实 JWT Secret 或 Token。
+
 ## frontend 启动方式
 
 ```powershell
