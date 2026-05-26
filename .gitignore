@@ -62,8 +62,8 @@ Thumbs.db
 .wrangler/
 .dev.vars
 
-# --- Documentation (entire directory excluded) ---
-docs/
+# --- Documentation ---
+# (docs/ is tracked - do not ignore)
 
 # --- Agents / Skills ---
 .agents/
