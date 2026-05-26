@@ -112,6 +112,44 @@ FAISS 向量索引不存储在 MySQL 中，而是由 `backend-ai` 保存到 `bac
 
 注意：数据库连接用户名和密码请在本地 `backend-java/src/main/resources/application.yml` 中按实际环境配置，不要提交真实密码。
 
+## Docker Compose 部署（推荐服务器部署）
+
+适合在 Ubuntu 等 Linux 服务器上一键部署，无需手动安装 JDK、Maven、Node.js、Python。
+
+### 快速开始
+
+```bash
+# 1. 安装 Docker 和 Docker Compose（如未安装）
+# Ubuntu 示例：sudo apt update && sudo apt install docker.io docker-compose-plugin
+
+# 2. 克隆项目
+git clone <仓库地址>
+cd campus-literature-system
+
+# 3. 复制并编辑环境变量
+cp .env.example .env
+# 使用编辑器修改 .env 中的密码和密钥
+
+# 4. 一键构建并启动
+docker compose up -d --build
+
+# 5. 查看日志
+docker compose logs -f
+```
+
+访问 `http://服务器公网IP` 即可使用。
+
+### 环境变量说明
+
+| 变量 | 说明 | 默认值 |
+|---|---|---|
+| `MYSQL_ROOT_PASSWORD` | MySQL root 密码 | 必须修改 |
+| `DB_PASSWORD` | Java 后端数据库密码 | 建议与 MySQL 密码一致 |
+| `JWT_SECRET` | JWT 签名密钥 | 必须修改为长随机字符串 |
+| `AI_SERVICE_BASE_URL` | AI 服务内部地址 | `http://backend-ai:8000` |
+
+详细部署文档见 [`docs/deployment-docker.md`](docs/deployment-docker.md)。
+
 ## 启动顺序
 
 推荐启动顺序：
@@ -292,4 +330,4 @@ LLM 输出控制包括：
 - 离线综述生成是默认稳定模式。
 - 文献更新后需要管理员重建智能检索索引。
 - 不要提交真实 API Key、数据库密码、Token。
-- 当前项目未实现 PDF 上传、真实论文库接入、Docker 部署、LLM 流式输出、Cross-Encoder Rerank；这些内容只能作为后续展望。
+- 当前项目未实现 PDF 上传、真实论文库接入、LLM 流式输出、Cross-Encoder Rerank；这些内容只能作为后续展望。

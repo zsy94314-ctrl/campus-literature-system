@@ -5,7 +5,7 @@ spring:
   application:
     name: campus-literature-system
   datasource:
-    url: jdbc:mysql://localhost:3306/campus_literature_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: ${DB_URL:jdbc:mysql://localhost:3306/campus_literature_system?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:123456}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -32,7 +32,7 @@ jwt:
 # AI 服务配置
 ai:
   service:
-    base-url: http://localhost:8000
+    base-url: ${AI_SERVICE_BASE_URL:http://localhost:8000}
 
 # 日志配置
 logging:
