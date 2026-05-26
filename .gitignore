@@ -67,6 +67,7 @@ docs/
 
 # --- Agents / Skills ---
 .agents/
+skills-lock.json
 
 # --- Misc ---
 *.tmp
